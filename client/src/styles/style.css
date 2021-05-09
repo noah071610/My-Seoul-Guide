@@ -250,6 +250,24 @@ a:active {
   }
 }
 
+@-webkit-keyframes slide {
+  from {
+    height: 0;
+  }
+  to {
+    height: auto;
+  }
+}
+
+@keyframes slide {
+  from {
+    height: 0;
+  }
+  to {
+    height: auto;
+  }
+}
+
 .home_landing {
   position: relative;
 }
@@ -289,6 +307,10 @@ a:active {
   font-family: "Kaushan Script", cursive;
   color: #fff;
   text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   background-image: linear-gradient(transparent calc(100% - 3px), #fff 5px);
   background-repeat: no-repeat;
   background-size: 0% 100%;
@@ -323,8 +345,8 @@ a:active {
   visibility: hidden;
   -webkit-animation: flip 0.4s 0.8s forwards;
           animation: flip 0.4s 0.8s forwards;
-  -webkit-box-shadow: 10px 10px 30px rgba(255, 255, 255, 0.3);
-          box-shadow: 10px 10px 30px rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
+          box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .checkList_form {
@@ -357,41 +379,9 @@ a:active {
 .main_page_wrapper {
   width: 100%;
   height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-.main_page_wrapper header {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  font-family: "Kaushan Script", cursive;
-  font-weight: bold;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.main_page_wrapper header .header_logo {
-  color: black;
-}
-
-.main_page_wrapper header .header_menu li {
-  margin: 0 0.4rem;
-  font-size: 1.1rem;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
-.main_page_wrapper header .header_menu li:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
 }
 
 .main_page_wrapper .main_wrapper {
-  width: 100%;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -402,34 +392,80 @@ a:active {
   display: block;
 }
 
-.main_page_wrapper .main_wrapper nav {
+header {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+header .header_logo {
+  color: black;
+  font-family: "Kaushan Script", cursive;
+  font-weight: bold;
+}
+
+header .settingIcon {
+  margin: 0 0.4rem;
+  font-size: 1.1rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+header span {
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+nav {
   width: 400px;
   font-size: 1.1rem;
   background-color: #263238;
 }
 
-.main_page_wrapper .main_wrapper nav .nav_menu {
-  overflow: hidden;
-}
-
-.main_page_wrapper .main_wrapper nav .nav_menu_link {
-  position: relative;
+nav .nav_menu_link {
   color: #fff;
   padding: 1.5rem;
   background-color: #263238;
 }
 
-.main_page_wrapper .main_wrapper nav .nav_menu_link:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+nav .nav_menu_link:hover {
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
-.main_page_wrapper .main_wrapper nav .nav_sub_menu li a {
+.nav_sub_menu {
+  overflow: hidden;
+}
+
+.nav_sub_menu div {
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.nav_sub_menu div li a {
   color: #fff;
   padding: 1rem 0 1rem 3rem;
 }
 
-.main_page_wrapper .main_wrapper nav .nav_sub_menu li a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+.nav_sub_menu div li a:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.offSubMenu {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  height: 0;
+}
+
+.onSubMenu {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  height: 100%;
 }
 
 .main_content_wrapper {
@@ -438,7 +474,7 @@ a:active {
 }
 
 .main_content_wrapper .content_card_box {
-  border-top: 2px solid rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
   padding: 1rem;
 }
 

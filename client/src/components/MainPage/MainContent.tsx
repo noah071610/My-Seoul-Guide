@@ -15,13 +15,13 @@ const MainContent: FC = observer(() => {
   return (
     <MainPageWrapper>
       <div className="main_content_wrapper">
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyB3aU6T0xfSaAzU6SqUZOlO0didFGsRtJo" }}
+        {/* <GoogleMapReact
+          bootstrapURLKeys={{ key:process.env.GOOGLE_MAP_CLIENT_ID }}
           defaultZoom={15}
           defaultCenter={{ lat: 37.55504418865722, lng: 127.93403516189143 }}
         >
           <Marker lat={37.55504418865722} lng={126.93403516189143} text="zzzzz" />
-        </GoogleMapReact>
+        </GoogleMapReact> */}
         <div className="content_card_box"></div>
       </div>
     </MainPageWrapper>

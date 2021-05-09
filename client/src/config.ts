@@ -8,29 +8,27 @@ export const check_purpose_list = [
   { label: "K-pop", value: "kpop" },
   { label: "Food", value: "food" },
   { label: "Shopping", value: "shopping" },
-  { label: "Plastic surgery", value: "surgery" },
   { label: "History", value: "history" },
   { label: "Night Life", value: "nightLife" },
-  { label: "BF or GF", value: "bfgf" },
-  { label: "Vacation", value: "vacation" },
+  { label: "Chillin", value: "chillin" },
+  { label: "Activity", value: "activity" },
+  { label: "Plastic surgery", value: "surgery" },
 ];
 export const check_party_list = ["Single", "Family", "Friend", "Lover"];
 export const check_age_list = ["Teenager", "Twenties", "Thirties", "Upper then Forties"];
 
 export const check_acm_list = [
   { label: "Easy to access", value: "access" },
-  { label: "Hot spot", value: "spot" },
   { label: "Near Airport", value: "airport" },
   { label: "Cheaper", value: "cheaper" },
-  { label: "Guest House", value: "guestHouse" },
   { label: "Luxury", value: "luxury" },
-  { label: "Young", value: "young" },
+  { label: "Native Recommendation", value: "Native" },
 ];
 
 export const main_nav_list = [
-  ["Accommodation 🏢", ""],
-  ["Place ✈", "place"],
-  ["Experience 👪", "experience"],
+  ["Accommodation 🏩", ""],
+  ["Place to go 🏞", "place"],
+  ["Activity 🏂", "activity"],
   ["Festival 🎆", "festival"],
   ["Analyzer 📈", "analyzer"],
 ];
