@@ -5,16 +5,20 @@ import "slick-carousel/slick/slick-theme.css";
 import Home from "./components/Home";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Suspense } from "react";
+import ActivityContent from "./components/MainPage/ActivityPage/ActivityContent";
+import AnalyzerContent from "./components/MainPage/AnalyzerPage/AnalyzerContent";
+import MapContent from "./components/MainPage/Acm&AirportPage/MapContent";
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Route exact path="/" component={Home} />
-        <Route exact path="/place" component={Home} />
-        <Route exact path="/experience" component={Home} />
-        <Route exact path="/festival" component={Home} />
-        <Route exact path="/analyzer" component={Home} />
+        <Route exact path="/acm" component={MapContent} />
+        <Route exact path="/airport_route" component={MapContent} />
+        <Route exact path="/activity" component={ActivityContent} />
+        <Route exact path="/festival" component={ActivityContent} />
+        <Route exact path="/analyzer" component={AnalyzerContent} />
       </Suspense>
     </BrowserRouter>
   );

@@ -1,10 +1,11 @@
 import { createContext, FC, ReactNode } from "react";
-import { checkListStore } from "./@store/store";
+import { checkListStore, mainStore } from "./@store/store";
 import ReactDOM from "react-dom";
 import App from "./App";
 
 const storeContext = createContext({
   checkListStore,
+  mainStore,
 });
 
 interface Props {
@@ -12,7 +13,9 @@ interface Props {
 }
 
 const StoreProvider: FC<Props> = ({ children }) => {
-  return <storeContext.Provider value={{ checkListStore }}>{children}</storeContext.Provider>;
+  return (
+    <storeContext.Provider value={{ checkListStore, mainStore }}>{children}</storeContext.Provider>
+  );
 };
 
 ReactDOM.render(
