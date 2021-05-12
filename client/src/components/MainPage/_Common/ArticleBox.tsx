@@ -18,7 +18,7 @@ const ArticleBox = observer(() => {
           </li>
           {mainStore.acmCard?.tags.map((tag, i) => {
             return (
-              <li key={i} className="article_tag">
+              <li key={i} className="article_tag tag">
                 {tag}
               </li>
             );

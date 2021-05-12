@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
@@ -14,7 +15,7 @@ interface NavProps {
 const SubMenuCSS = (menuIdx: number, stopAnimation: number | null) => css`
   overflow: hidden;
   div {
-    ${stopAnimation === menuIdx ? null : "transition: 0.3s all"};
+    ${stopAnimation === menuIdx ? null : "transition: transform 0.3s"};
   }
   a {
     color: white;
@@ -39,6 +40,7 @@ export interface IdxHash {
 }
 
 const Navigation: FC<NavProps> = observer(() => {
+  const history = useHistory();
   let navRefs = useRef<HTMLDivElement[]>([]);
 
   // Get the indexHash for slide menu animation
@@ -46,7 +48,6 @@ const Navigation: FC<NavProps> = observer(() => {
   let idxHash: IdxHash[] = [];
 
   const [stopAnimation, setStopAnimation] = useState<number | null>(null);
-  const history = useHistory();
   const onClickMenu = useCallback((menuIdx: number) => {
     let menuIdxWithActiveIdx = idxHash.find((v) => {
       return v.menuIdx === menuIdx;
@@ -55,27 +56,19 @@ const Navigation: FC<NavProps> = observer(() => {
     //idxHash {menuIdx: menu index which have sub menus , activeIndex}
     mainStore.onChangeActiveMenu(menuIdxWithActiveIdx as IdxHash);
     navRefs?.current[menuIdxWithActiveIdx?.activeIdx as number].classList.toggle("onSubMenu");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const onClickSubMenu = (path: string, subMenuIdx: number) => {
-    if (path === "airport_route") {
-      mainStore.deleteAcmCard();
-      mainStore.addAirportCard(subMenuIdx);
-    } else if (path === "acm") {
-      mainStore.deleteAirportCard();
-      mainStore.addAcmCard(subMenuIdx);
-    }
-    if (mainStore.onSmallNav) {
-      mainStore.onToggleSmallNav();
-    }
-    history.push(`/${path}`);
-  };
-  const onClickNoSubMenu = () => {
+
+  const onClickSubMenu = useCallback((path: string) => {
+    history.push(`/activity/${path.toLowerCase()}`);
+  }, []);
+
+  const onClickNoSubMenu = useCallback(() => {
     if (mainStore.onSmallNav) {
       mainStore.onToggleSmallNav();
     }
     mainStore.onChangeActiveMenu(null);
-  };
+  }, []);
+
   useEffect(() => {
     if (mainStore.activeMenuIdx) {
       navRefs.current[mainStore.activeMenuIdx.activeIdx].classList.add("onSubMenu");
@@ -96,7 +89,7 @@ const Navigation: FC<NavProps> = observer(() => {
                   {list[0]}
                 </a>
               ) : (
-                <Link onClick={onClickNoSubMenu} className="nav_menu_link" to={list[1]}>
+                <Link onClick={onClickNoSubMenu} className="nav_menu_link" to={`/${list[1]}`}>
                   {list[0]}
                 </Link>
               )}
@@ -106,17 +99,14 @@ const Navigation: FC<NavProps> = observer(() => {
                   <div
                     className="offSubMenu"
                     ref={(el) => {
-                      //el will be pushed sequentially that's why i did ++ ㅇㅋ?
+                      //el will be pushed sequentially that's why i did ++
                       idxHash.push({ menuIdx, activeIdx: activeIdx++ });
                       navRefs.current = [...navRefs.current, el!];
                     }}
                   >
                     {list.slice(2, list.length).map((subList, subMenuIdx) => (
                       <li key={subMenuIdx}>
-                        <a
-                          className="sub_menu_link"
-                          onClick={() => onClickSubMenu(list[1], subMenuIdx)}
-                        >
+                        <a className="sub_menu_link" onClick={() => onClickSubMenu(subList)}>
                           {subList}
                         </a>
                       </li>

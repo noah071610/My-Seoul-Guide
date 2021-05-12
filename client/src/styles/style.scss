@@ -162,6 +162,7 @@ a {
   color: black;
   text-decoration: none;
   outline: none;
+  display: block;
 }
 a:hover,
 a:active {
@@ -217,6 +218,24 @@ p {
   width: 100vw;
   height: 200vh;
   background: rgba(0, 0, 0, 0.5);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  background-color: $MAIN_COLOR;
+  padding: 0.1rem 0.5rem;
+  color: $WHITE_COLOR;
+  border-radius: 5px;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.strong {
+  margin: 0 0.5rem;
+  font-weight: bold;
+  color: $BLUE_COLOR;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
@@ -348,8 +367,10 @@ p {
   .main_wrapper {
     height: calc(100% - 59.26px);
     display: flex;
-    a {
-      display: block;
+    .main_content_wrapper {
+      width: 100%;
+      overflow: auto;
+      position: relative;
     }
   }
 }
@@ -399,6 +420,7 @@ header {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid $GRAY_COLOR;
   .header_logo {
     color: black;
     font-family: "Kaushan Script", cursive;
@@ -412,6 +434,9 @@ header {
     margin-right: 0.5rem;
     font-size: 0.9rem;
   }
+  a {
+    display: inline-block;
+  }
 }
 
 //=================== Navigation =========================
@@ -419,7 +444,6 @@ header {
 .nav {
   width: 320px;
   font-size: 1.1rem;
-
   background-color: $MAIN_COLOR;
   .nav_menu {
     &_link {
@@ -449,14 +473,7 @@ header {
 
 //=================Main Content =======================
 
-.main_content_wrapper {
-  width: 100%;
-  overflow: auto;
-  position: relative;
-}
-
 .article_box {
-  border-top: 1px solid $GRAY_COLOR;
   padding: 2rem;
   width: 100%;
   .article_content {
@@ -488,12 +505,6 @@ header {
       .article_tag {
         user-select: none;
         margin-right: 0.5rem;
-        display: inline-block;
-        font-size: 0.8rem;
-        background-color: $MAIN_COLOR;
-        padding: 0.1rem 0.5rem;
-        color: $WHITE_COLOR;
-        border-radius: 5px;
         &:hover {
           transform: scale(1.05);
         }
@@ -502,28 +513,83 @@ header {
   }
 }
 
-.main_route {
-  width: 100%;
-  height: 20%;
+.article_small_box {
   padding: 1rem;
-  display: flex;
-  div:first-of-type {
-    margin-right: 0.5rem;
-  }
-  div {
-    width: 50%;
+  transition: 0.4s all;
+  width: 100%;
+  h2 {
+    margin-bottom: 1rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.5s all;
-    box-shadow: 3px 3px 5px $GRAY_COLOR;
-    border-radius: 5px;
+    justify-content: space-between;
+    align-items: flex-end;
     span {
+      font-family: "Kaushan Script", cursive;
+    }
+    a:last-child {
+      font-size: 0.9rem;
+    }
+  }
+  .image_wrapper {
+    overflow: hidden;
+    border-radius: 10px;
+    img {
+      width: 100%;
+      height: 240px;
+      transition: 0.4s all;
+      border-radius: 10px;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.route_content {
+  &_header {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  &_info {
+    display: flex;
+    align-items: center;
+    span {
+      margin: 0 0.5rem;
+    }
+    ul {
+      display: flex;
+      li {
+        display: flex;
+        align-items: center;
+      }
+    }
+    a {
+      &:hover {
+        color: $WHITE_COLOR;
+      }
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+.route_btn {
+  position: absolute;
+  z-index: 1;
+  top: -3rem;
+  font-size: 1.5rem;
+  &_prev {
+    right: 3rem;
+    &:hover {
       color: $BLUE_COLOR;
     }
+  }
+  &_next {
+    right: 1rem;
     &:hover {
-      background-color: $GRAY_COLOR;
+      color: $BLUE_COLOR;
     }
   }
 }

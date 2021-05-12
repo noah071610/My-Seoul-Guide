@@ -3,20 +3,25 @@ import { FC, useCallback, useEffect, useState } from "react";
 import MainPageWrapper from "../MainPageWrapper";
 import { GoogleMap, LoadScript, Polygon } from "@react-google-maps/api";
 import { mainStore } from "../../../@store/store";
-import ContentCard from "../_Common/ArticleBox";
+import AcmPage from "../_Common/ArticleBox";
 import { useRouteMatch } from "react-router";
-import { polygonOption } from "../../../config";
+import { airportList, polygonOption } from "../../../config";
 import { useCalcCenter } from "../../../hooks/useCalcCenter";
 import { Directions } from "../_Common/Directions";
+import { PathObj } from "../../../@store/store";
+import AirportPage from "./AirportRoutePage";
 
 const MapContent: FC = observer(() => {
+  const [isPickAirport, setIsPickAirport] = useState<number>(0);
   const { path } = useRouteMatch();
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
+  const [center, setCenter] = useState<PathObj>({
+    lat: 37.517146640932296,
+    lng: 126.80792769408053,
+  });
 
   let isRoutePath = path.slice(1) === "airport_route";
-
   const mapContainerStyle = {
-    height: isRoutePath ? "80%" : "50%",
+    height: "50%",
     width: "100%",
   };
   const onClickDirection = useCallback((listNum: number) => {
@@ -24,14 +29,21 @@ const MapContent: FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (mainStore.acmCard) {
-      let centerXY = useCalcCenter(mainStore.acmCard.path);
-      setCenter(centerXY);
-    } else if (mainStore.airportInfo) {
-      setCenter({ lat: 37.517146640932296, lng: 126.80792769408053 });
+    mainStore.addAcmCard(0);
+  }, []);
+
+  useEffect(() => {
+    if (!isRoutePath) {
+      let centerXY = useCalcCenter(mainStore.acmCard?.path as PathObj[]);
+      //I'm so afraid undefined || null ....... doubleCheck
+      setCenter(
+        centerXY === undefined || null
+          ? { lat: 37.517146640932296, lng: 126.80792769408053 }
+          : centerXY
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mainStore.acmCard, mainStore.airportInfo]);
+  }, [mainStore.acmCard]);
 
   return (
     <MainPageWrapper>
@@ -42,30 +54,28 @@ const MapContent: FC = observer(() => {
           zoom={isRoutePath ? 10 : 14}
         >
           {isRoutePath ? (
-            <Directions
-              origin={mainStore.airportInfo?.path}
-              destination={mainStore.acmCard?.stationPath}
-            />
+            // If mainStore gets the items OR set default value
+            isPickAirport && (
+              <Directions
+                origin={{
+                  lat: airportList[isPickAirport - 1]?.path.lat || 37.4480776440891,
+                  lng: airportList[isPickAirport - 1]?.path.lng || 126.45117714540771,
+                }}
+                destination={{
+                  lat: mainStore.acmCard?.stationPath.lat || 37.4480776440891,
+                  lng: mainStore.acmCard?.stationPath.lng || 126.45117714540771,
+                }}
+              />
+            )
           ) : (
             <Polygon paths={mainStore.acmCard?.path} options={polygonOption} />
           )}
         </GoogleMap>
       </LoadScript>
       {isRoutePath ? (
-        <div className="main_route">
-          <div onClick={() => onClickDirection(0)}>
-            <h3>
-              From InCheon Airport ✈ to <span>Myeong-dong</span>
-            </h3>
-          </div>
-          <div onClick={() => onClickDirection(1)}>
-            <h3>
-              From InCheon Airport ✈ to <span>Hong-dae</span>
-            </h3>
-          </div>
-        </div>
+        <AirportPage isPickAirport={isPickAirport} setIsPickAirport={setIsPickAirport} />
       ) : (
-        <ContentCard />
+        <AcmPage />
       )}
     </MainPageWrapper>
   );

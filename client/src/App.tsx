@@ -14,10 +14,9 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Route exact path="/" component={Home} />
-        <Route exact path="/acm" component={MapContent} />
+        <Route exact path="/stay" component={MapContent} />
         <Route exact path="/airport_route" component={MapContent} />
-        <Route exact path="/activity" component={ActivityContent} />
-        <Route exact path="/festival" component={ActivityContent} />
+        <Route exact path="/activity/:category" component={ActivityContent} />
         <Route exact path="/analyzer" component={AnalyzerContent} />
       </Suspense>
     </BrowserRouter>

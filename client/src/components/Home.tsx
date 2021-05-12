@@ -22,7 +22,7 @@ const Home = observer(() => {
   const [onOverlay, setOnOverlay] = useState(true);
   return (
     <div css={HomeWrapper(checkListStore.isSubmit)}>
-      <LandingPage />
+      {/* <LandingPage />
       {checkListStore.isSubmit && (
         <MainPageWrapper>
           <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
@@ -39,7 +39,16 @@ const Home = observer(() => {
           />
           <HomeModal onOverlay={onOverlay} />
         </MainPageWrapper>
-      )}
+      )} */}
+      <MainPageWrapper>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={{ lat: 37.549687466128496, lng: 126.9809660539474 }}
+            zoom={11}
+          ></GoogleMap>
+        </LoadScript>
+      </MainPageWrapper>
     </div>
   );
 });

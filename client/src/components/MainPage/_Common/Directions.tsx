@@ -16,7 +16,7 @@ export const Directions = (props: any) => {
 
   useEffect(() => {
     count.current = 0;
-  }, []);
+  }, [destination]);
 
   const directionsCallback = (res: any, status: any) => {
     if (status === "OK" && count.current === 0) {

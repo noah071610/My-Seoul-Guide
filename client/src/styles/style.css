@@ -161,6 +161,7 @@ a {
   color: black;
   text-decoration: none;
   outline: none;
+  display: block;
 }
 
 a:hover,
@@ -224,6 +225,26 @@ p {
   width: 100vw;
   height: 200vh;
   background: rgba(0, 0, 0, 0.5);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  background-color: #263238;
+  padding: 0.1rem 0.5rem;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.tag:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.strong {
+  margin: 0 0.5rem;
+  font-weight: bold;
+  color: #1187cf;
 }
 
 @-webkit-keyframes zoomInOut {
@@ -426,8 +447,10 @@ p {
   display: flex;
 }
 
-.main_page_wrapper .main_wrapper a {
-  display: block;
+.main_page_wrapper .main_wrapper .main_content_wrapper {
+  width: 100%;
+  overflow: auto;
+  position: relative;
 }
 
 .home_modal {
@@ -481,6 +504,7 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 header .header_logo {
@@ -497,6 +521,10 @@ header .settingIcon {
 header span {
   margin-right: 0.5rem;
   font-size: 0.9rem;
+}
+
+header a {
+  display: inline-block;
 }
 
 .nav {
@@ -535,14 +563,7 @@ header span {
   height: 100%;
 }
 
-.main_content_wrapper {
-  width: 100%;
-  overflow: auto;
-  position: relative;
-}
-
 .article_box {
-  border-top: 1px solid rgba(0, 0, 0, 0.25);
   padding: 2rem;
   width: 100%;
 }
@@ -583,12 +604,6 @@ header span {
       -ms-user-select: none;
           user-select: none;
   margin-right: 0.5rem;
-  display: inline-block;
-  font-size: 0.8rem;
-  background-color: #263238;
-  padding: 0.1rem 0.5rem;
-  color: #fff;
-  border-radius: 5px;
 }
 
 .article_box .article_header ul .article_tag:hover {
@@ -596,43 +611,117 @@ header span {
           transform: scale(1.05);
 }
 
-.main_route {
-  width: 100%;
-  height: 20%;
+.article_small_box {
   padding: 1rem;
+  -webkit-transition: 0.4s all;
+  transition: 0.4s all;
+  width: 100%;
+}
+
+.article_small_box h2 {
+  margin-bottom: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
-.main_route div:first-of-type {
-  margin-right: 0.5rem;
+.article_small_box h2 span {
+  font-family: "Kaushan Script", cursive;
 }
 
-.main_route div {
-  width: 50%;
+.article_small_box h2 a:last-child {
+  font-size: 0.9rem;
+}
+
+.article_small_box .image_wrapper {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.article_small_box .image_wrapper img {
+  width: 100%;
+  height: 240px;
+  -webkit-transition: 0.4s all;
+  transition: 0.4s all;
+  border-radius: 10px;
+}
+
+.article_small_box:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.article_small_box:hover img {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.route_content_header {
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.route_content_info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
-  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
 }
 
-.main_route div span {
+.route_content_info span {
+  margin: 0 0.5rem;
+}
+
+.route_content_info ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.route_content_info ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.route_content_info a {
+  margin-left: 0.5rem;
+}
+
+.route_content_info a:hover {
+  color: #fff;
+}
+
+.route_btn {
+  position: absolute;
+  z-index: 1;
+  top: -3rem;
+  font-size: 1.5rem;
+}
+
+.route_btn_prev {
+  right: 3rem;
+}
+
+.route_btn_prev:hover {
   color: #1187cf;
 }
 
-.main_route div:hover {
-  background-color: rgba(0, 0, 0, 0.25);
+.route_btn_next {
+  right: 1rem;
+}
+
+.route_btn_next:hover {
+  color: #1187cf;
 }
 /*# sourceMappingURL=style.css.map */

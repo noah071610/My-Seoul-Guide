@@ -38,10 +38,9 @@ export const check_acm_list = [
 
 export const main_nav_list = [
   ["Home 🗺", ""],
-  ["Accommodation 🏩", "acm", "Myeong-Dong", "Hong-Dae"],
-  ["From Airport ✈", "airport_route", "Incheon-Airport", "Kimpo-Airport"],
-  ["Activity 🏂", "activity"],
-  ["Festival 🎆", "festival"],
+  ["Accommodation 🏩", "stay"],
+  ["From Airport ✈", "airport_route"],
+  ["Activity 🏂", "activity", "Festival", "Experience", "Museum"],
   ["Analyzer 📈", "analyzer"],
 ];
 
@@ -56,8 +55,16 @@ export const polygonOption = {
 };
 
 export const airportList = [
-  { name: "Incheon-Airport", path: { lat: 37.4480776440891, lng: 126.45117714540771 } },
-  { name: "Kimpo-Airport", path: { lat: 37.56002674165833, lng: 126.80517798548506 } },
+  {
+    name: "Incheon-Airport",
+    path: { lat: 37.4480776440891, lng: 126.45117714540771 },
+    src: "https://futureiot.tech/wp-content/uploads/2020/04/Incheon-Airport-resized.jpg",
+  },
+  {
+    name: "Gimpo-Airport",
+    path: { lat: 37.56002674165833, lng: 126.80517798548506 },
+    src: "https://lh3.googleusercontent.com/proxy/KU4K0tgL8s9tdkskv9V3_l7EoW6rC65wSmsN_8VnYaXyuMmzRsN7y6M4cTsdEQz3ssmWDZFd49gqYdK4HnHWOi1jippm-2FF",
+  },
 ];
 
 export const acmCardList = [
