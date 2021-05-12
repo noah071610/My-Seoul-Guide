@@ -11,6 +11,11 @@ import { Directions } from "../_Common/Directions";
 import { PathObj } from "../../../@store/store";
 import AirportPage from "./AirportRoutePage";
 
+const mapContainerStyle = {
+  height: "50%",
+  width: "100%",
+};
+
 const MapContent: FC = observer(() => {
   const [isPickAirport, setIsPickAirport] = useState<number>(0);
   const { path } = useRouteMatch();
@@ -20,10 +25,7 @@ const MapContent: FC = observer(() => {
   });
 
   let isRoutePath = path.slice(1) === "airport_route";
-  const mapContainerStyle = {
-    height: "50%",
-    width: "100%",
-  };
+  
   const onClickDirection = useCallback((listNum: number) => {
     mainStore.addAcmCard(listNum);
   }, []);
@@ -35,7 +37,7 @@ const MapContent: FC = observer(() => {
   useEffect(() => {
     if (!isRoutePath) {
       let centerXY = useCalcCenter(mainStore.acmCard?.path as PathObj[]);
-      //I'm so afraid undefined || null ....... doubleCheck
+      //doubleCheck
       setCenter(
         centerXY === undefined || null
           ? { lat: 37.517146640932296, lng: 126.80792769408053 }
@@ -54,7 +56,7 @@ const MapContent: FC = observer(() => {
           zoom={isRoutePath ? 10 : 14}
         >
           {isRoutePath ? (
-            // If mainStore gets the items OR set default value
+            //You can see direction when you pick airport up
             isPickAirport && (
               <Directions
                 origin={{
@@ -68,6 +70,7 @@ const MapContent: FC = observer(() => {
               />
             )
           ) : (
+            //Polygon map area for acm page 
             <Polygon paths={mainStore.acmCard?.path} options={polygonOption} />
           )}
         </GoogleMap>
