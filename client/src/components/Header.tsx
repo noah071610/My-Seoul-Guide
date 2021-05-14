@@ -3,10 +3,10 @@
 import { css } from "@emotion/react";
 import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react";
-import { FC } from "react";
+import { FC, MouseEvent, useCallback } from "react";
 import { Link } from "react-router-dom";
 import useToggle from "../hooks/useToggle";
-import { Divider } from "antd";
+import { Divider, message, Popconfirm } from "antd";
 import { mainStore } from "../@store/store";
 
 const settingBar = (onSetting: boolean) => css`
@@ -17,6 +17,9 @@ const settingBar = (onSetting: boolean) => css`
     display: ${onSetting ? "flex" : "none"};
   }
 `;
+function confirm(e: MouseEvent<HTMLElement, MouseEvent>) {
+  console.log(e);
+}
 
 const Header: FC = observer(() => {
   const [onSetting, onChangeSetting] = useToggle(false);
@@ -28,15 +31,22 @@ const Header: FC = observer(() => {
       <div css={settingBar(onSetting)}>
         <ul className="settingBar">
           <li className="settingIcon">
-            <Link to="/">
-              <span>Go back First-page</span>
-            </Link>
+            <Popconfirm
+              title="Are you sure to go back first page?"
+              onConfirm={() => confirm}
+              okText="Yes"
+              cancelText="No"
+            >
+              <a href="#">
+                <span>Go back First-page</span>
+              </a>
+            </Popconfirm>
             <Divider type="vertical" />
           </li>
           <li className="settingIcon">
-            <Link to="/">
+            <a href="mailto:noah071610@naver.com">
               <span>FeedBack</span>
-            </Link>
+            </a>
           </li>
         </ul>
         <a className="settingIcon" onClick={onChangeSetting}>

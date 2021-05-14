@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /** @jsxImportSource @emotion/react */
+import { GithubFilled, InstagramFilled, MailFilled } from "@ant-design/icons";
 import { css } from "@emotion/react";
 import { observer } from "mobx-react";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
@@ -114,6 +115,27 @@ const Navigation: FC<NavProps> = observer(() => {
           );
         })}
       </ul>
+      <div className="footer">
+        <h4 className="footer_desc">ⓒ 2021, Jang Hyun Soo. All Rights Resrved.</h4>
+        <h4 className="footer_desc">Support by Korea Tourism Organization's</h4>
+        <ul>
+          <li>
+            <a href="https://github.com/noah071610" target="_blank" rel="noreferrer">
+              <GithubFilled />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/salmonchobab/" target="_blank" rel="noreferrer">
+              <InstagramFilled />
+            </a>
+          </li>
+          <li>
+            <a href="mailto:noah071610@naver.com">
+              <MailFilled />
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 });

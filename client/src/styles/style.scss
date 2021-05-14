@@ -468,16 +468,35 @@ header {
   width: 320px;
   font-size: 1.1rem;
   background-color: $MAIN_COLOR;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .nav_menu {
     &_link {
-      color: $WHITE_COLOR;
       padding: 1.5rem;
+      color: $WHITE_COLOR;
       background-color: $MAIN_COLOR;
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);
       }
     }
   }
+  .footer {
+    padding: 1rem;
+    &_desc {
+      margin-bottom: 0.5rem;
+      color: $WHITE_COLOR;
+      font-size: 0.9rem;
+    }
+    ul {
+      display: flex;
+      a {
+        color: $WHITE_COLOR;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
   @media only screen and (max-width: $md) {
     transform: translateX(-100px);
     width: 0px;
