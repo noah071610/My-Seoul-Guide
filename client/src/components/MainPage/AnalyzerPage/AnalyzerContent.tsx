@@ -1,129 +1,62 @@
-/** @jsxImportSource @emotion/react */
 import { ResponsivePie } from "@nivo/pie";
 import { observer } from "mobx-react";
+import { mainStore } from "../../../@store/store";
 import MainPageWrapper from "../MainPageWrapper";
+import PaymentList from "./PaymentList";
 
 const data = [
   {
-    id: "erlang",
-    label: "erlang",
-    value: 238,
+    id: "Airfare",
+    label: "Airfare",
+    value: mainStore.chartValue.airfare,
+    color: "hsl(77, 70%, 50%)",
+  },
+  {
+    id: "Total",
+    label: "Total",
+    value: mainStore.chartValue.total,
+    color: "hsl(27, 70%, 70%)",
+  },
+  {
+    id: "Stay",
+    label: "Stay",
+    value: mainStore.chartValue.stay,
     color: "hsl(164, 70%, 50%)",
   },
   {
-    id: "stylus",
-    label: "stylus",
-    value: 172,
+    id: "Food",
+    label: "Food",
+    value: mainStore.chartValue.food,
     color: "hsl(42, 70%, 50%)",
   },
   {
-    id: "php",
-    label: "php",
-    value: 274,
+    id: "Attractions",
+    label: "Attractions",
+    value: mainStore.chartValue.attractions,
     color: "hsl(135, 70%, 50%)",
   },
   {
-    id: "hack",
-    label: "hack",
-    value: 327,
+    id: "Shopping",
+    label: "Shopping",
+    value: mainStore.chartValue.shopping,
     color: "hsl(213, 70%, 50%)",
-  },
-  {
-    id: "go",
-    label: "go",
-    value: 164,
-    color: "hsl(77, 70%, 50%)",
   },
 ];
 
 const AnalyzerContent = observer(() => {
   return (
     <MainPageWrapper>
+      <PaymentList />
       <ResponsivePie
         data={data}
-        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        innerRadius={0.5}
+        margin={{ top: 80, right: 80, bottom: 150, left: 80 }}
+        innerRadius={0.01}
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
-        borderWidth={1}
-        borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor="#333333"
         arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: "color" }}
-        arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
-        defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
-          {
-            id: "lines",
-            type: "patternLines",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10,
-          },
-        ]}
-        fill={[
-          {
-            match: {
-              id: "ruby",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "c",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "go",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "python",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "scala",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "lisp",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "elixir",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "javascript",
-            },
-            id: "lines",
-          },
-        ]}
         legends={[
           {
             anchor: "bottom",

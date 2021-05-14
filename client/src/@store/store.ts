@@ -1,20 +1,8 @@
-import { acmCardList, airportList } from "./../config";
+import { acmCardList } from "./../config";
 import { observable, configure, action } from "mobx";
-import { IdxHash } from "../components/Navigation";
+import { CheckListStore, IdxHash, MainStore, PaymentListInter } from "../types";
 
 configure({ enforceActions: "always" });
-
-interface CheckListStore {
-  gender: string | null;
-  age: string | null;
-  party: string | null;
-  purpose: string[] | null;
-  acm: string[] | null;
-  isSubmit: boolean;
-  changeTaste: (data: string[], name: string) => void;
-  changeInfo: (data: string, name: string) => void;
-  onSubmit: () => void;
-}
 
 const checkListStore = observable<CheckListStore>({
   gender: null,
@@ -44,45 +32,13 @@ const checkListStore = observable<CheckListStore>({
   }),
 });
 
-export interface PathObj {
-  lat: number;
-  lng: number;
-}
-
-export interface AcmCard {
-  name: string;
-  src: string;
-  href: string;
-  desc: string;
-  rate: number;
-  tags: string[];
-  path: PathObj[];
-  stationPath: PathObj;
-}
-
-export interface AirportInter {
-  name: string;
-  path: PathObj;
-  src: string;
-}
-
-interface MainStore {
-  acmCard: AcmCard | null;
-  activeMenuIdx: IdxHash | null;
-  onSmallNav: boolean;
-  addAcmCard: (data: number) => void;
-  deleteAcmCard: () => void;
-  onChangeActiveMenu: (data: IdxHash | null) => void;
-  onToggleSmallNav: () => void;
-  getContents: (res: any) => void;
-  itemList: any;
-}
-
 const mainStore = observable<MainStore>({
   acmCard: null,
   activeMenuIdx: null,
   onSmallNav: false,
   itemList: null,
+  paymentList: null,
+  chartValue: { total: 1, airfare: 0, transport: 0, stay: 0, food: 0, attractions: 0, shopping: 0 },
   deleteAcmCard: action(() => {
     mainStore.acmCard = null;
   }),
@@ -124,6 +80,14 @@ const mainStore = observable<MainStore>({
       itemList.push(item);
     }
     mainStore.itemList = itemList;
+  }),
+  addPaymentList: action((data: PaymentListInter[]) => {
+    mainStore.paymentList = data;
+  }),
+  deletePaymentList: action((id: number) => {
+    if (mainStore.paymentList) {
+      mainStore.paymentList.splice(id, 1);
+    }
   }),
 });
 

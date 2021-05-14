@@ -2,21 +2,21 @@ import { observer } from "mobx-react";
 import { FC, useCallback, useEffect, useState } from "react";
 import MainPageWrapper from "../MainPageWrapper";
 import { GoogleMap, LoadScript, Polygon } from "@react-google-maps/api";
-import { mainStore } from "../../../@store/store";
-import AcmPage from "../_Common/ArticleBox";
+import AcmPage from "../_Common/ContentBox";
 import { useRouteMatch } from "react-router";
-import { airportList, polygonOption } from "../../../config";
+import { acmCardList, airportList, polygonOption } from "../../../config";
 import { useCalcCenter } from "../../../hooks/useCalcCenter";
 import { Directions } from "../_Common/Directions";
-import { PathObj } from "../../../@store/store";
 import AirportPage from "./AirportRoutePage";
+import { PathObj } from "../../../types";
+import { mainStore } from "../../../@store/store";
 
 const mapContainerStyle = {
   height: "50%",
   width: "100%",
 };
 
-const MapContent: FC = observer(() => {
+const AccomodationPage: FC = observer(() => {
   const [isPickAirport, setIsPickAirport] = useState<number>(0);
   const { path } = useRouteMatch();
   const [center, setCenter] = useState<PathObj>({
@@ -24,8 +24,8 @@ const MapContent: FC = observer(() => {
     lng: 126.80792769408053,
   });
 
-  let isRoutePath = path.slice(1) === "airport_route";
-  
+  let isAirportRoutePath = path.slice(1) === "airport_route";
+
   const onClickDirection = useCallback((listNum: number) => {
     mainStore.addAcmCard(listNum);
   }, []);
@@ -35,7 +35,7 @@ const MapContent: FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (!isRoutePath) {
+    if (!isAirportRoutePath) {
       let centerXY = useCalcCenter(mainStore.acmCard?.path as PathObj[]);
       //doubleCheck
       setCenter(
@@ -53,9 +53,9 @@ const MapContent: FC = observer(() => {
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           center={center}
-          zoom={isRoutePath ? 10 : 14}
+          zoom={isAirportRoutePath ? 10 : 14}
         >
-          {isRoutePath ? (
+          {isAirportRoutePath ? (
             //You can see direction when you pick airport up
             isPickAirport && (
               <Directions
@@ -70,18 +70,18 @@ const MapContent: FC = observer(() => {
               />
             )
           ) : (
-            //Polygon map area for acm page 
+            //Polygon map area for acm page
             <Polygon paths={mainStore.acmCard?.path} options={polygonOption} />
           )}
         </GoogleMap>
       </LoadScript>
-      {isRoutePath ? (
+      {isAirportRoutePath ? (
         <AirportPage isPickAirport={isPickAirport} setIsPickAirport={setIsPickAirport} />
       ) : (
-        <AcmPage />
+        <AcmPage card={acmCardList[0]} isAcmCard={true} />
       )}
     </MainPageWrapper>
   );
 });
 
-export default MapContent;
+export default AccomodationPage;

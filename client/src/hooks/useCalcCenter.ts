@@ -1,4 +1,4 @@
-import { PathObj } from "./../@store/store";
+import { PathObj } from "../types";
 
 export const useCalcCenter = (path: PathObj[]) => {
   let maxY = Number.MIN_SAFE_INTEGER;

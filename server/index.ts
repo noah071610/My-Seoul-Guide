@@ -1,29 +1,30 @@
 import { ApolloServer, gql } from "apollo-server";
-import { getItems } from "./db";
+import { getItems, getOverViews } from "./db";
 
 const typeDefs = gql`
-  type Name {
+  type Content {
     _text: String
   }
   type Id {
     _text: String
   }
-  type AttrList {
-    title: Name
-    firstimage: Name
-    addr1: Name
-    mapx: Name
-    mapy: Name
+  type List {
+    title: Content
+    firstimage: Content
+    addr1: Content
+    mapx: Content
+    mapy: Content
     contentid: Id
+    overview: Content
   }
   type Query {
-    Contents(typeNum: Int!): [AttrList]
+    ActivityCard(typeNum: Int!): [List]
   }
 `;
 
 const resolvers = {
   Query: {
-    Contents: (_: any, { typeNum }: { typeNum: number }) => getItems(typeNum),
+    ActivityCard: (_: any, { typeNum }: { typeNum: number }) => getItems(typeNum),
   },
 };
 

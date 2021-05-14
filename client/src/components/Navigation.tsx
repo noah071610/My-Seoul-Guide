@@ -7,6 +7,7 @@ import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { mainStore } from "../@store/store";
 import { main_nav_list, MD_SIZE } from "../config";
+import { IdxHash } from "../types";
 
 interface NavProps {
   isSmall: boolean;
@@ -33,11 +34,6 @@ const navCSS = (onSmallNav: boolean) => css`
     "transform:translateX(0); width:200px; position:absolute; top:59.26px;left:0;z-index:1; font-size:0.8rem; height:100%"};
   }
 `;
-
-export interface IdxHash {
-  menuIdx: number;
-  activeIdx: number;
-}
 
 const Navigation: FC<NavProps> = observer(() => {
   const history = useHistory();

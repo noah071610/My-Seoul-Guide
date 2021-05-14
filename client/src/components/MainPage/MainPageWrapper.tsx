@@ -1,5 +1,4 @@
-import { observer } from "mobx-react";
-import { FC, ReactNode } from "react";
+import { FC, memo, ReactNode } from "react";
 import Navigation from "../Navigation";
 import Header from "../Header";
 
@@ -7,7 +6,7 @@ interface Wrapper {
   children: ReactNode;
 }
 
-const MainPageWrapper: FC<Wrapper> = observer(({ children }) => {
+const MainPageWrapper: FC<Wrapper> = memo(({ children }) => {
   return (
     <div className="main_page_wrapper">
       <Header />
@@ -19,4 +18,4 @@ const MainPageWrapper: FC<Wrapper> = observer(({ children }) => {
   );
 });
 
-export default MainPageWrapper;
+export default memo(MainPageWrapper);

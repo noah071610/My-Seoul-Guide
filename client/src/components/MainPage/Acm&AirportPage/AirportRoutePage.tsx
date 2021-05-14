@@ -2,10 +2,12 @@
 import Slider from "react-slick";
 import { observer } from "mobx-react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
-import AirportCard from "./AirportCard";
+import ContentSmallBox from "../_Common/ContentSmallBox";
 import { mainStore } from "../../../@store/store";
 import { useCallback } from "react";
 import { airportList } from "../../../config";
+import { Select } from "antd";
+const { Option } = Select;
 
 function PrevArrow(props: any) {
   const { onClick } = props;
@@ -50,7 +52,14 @@ const AirportRoutePage = observer(({ isPickAirport, setIsPickAirport }: Props) =
         <h3 className="route_content_info">
           {isPickAirport ? (
             <>
-              Route from <span className="strong">{airportList[isPickAirport - 1].name}</span>(
+              Route from :
+              <Select
+                style={{ margin: "0 1rem" }}
+                defaultValue={airportList[isPickAirport - 1].name}
+              >
+                <Option value="Incheon-Airport">Incheon-Airport</Option>
+                <Option value="Gimpo-Airport">Gimpo-Airport</Option>
+              </Select>
               Recommendation :
               <ul>
                 <li>
@@ -60,7 +69,6 @@ const AirportRoutePage = observer(({ isPickAirport, setIsPickAirport }: Props) =
                   <a className="tag">Hong-Dae</a>
                 </li>
               </ul>
-              &nbsp;)
             </>
           ) : (
             "✈ Select your arrival airport"
@@ -69,45 +77,45 @@ const AirportRoutePage = observer(({ isPickAirport, setIsPickAirport }: Props) =
       </div>
       {isPickAirport ? (
         <Slider {...settings}>
-          <div className="article_small_box">
+          <div className="content_small_box">
             <h2>
-              <span>{mainStore.acmCard?.name}</span>
+              <span>{mainStore.acmCard?.title._text}</span>
               <a>View Route 📍</a>
             </h2>
             <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.src} />
+              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
             </div>
           </div>
-          <div className="article_small_box">
+          <div className="content_small_box">
             <h2>
-              <span>{mainStore.acmCard?.name}</span>
+              <span>{mainStore.acmCard?.title._text}</span>
               <a>View Route 📍</a>
             </h2>
             <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.src} />
+              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
             </div>
           </div>
-          <div className="article_small_box">
+          <div className="content_small_box">
             <h2>
-              <span>{mainStore.acmCard?.name}</span>
+              <span>{mainStore.acmCard?.title._text}</span>
               <a>View Route 📍</a>
             </h2>
             <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.src} />
+              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
             </div>
           </div>
-          <div className="article_small_box">
+          <div className="content_small_box">
             <h2>
-              <span>{mainStore.acmCard?.name}</span>
+              <span>{mainStore.acmCard?.title._text}</span>
               <a>View Route 📍</a>
             </h2>
             <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.src} />
+              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
             </div>
           </div>
         </Slider>
       ) : (
-        <AirportCard onClickAirport={onClickAirport} />
+        <ContentSmallBox onClickAirport={onClickAirport} />
       )}
     </>
   );
