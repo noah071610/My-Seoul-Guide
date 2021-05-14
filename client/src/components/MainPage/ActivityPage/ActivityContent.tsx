@@ -26,6 +26,9 @@ const ActivityContent = observer(() => {
   const GET_CONTENTS = gql`
     query {
       ActivityCard(typeNum: ${pageType}) {
+        contentid{
+          _text
+        }
         title {
           _text
         }
@@ -38,6 +41,12 @@ const ActivityContent = observer(() => {
         overview {
           _text
         }
+        mapx{
+          _text
+        }
+        mapy{
+          _text
+        }
       }
     }
   `;
@@ -45,7 +54,6 @@ const ActivityContent = observer(() => {
   const { loading, error, data } = useQuery(GET_CONTENTS);
   if (loading) return <LoadingPage />;
   if (error) return <p className="error">Error :(</p>;
-
   return (
     <MainPageWrapper>
       {data.ActivityCard.map((card: ContentCardInter, i: number) => {

@@ -7,6 +7,7 @@ import {
   IdxHash,
   MainStore,
   PaymentListInter,
+  TogoInter,
 } from "../types";
 
 configure({ enforceActions: "always" });
@@ -146,10 +147,32 @@ const analyzerStore = observable<AnalyzerStore>({
 
 const mainStore = observable<MainStore>({
   acmCard: null,
+  togoLists: [],
   activeMenuIdx: null,
   onSmallNav: false,
   itemList: null,
   airport: null,
+  addTogoList: action((form: TogoInter) => {
+    mainStore.togoLists.push(form);
+    if (mainStore.togoLists.length === 0) {
+      localStorage.setItem("togo_list", JSON.stringify([form]));
+    } else {
+      localStorage.setItem("togo_list", JSON.stringify(mainStore.togoLists));
+    }
+  }),
+  setTogoList: action((form: TogoInter[]) => {
+    mainStore.togoLists = form;
+  }),
+  deleteTogoList: action((contentid: string) => {
+    mainStore.togoLists = mainStore.togoLists.filter((v) => {
+      return v.contentid !== contentid;
+    });
+    if (mainStore.togoLists.length === 0) {
+      localStorage.removeItem("togo_list");
+    } else {
+      localStorage.setItem("togo_list", JSON.stringify(mainStore.togoLists));
+    }
+  }),
   setAirport: action((number: number) => {
     mainStore.airport = airportList[number];
   }),

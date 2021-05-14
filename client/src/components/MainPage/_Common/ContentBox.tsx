@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Col, Divider, Rate, Row } from "antd";
+import { Col, Divider, message, Rate, Row } from "antd";
 import { observer } from "mobx-react";
 import { ContentCardInter } from "../../../types";
 import parser from "html-react-parser";
+import { useCallback } from "react";
+import { mainStore } from "../../../@store/store";
 
 interface ContentBoxProps {
   card: ContentCardInter;
@@ -10,6 +12,19 @@ interface ContentBoxProps {
 }
 
 const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
+  const onClickAddTogo = useCallback(() => {
+    let form = {
+      path: {
+        lat: Number(card.mapy?._text),
+        lng: Number(card.mapx?._text),
+      },
+      title: card.title?._text,
+      contentid: card.contentid?._text as string,
+    };
+    mainStore.addTogoList(form);
+    message.success("Successfully added! check Home out 🤩");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="content_box">
       <div className="content_top">
@@ -36,7 +51,9 @@ const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
         ) : (
           <div className="content_subtitle">
             <h3>🗺 {card.addr1?._text}</h3>
-            <span className="tag">🌟 Add trip route</span>
+            <span onClick={onClickAddTogo} className="tag">
+              🌟 Add trip route
+            </span>
           </div>
         )}
       </div>

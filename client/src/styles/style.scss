@@ -382,6 +382,22 @@ p {
   }
 }
 
+.togo_preview {
+  background-color: $WHITE_COLOR;
+  padding: 1rem;
+  border-radius: 5px;
+  position: relative;
+  transform: translateY(-100%);
+  z-index: 1;
+  cursor: pointer;
+  span {
+    position: absolute;
+    font-size: 2rem;
+    bottom: -1rem;
+    left: -1rem;
+  }
+}
+
 .home_modal {
   background-color: $WHITE_COLOR;
   border-radius: 5px;

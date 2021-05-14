@@ -46,17 +46,27 @@ export interface AnalyzerStore {
   setChart: (chart: ChartInter) => void;
 }
 
+export interface TogoInter {
+  path: PathObj;
+  title: string;
+  contentid: string;
+}
+
 export interface MainStore {
   acmCard: AcmCard | null;
   activeMenuIdx: IdxHash | null;
   onSmallNav: boolean;
   airport: AirportInter | null;
+  togoLists: TogoInter[];
+  addTogoList: (form: TogoInter) => void;
+  deleteTogoList: (contentid: string) => void;
   setAirport: (number: number) => void;
   addAcmCard: (data: number) => void;
   deleteAcmCard: () => void;
   onChangeActiveMenu: (data: IdxHash | null) => void;
   onToggleSmallNav: () => void;
   getContents: (res: any) => void;
+  setTogoList: (form: TogoInter[]) => void;
 
   itemList: any;
 }
@@ -80,12 +90,15 @@ export interface CardText {
 export interface ContentCardInter {
   title: CardText;
   firstimage?: CardText;
+  contentid?: CardText;
   addr1?: CardText;
   href?: string;
   rate?: number;
   tags?: string[];
   path?: PathObj[];
   stationPath?: PathObj;
+  mapx?: CardText;
+  mapy?: CardText;
   overview: CardText;
 }
 
