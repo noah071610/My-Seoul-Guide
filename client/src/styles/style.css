@@ -795,9 +795,21 @@ header a {
   margin-right: 1rem;
 }
 
-.analyzer_budget button {
+.analyzer_budget_btn {
   height: 50%;
   font-size: 0.8rem;
+}
+
+.analyzer_budget_input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  width: 20%;
+}
+
+.analyzer_budget_input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .analyzer_input {

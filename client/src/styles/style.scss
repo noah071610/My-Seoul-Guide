@@ -644,9 +644,19 @@ header {
     h2 {
       margin-right: 1rem;
     }
-    button {
+    &_btn {
       height: 50%;
       font-size: 0.8rem;
+    }
+    &_input {
+      border: none;
+      border-bottom: 1px solid $GRAY_COLOR;
+      width: 20%;
+      &:focus {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid $GRAY_COLOR;
+      }
     }
   }
   &_input {

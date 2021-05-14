@@ -1,5 +1,5 @@
 import { createContext, FC, ReactNode } from "react";
-import { checkListStore, mainStore } from "./@store/store";
+import { checkListStore, mainStore, analyzerStore } from "./@store/store";
 import { ApolloProvider } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import ReactDOM from "react-dom";
@@ -13,6 +13,7 @@ const client = new ApolloClient({
 const storeContext = createContext({
   checkListStore,
   mainStore,
+  analyzerStore,
 });
 
 interface Props {
@@ -21,7 +22,9 @@ interface Props {
 
 const StoreProvider: FC<Props> = ({ children }) => {
   return (
-    <storeContext.Provider value={{ checkListStore, mainStore }}>{children}</storeContext.Provider>
+    <storeContext.Provider value={{ checkListStore, mainStore, analyzerStore }}>
+      {children}
+    </storeContext.Provider>
   );
 };
 

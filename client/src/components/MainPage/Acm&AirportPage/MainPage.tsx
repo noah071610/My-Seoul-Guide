@@ -1,10 +1,10 @@
 import { observer } from "mobx-react";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import MainPageWrapper from "../MainPageWrapper";
 import { GoogleMap, LoadScript, Polygon } from "@react-google-maps/api";
 import AcmPage from "../_Common/ContentBox";
 import { useRouteMatch } from "react-router";
-import { acmCardList, airportList, polygonOption } from "../../../config";
+import { acmCardList, polygonOption } from "../../../config";
 import { useCalcCenter } from "../../../hooks/useCalcCenter";
 import { Directions } from "../_Common/Directions";
 import AirportPage from "./AirportRoutePage";
@@ -16,8 +16,7 @@ const mapContainerStyle = {
   width: "100%",
 };
 
-const AccomodationPage: FC = observer(() => {
-  const [isPickAirport, setIsPickAirport] = useState<number>(0);
+const MainPage: FC = observer(() => {
   const { path } = useRouteMatch();
   const [center, setCenter] = useState<PathObj>({
     lat: 37.517146640932296,
@@ -25,14 +24,6 @@ const AccomodationPage: FC = observer(() => {
   });
 
   let isAirportRoutePath = path.slice(1) === "airport_route";
-
-  const onClickDirection = useCallback((listNum: number) => {
-    mainStore.addAcmCard(listNum);
-  }, []);
-
-  useEffect(() => {
-    mainStore.addAcmCard(0);
-  }, []);
 
   useEffect(() => {
     if (!isAirportRoutePath) {
@@ -57,11 +48,11 @@ const AccomodationPage: FC = observer(() => {
         >
           {isAirportRoutePath ? (
             //You can see direction when you pick airport up
-            isPickAirport && (
+            mainStore.airport && (
               <Directions
                 origin={{
-                  lat: airportList[isPickAirport - 1]?.path.lat || 37.4480776440891,
-                  lng: airportList[isPickAirport - 1]?.path.lng || 126.45117714540771,
+                  lat: mainStore.airport?.path.lat || 37.4480776440891,
+                  lng: mainStore.airport?.path.lng || 126.45117714540771,
                 }}
                 destination={{
                   lat: mainStore.acmCard?.stationPath.lat || 37.4480776440891,
@@ -75,13 +66,9 @@ const AccomodationPage: FC = observer(() => {
           )}
         </GoogleMap>
       </LoadScript>
-      {isAirportRoutePath ? (
-        <AirportPage isPickAirport={isPickAirport} setIsPickAirport={setIsPickAirport} />
-      ) : (
-        <AcmPage card={acmCardList[0]} isAcmCard={true} />
-      )}
+      {isAirportRoutePath ? <AirportPage /> : <AcmPage card={acmCardList[0]} isAcmCard={true} />}
     </MainPageWrapper>
   );
 });
 
-export default AccomodationPage;
+export default MainPage;

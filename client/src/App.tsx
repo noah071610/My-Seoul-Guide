@@ -7,15 +7,15 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Suspense } from "react";
 import ActivityContent from "./components/MainPage/ActivityPage/ActivityContent";
 import AnalyzerContent from "./components/MainPage/AnalyzerPage/AnalyzerContent";
-import AccomodationPage from "./components/MainPage/Acm&AirportPage/AccomodationPage";
+import MainPage from "./components/MainPage/Acm&AirportPage/MainPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Route exact path="/" component={Home} />
-        <Route exact path="/stay" component={AccomodationPage} />
-        <Route exact path="/airport_route" component={AccomodationPage} />
+        <Route exact path="/stay" component={MainPage} />
+        <Route exact path="/airport_route" component={MainPage} />
         <Route exact path="/activity/:category" component={ActivityContent} />
         <Route exact path="/analyzer" component={AnalyzerContent} />
       </Suspense>

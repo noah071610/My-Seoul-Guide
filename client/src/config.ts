@@ -56,11 +56,13 @@ export const polygonOption = {
 
 export const airportList = [
   {
+    id: 0,
     name: "Incheon-Airport",
     path: { lat: 37.4480776440891, lng: 126.45117714540771 },
     src: "https://futureiot.tech/wp-content/uploads/2020/04/Incheon-Airport-resized.jpg",
   },
   {
+    id: 1,
     name: "Gimpo-Airport",
     path: { lat: 37.56002674165833, lng: 126.80517798548506 },
     src: "https://www.korea.kr/newsWeb/resources/attaches/2018.10/22/I7(4).JPG",
@@ -203,5 +205,29 @@ export const acmCardList = [
       { lat: 37.58965541801568, lng: 126.99195410457853 },
     ],
     stationPath: { lat: 37.58259196558186, lng: 127.00183184377404 },
+  },
+  {
+    id: 6,
+    title: { _text: "Yeongdeungpo" },
+    firstimage: {
+      _text:
+        "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99D0F7465C0DC75425",
+    },
+    href: "https://en.wikipedia.org/wiki/Yeongdeungpo_District",
+    rate: 4,
+    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    overview: {
+      _text: `
+      Yeongdeungpo District has been heavily developed as an office, commercial, and residential district. Yeouido Dong is home to DLI 63 Building, the highest office building in South Korea and currently the 3rd tallest building in the country. The National Assembly Building is located in Yeouido-dong. Other organisations, such as the Financial Union of Korea are also based in Yeongdeungpo. There are also mass-media corporations in the area, including; Kookmin Newspaper Corporation; Munhwa Broadcasting Corporation and Korean Broadcasting System.`,
+    },
+    path: [
+      { lat: 37.529381772977786, lng: 126.89168990348853 },
+      { lat: 37.5242315974335, lng: 126.88203996183724 },
+      { lat: 37.51566322796156, lng: 126.88307171660497 },
+      { lat: 37.51099353378798, lng: 126.89260027534242 },
+      { lat: 37.51802203455947, lng: 126.91196085010192 },
+      { lat: 37.52480920491636, lng: 126.90922973454022 },
+    ],
+    stationPath: { lat: 37.51551880880889, lng: 126.90613447023699 },
   },
 ];

@@ -1,4 +1,5 @@
-import { Card, Col, Divider, Rate, Row } from "antd";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Col, Divider, Rate, Row } from "antd";
 import { observer } from "mobx-react";
 import { ContentCardInter } from "../../../types";
 import parser from "html-react-parser";

@@ -1,32 +1,36 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { FC, memo } from "react";
+import { FC } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Divider, Input, message, Select } from "antd";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import useInput from "../../../hooks/useInput";
-import { mainStore } from "../../../@store/store";
+import { analyzerStore } from "../../../@store/store";
 import { observer } from "mobx-react";
-
 const { Option } = Select;
 
 const PaymentList: FC = observer(() => {
   const [memo, onChangeMemo, setMemo] = useInput("");
   const [currentExchage, setCurrentExchage] = useState<number>(0);
   const [payment, onChangePayment, setPayment] = useInput(null);
+  const [budget, onChangeBudget] = useInput(null);
+  const [isbudgetChange, setIsbudgetChage] = useState(false);
   const [select, setSelect] = useState("");
 
   const onChangeSelect = useCallback((value: string) => {
     setSelect(value);
   }, []);
 
-  const exchangeCalc = useCallback(() => {
-    return (
-      Math.floor(payment * currentExchage)
-        .toString()
-        .slice(0, -1) + 0
-    );
-  }, [currentExchage, payment]);
+  const exchangeCalc = useCallback(
+    (data) => {
+      return Number(
+        Math.floor(data * currentExchage)
+          .toString()
+          .slice(0, -1) + 0
+      );
+    },
+    [currentExchage]
+  );
 
   const onSubmit = useCallback(() => {
     if (!payment || !select) {
@@ -40,27 +44,25 @@ const PaymentList: FC = observer(() => {
     let form = {
       date: year + "/" + month + "/" + day,
       type: select,
-      payment: exchangeCalc(),
+      payment: exchangeCalc(payment),
       memo,
     };
-    if (localStorage.getItem("payment_list")) {
-      const prevStorage = JSON.parse(localStorage.getItem("payment_list")!);
-      prevStorage.push(form);
-      localStorage.setItem("payment_list", JSON.stringify(prevStorage));
-      mainStore.addPaymentList(prevStorage);
-    } else {
-      localStorage.setItem("payment_list", JSON.stringify([form]));
-      mainStore.addPaymentList([form]);
-    }
+    analyzerStore.addPaymentList(form);
     setMemo("");
     setPayment("");
-  }, [exchangeCalc, memo, select, setMemo, setPayment]);
+  }, [exchangeCalc, memo, payment, select, setMemo, setPayment]);
 
   const onClickDeleteBtn = useCallback((e) => {
-    const id = e.currentTarget.dataset.id;
-    mainStore.deletePaymentList(id);
-    localStorage.setItem("payment_list", JSON.stringify(mainStore.paymentList));
+    const data = e.currentTarget.dataset;
+    analyzerStore.deletePaymentList(data.id, data.type, data.payment);
   }, []);
+
+  const onChangeIsbudgetChange = useCallback(() => {
+    if (isbudgetChange) {
+      analyzerStore.setTotal(exchangeCalc(budget));
+    }
+    setIsbudgetChage((prev) => !prev);
+  }, [budget, exchangeCalc, isbudgetChange]);
 
   useEffect(() => {
     axios
@@ -68,25 +70,40 @@ const PaymentList: FC = observer(() => {
         `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGE_KEY}&symbols=KRW&format=1`
       )
       .then((res) => setCurrentExchage(Object.values(res.data.rates)[0] as number));
-    if (localStorage.getItem("payment_list")) {
-      mainStore.addPaymentList(JSON.parse(localStorage.getItem("payment_list")!));
-    }
+  }, []);
+
+  useEffect(() => {
+    analyzerStore.setPaymentList(JSON.parse(localStorage.getItem("payment_list")!));
+    return () => {
+      localStorage.setItem("payment_list", JSON.stringify(analyzerStore.paymentList));
+    };
   }, []);
 
   return (
     <>
       <div className="analyzer_budget">
-        <h2>Total your budget : 403000 KRW</h2>
-        <Button>Budget Change</Button>
+        <h2>Total your budget : {analyzerStore.chartValue.total} KRW</h2>
+        {isbudgetChange && (
+          <Input
+            onChange={onChangeBudget}
+            value={budget}
+            placeholder="USD"
+            className="analyzer_budget_input"
+            type="number"
+          />
+        )}
+        <Button className="analyzer_budget_btn" onClick={onChangeIsbudgetChange}>
+          Budget Change
+        </Button>
       </div>
       <div className="analyzer_input">
         <Select className="type_selector" onChange={onChangeSelect} defaultValue="Payment type">
-          <Option value="Airfare ✈">Airfare</Option>
-          <Option value="Transport 🚝">Transport</Option>
-          <Option value="Stay 🛌">Stay</Option>
-          <Option value="Food 🍝">Food</Option>
-          <Option value="Attractions 🎢">Attractions</Option>
-          <Option value="Shopping 🥼">Shopping</Option>
+          <Option value="Airfare">Airfare</Option>
+          <Option value="Transport">Transport</Option>
+          <Option value="Stay">Stay</Option>
+          <Option value="Food">Food</Option>
+          <Option value="Attractions">Attractions</Option>
+          <Option value="Shopping">Shopping</Option>
         </Select>
         <Input onChange={onChangeMemo} value={memo} placeholder="memo about payment simply" />
         <Input
@@ -97,26 +114,36 @@ const PaymentList: FC = observer(() => {
           prefix="$"
           suffix="USD"
         />
-        <Input className="payment_krw" disabled value={exchangeCalc()} prefix="₩" suffix="KRW" />
+        <Input
+          className="payment_krw"
+          disabled
+          value={exchangeCalc(payment)}
+          prefix="₩"
+          suffix="KRW"
+        />
         <Button onClick={onSubmit}>ADD</Button>
       </div>
-      {mainStore.paymentList?.map((v, i) => {
-        return (
-          <ul className="analyzer_list" key={i}>
-            <li>
-              {v.date} <Divider type="vertical" /> {v.type} <Divider type="vertical" /> {v.payment}{" "}
-              KRW <Divider type="vertical" />
-              {v.memo}
-            </li>
-            <div>
-              <span>Rest budget : 32493 KRW</span>
-              <a data-id={i} className="delete_btn" onClick={onClickDeleteBtn}>
-                <DeleteOutlined />
-              </a>
-            </div>
-          </ul>
-        );
-      })}
+      {analyzerStore?.paymentList?.map((v, i) => (
+        <ul className="analyzer_list" key={i}>
+          <li>
+            {v.date} <Divider type="vertical" /> {v.type} <Divider type="vertical" /> {v.payment}{" "}
+            KRW <Divider type="vertical" />
+            {v.memo}
+          </li>
+          <div>
+            <span>Rest budget : 32493 KRW</span>
+            <a
+              data-id={i}
+              data-type={v.type}
+              data-payment={v.payment}
+              className="delete_btn"
+              onClick={onClickDeleteBtn}
+            >
+              <DeleteOutlined />
+            </a>
+          </div>
+        </ul>
+      ))}
     </>
   );
 });

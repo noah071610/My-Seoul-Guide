@@ -15,6 +15,7 @@ export interface AcmCard {
 }
 
 export interface AirportInter {
+  id: number;
   name: string;
   path: PathObj;
   src: string;
@@ -35,20 +36,29 @@ export interface ChartInter {
   shopping: number;
 }
 
+export interface AnalyzerStore {
+  deletePaymentList: (id: number, type: string, cost: number) => void;
+  addPaymentList: (data: PaymentListInter) => void;
+  setPaymentList: (data: PaymentListInter[]) => void;
+  paymentList: PaymentListInter[] | null;
+  chartValue: ChartInter;
+  setTotal: (data: number) => void;
+  setChart: (chart: ChartInter) => void;
+}
+
 export interface MainStore {
   acmCard: AcmCard | null;
   activeMenuIdx: IdxHash | null;
   onSmallNav: boolean;
+  airport: AirportInter | null;
+  setAirport: (number: number) => void;
   addAcmCard: (data: number) => void;
   deleteAcmCard: () => void;
   onChangeActiveMenu: (data: IdxHash | null) => void;
   onToggleSmallNav: () => void;
   getContents: (res: any) => void;
-  deletePaymentList: (id: number) => void;
-  addPaymentList: (data: PaymentListInter[]) => void;
+
   itemList: any;
-  paymentList: PaymentListInter[] | null;
-  chartValue: ChartInter;
 }
 
 export interface CheckListStore {
@@ -82,6 +92,6 @@ export interface ContentCardInter {
 export interface PaymentListInter {
   date: string;
   type: string;
-  payment: string;
+  payment: number;
   memo: string;
 }

@@ -3,10 +3,10 @@ import Slider from "react-slick";
 import { observer } from "mobx-react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
 import ContentSmallBox from "../_Common/ContentSmallBox";
-import { mainStore } from "../../../@store/store";
 import { useCallback } from "react";
-import { airportList } from "../../../config";
+import { acmCardList } from "../../../config";
 import { Select } from "antd";
+import { mainStore } from "../../../@store/store";
 const { Option } = Select;
 
 function PrevArrow(props: any) {
@@ -33,32 +33,28 @@ const settings = {
   nextArrow: <NextArrow />,
 };
 
-interface Props {
-  isPickAirport: number;
-  setIsPickAirport: (number: number) => void;
-}
+const AirportRoutePage = observer(() => {
+  const onClickAcmCard = useCallback((listNum: number) => {
+    mainStore.addAcmCard(listNum);
+  }, []);
 
-const AirportRoutePage = observer(({ isPickAirport, setIsPickAirport }: Props) => {
-  const onClickAirport = useCallback(
-    (number: number) => {
-      setIsPickAirport(number);
-    },
-    [setIsPickAirport]
-  );
-
+  const onChangeAirport = useCallback((value) => {
+    mainStore.setAirport(value);
+  }, []);
   return (
     <>
       <div className="route_content_header">
         <h3 className="route_content_info">
-          {isPickAirport ? (
+          {mainStore.airport ? (
             <>
               Route from :
               <Select
                 style={{ margin: "0 1rem" }}
-                defaultValue={airportList[isPickAirport - 1].name}
+                onChange={onChangeAirport}
+                defaultValue={mainStore.airport.name}
               >
-                <Option value="Incheon-Airport">Incheon-Airport</Option>
-                <Option value="Gimpo-Airport">Gimpo-Airport</Option>
+                <Option value="0">Incheon-Airport</Option>
+                <Option value="1">Gimpo-Airport</Option>
               </Select>
               Recommendation :
               <ul>
@@ -75,47 +71,22 @@ const AirportRoutePage = observer(({ isPickAirport, setIsPickAirport }: Props) =
           )}
         </h3>
       </div>
-      {isPickAirport ? (
+      {mainStore.airport ? (
         <Slider {...settings}>
-          <div className="content_small_box">
-            <h2>
-              <span>{mainStore.acmCard?.title._text}</span>
-              <a>View Route 📍</a>
-            </h2>
-            <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
+          {acmCardList.map((v, i) => (
+            <div key={i} onClick={() => onClickAcmCard(i)} className="content_small_box">
+              <h2>
+                <span>{v.title._text}</span>
+                <a>View Route 📍</a>
+              </h2>
+              <div className="image_wrapper">
+                <img alt="tour_acm_redcommendation_img" src={v.firstimage._text} />
+              </div>
             </div>
-          </div>
-          <div className="content_small_box">
-            <h2>
-              <span>{mainStore.acmCard?.title._text}</span>
-              <a>View Route 📍</a>
-            </h2>
-            <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
-            </div>
-          </div>
-          <div className="content_small_box">
-            <h2>
-              <span>{mainStore.acmCard?.title._text}</span>
-              <a>View Route 📍</a>
-            </h2>
-            <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
-            </div>
-          </div>
-          <div className="content_small_box">
-            <h2>
-              <span>{mainStore.acmCard?.title._text}</span>
-              <a>View Route 📍</a>
-            </h2>
-            <div className="image_wrapper">
-              <img alt="tour_acm_redcommendation_img" src={mainStore.acmCard?.firstimage._text} />
-            </div>
-          </div>
+          ))}
         </Slider>
       ) : (
-        <ContentSmallBox onClickAirport={onClickAirport} />
+        <ContentSmallBox />
       )}
     </>
   );
