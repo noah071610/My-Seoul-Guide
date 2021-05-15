@@ -3,10 +3,10 @@
 import { css } from "@emotion/react";
 import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react";
-import { FC, MouseEvent, useCallback } from "react";
+import { FC, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import useToggle from "../hooks/useToggle";
-import { Divider, message, Popconfirm } from "antd";
+import { Divider, Popconfirm } from "antd";
 import { mainStore } from "../@store/store";
 
 const settingBar = (onSetting: boolean) => css`

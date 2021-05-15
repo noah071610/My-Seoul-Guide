@@ -1,7 +1,7 @@
 import { ResponsivePie } from "@nivo/pie";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
-import { analyzerStore } from "../../../@store/store";
+import analyzerStore from "../../../@store/analyzerStore";
 import MainPageWrapper from "../MainPageWrapper";
 import PaymentList from "./PaymentList";
 

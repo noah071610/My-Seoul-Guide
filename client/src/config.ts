@@ -1,3 +1,5 @@
+import { PlaceCardInter } from "./types";
+
 export const WHITE_COLOR = "#fff" as const;
 export const BLUE_COLOR = "#1187cf" as const;
 export const GRAY_COLOR = "rgba(0, 0, 0, 0.25)" as const;
@@ -16,29 +18,34 @@ export let page_images = [
 ];
 
 export const check_purpose_list = [
-  { label: "K-pop", value: "kpop" },
-  { label: "Food", value: "food" },
-  { label: "Shopping", value: "shopping" },
-  { label: "History", value: "history" },
-  { label: "Night Life", value: "nightLife" },
-  { label: "Chillin", value: "chillin" },
-  { label: "Activity", value: "activity" },
-  { label: "Plastic surgery", value: "surgery" },
+  { label: "K-pop", value: "K-pop" },
+  { label: "Food", value: "Food" },
+  { label: "Shopping", value: "Shopping" },
+  { label: "Night Life", value: "Night Life" },
+  { label: "Chillin", value: "Chillin" },
+  { label: "Activity", value: "Activity" },
+  { label: "Plastic surgery", value: "Plastic surgery" },
 ];
 export const check_party_list = ["Single", "Family", "Friend", "Lover"];
 export const check_age_list = ["Teenager", "Twenties", "Thirties", "Upper then Forties"];
 
 export const check_acm_list = [
-  { label: "Easy to access", value: "access" },
-  { label: "Near Airport", value: "airport" },
-  { label: "Cheaper", value: "cheaper" },
-  { label: "Luxury", value: "luxury" },
-  { label: "Native Recommendation", value: "Native" },
+  { label: "Easy to access", value: "Easy to access" },
+  { label: "Near Transportation", value: "Near Transportation" },
+  { label: "Cheaper", value: "Cheaper" },
+  { label: "Luxury", value: "Luxury" },
+  { label: "Native Recommendation", value: "Native Recommendation" },
 ];
 
 export const main_nav_list = [
   ["Home 🗺", ""],
-  ["Accommodation 🏩", "stay"],
+  [
+    "Accommodation 🛌",
+    "stay",
+    ...JSON.parse(localStorage.getItem("recommend_places")!).map(
+      (v: PlaceCardInter) => v.title._text
+    ),
+  ],
   ["From Airport ✈", "airport_route"],
   ["Attractions 🏂", "activity", "Popular", "Facilities", "Experience"],
   ["Analyzer 📈", "analyzer"],
@@ -69,17 +76,29 @@ export const airportList = [
   },
 ];
 
-export const acmCardList = [
+export const placeList = [
   {
-    id: 0,
-    title: { _text: "Myeong Dong" },
+    id: 1,
+    title: { _text: "MyeongDong" },
     firstimage: {
       _text:
         "https://www.lottehotel.com/content/dam/lotte-hotel/lotte/seoul/overview/e-concierge/shopping-performance/190320-4-768-ove-LTSE.jpg.thumb.768.768.jpg",
     },
     href: "https://en.wikipedia.org/wiki/Myeong-dong",
-    rate: 3,
-    tags: ["Hot Spot", "Shopping", "Easy to Access"],
+    rate: 4,
+    valueList: [
+      { value: "Easy to access", rate: 9 },
+      { value: "Near Transportation", rate: 9 },
+      { value: "Teenager", rate: 6 },
+      { value: "Twenties", rate: 7 },
+      { value: "Thirties", rate: 7 },
+      { value: "Upper then Forties", rate: 7 },
+      { value: "Shopping", rate: 8 },
+      { value: "Night Life", rate: -3 },
+      { value: "Chillin", rate: 2 },
+      { value: "Luxury", rate: 7 },
+    ],
+    tags: ["Center of Seoul", "Shopping", "Awesome Access"],
     overview: {
       _text: `Myeongdong (Korean: 명동; Hanja: 明洞; lit. 'bright cave' or 'bright tunnel') is a dong in
   Jung-gu, Seoul, South Korea between Chungmu-ro, Eulji-ro, and Namdaemun-ro. It covers
@@ -98,14 +117,26 @@ export const acmCardList = [
     stationPath: { lat: 37.56088294419242, lng: 126.9862827942377 },
   },
   {
-    id: 1,
-    title: { _text: "Hong Dae" },
+    id: 2,
+    title: { _text: "HongDae" },
     firstimage: {
       _text: "https://ak-d.tripcdn.com/images/22080y000000masslABEB_Z_550_412_R5_Q70_D.jpg",
     },
     href: "https://en.wikipedia.org/wiki/Hongdae%2C_Seoul",
     rate: 5,
-    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    valueList: [
+      { value: "Easy to access", rate: 8 },
+      { value: "Near Transportation", rate: 7 },
+      { value: "Teenager", rate: 8 },
+      { value: "Twenties", rate: 8 },
+      { value: "Thirties", rate: 3 },
+      { value: "Upper then Forties", rate: -5 },
+      { value: "Shopping", rate: 7 },
+      { value: "Night Life", rate: 8 },
+      { value: "Chillin", rate: 5 },
+      { value: "Luxury", rate: 2 },
+    ],
+    tags: ["University", "Food", "Young", "Trandy", "Music"],
     overview: {
       _text: `Hongdae (Korean: 홍대; Hanja: 弘大) is a neighborhood in Seoul, South Korea near Hongik University, after which it is named. It is known for its urban arts and indie music culture, local shops, clubs and entertainment. The area is located in Mapo-gu in the western end of Seoul, stretching from Seogyo-dong to Hapjeong-dong.`,
     },
@@ -119,14 +150,26 @@ export const acmCardList = [
     stationPath: { lat: 37.556784402416255, lng: 126.92369675132217 },
   },
   {
-    id: 2,
-    title: { _text: "Gang Nam" },
+    id: 3,
+    title: { _text: "GangNam" },
     firstimage: {
       _text: "https://image.여기유.com/content_travel/2020021412015815816493185544.jpg",
     },
     href: "https://en.wikipedia.org/wiki/Gangnam_District",
     rate: 4,
-    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    valueList: [
+      { value: "Easy to access", rate: 6 },
+      { value: "Near Transportation", rate: 6 },
+      { value: "Teenager", rate: 6 },
+      { value: "Twenties", rate: 6 },
+      { value: "Thirties", rate: 8 },
+      { value: "Upper then Forties", rate: 2 },
+      { value: "Shopping", rate: 8 },
+      { value: "Night Life", rate: 8 },
+      { value: "Chillin", rate: 3 },
+      { value: "Luxury", rate: 8 },
+    ],
+    tags: ["Luxury", "Shopping", "MICE industry", "Trandy"],
     overview: {
       _text: `Gangnam District (/ˈɡæŋnæm, ˈɡɑːŋnɑːm/; Korean: 강남구; Hanja: 江南區; RR: Gangnam-gu, Korean pronunciation: [kaŋ nam gu]) is one of the 25 local government districts which make up the city of Seoul, South Korea. Gangnam literally means "South of the (Han) River". Gangnam District is the third largest district in Seoul, with an area of 39.5 km2 (15.3 sq mi). As of the 2017 census, Gangnam District had a population of 561,052. There is a high concentration of wealth in the district with prices for an apartment as of 2020 having risen by 83 times in 40 years compared to just 6 times in the rest of Seoul.`,
     },
@@ -139,7 +182,7 @@ export const acmCardList = [
     stationPath: { lat: 37.4982578685352, lng: 127.02819123067702 },
   },
   {
-    id: 3,
+    id: 4,
     title: { _text: "Dongdaemun" },
     firstimage: {
       _text:
@@ -147,7 +190,19 @@ export const acmCardList = [
     },
     href: "https://en.wikipedia.org/wiki/Gangnam_District",
     rate: 5,
-    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    valueList: [
+      { value: "Easy to access", rate: 9 },
+      { value: "Near Transportation", rate: 8 },
+      { value: "Teenager", rate: 7 },
+      { value: "Twenties", rate: 6 },
+      { value: "Thirties", rate: 8 },
+      { value: "Upper then Forties", rate: 7 },
+      { value: "Shopping", rate: 11 },
+      { value: "Night Life", rate: 5 },
+      { value: "Chillin", rate: 3 },
+      { value: "Luxury", rate: 5 },
+    ],
+    tags: ["Art", "Shopping", "Trandy", "Fashion"],
     overview: {
       _text: `Dongdaemun District (Korean: 동대문구, romanized: Dongdaemun-gu, "Great Eastern Gate") is one of the 25 districts of Seoul, South Korea.
     Dongdaemun has a population of 346,770 (2010) and has a geographic area of 14.22 km2 (5.49 sq mi), and is divided into 14 dong (administrative neighborhoods). Dongdaemun is located in northeastern Seoul, bordering the city districts of Seongbuk to the northwest, Jongno to the west, Seongdong to the south, Gwangjin to the southeast, and Jungnang to the east.
@@ -163,7 +218,7 @@ export const acmCardList = [
     stationPath: { lat: 37.57090581471602, lng: 127.0092725716916 },
   },
   {
-    id: 4,
+    id: 5,
     title: { _text: "Itaewon" },
     firstimage: {
       _text:
@@ -171,7 +226,19 @@ export const acmCardList = [
     },
     href: "https://en.wikipedia.org/wiki/Itaewon",
     rate: 4,
-    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    valueList: [
+      { value: "Easy to access", rate: 6 },
+      { value: "Near Transportation", rate: 7 },
+      { value: "Teenager", rate: 8 },
+      { value: "Twenties", rate: 8 },
+      { value: "Thirties", rate: 3 },
+      { value: "Upper then Forties", rate: -10 },
+      { value: "Shopping", rate: 4 },
+      { value: "Night Life", rate: 11 },
+      { value: "Chillin", rate: 1 },
+      { value: "Luxury", rate: 3 },
+    ],
+    tags: ["Global", "Night Life", "World-wild", "Club"],
     overview: {
       _text: `Itaewon is known as the place to go when you want to get your foreign food fix. Restaurants featuring cuisine from all over the world can be found here including Indian, Thai, Pakistani, Greek, German, French, Italian, Australian, English, American, and Mexican, cuisines which are not easily found in Korea. Itaewon is also famous for its nightlife. Among foreigners, it is often considered the most popular area of Seoul for bars and clubs other than Hongdae. A range of drinking establishments can be found here including pubs, wine bars, hip-hop clubs, salsa clubs, lounges and cafes.`,
     },
@@ -184,15 +251,27 @@ export const acmCardList = [
     stationPath: { lat: 37.534516720916024, lng: 126.99488640277814 },
   },
   {
-    id: 5,
+    id: 6,
     title: { _text: "Hyehwa" },
     firstimage: {
       _text:
         "http://2.bp.blogspot.com/-ILeMpKHyApE/U0fGvVEUTsI/AAAAAAAALyw/zUc_E4lEutU/s1600/IMG_2371.JPG",
     },
     href: "https://en.wikipedia.org/wiki/Itaewon",
-    rate: 4,
-    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    rate: 3,
+    valueList: [
+      { value: "Easy to access", rate: 5 },
+      { value: "Near Transportation", rate: 5 },
+      { value: "Teenager", rate: 8 },
+      { value: "Twenties", rate: 8 },
+      { value: "Thirties", rate: 5 },
+      { value: "Upper then Forties", rate: 2 },
+      { value: "Shopping", rate: 5 },
+      { value: "Night Life", rate: 8 },
+      { value: "Chillin", rate: 5 },
+      { value: "Luxury", rate: 3 },
+    ],
+    tags: ["Musical", "Shopping", "Young", "University"],
     overview: {
       _text: `Hyehwa-dong is an administrative and legal dong in Jongno-gu, Seoul. Hyehwa-dong is in charge of Hyehwa-dong, Myeongryun 1-ga, Myeongryun 2-ga, Myeongryun 3-ga, and Myeongryun 4-ga. There are many educational institutions, including Sungkyunkwan University, Catholic University, Dongsung High School, Seoul Science High School, Kyungshin High School, and Seoul International High School. The Dong Community Center is the first to use hanok in Korea.`,
     },
@@ -207,15 +286,27 @@ export const acmCardList = [
     stationPath: { lat: 37.58259196558186, lng: 127.00183184377404 },
   },
   {
-    id: 6,
+    id: 7,
     title: { _text: "Yeongdeungpo" },
     firstimage: {
       _text:
         "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99D0F7465C0DC75425",
     },
     href: "https://en.wikipedia.org/wiki/Yeongdeungpo_District",
-    rate: 4,
-    tags: ["Hot Spot", "Shopping", "Young", "Trandy"],
+    rate: 3,
+    valueList: [
+      { value: "Easy to access", rate: 5 },
+      { value: "Near Transportation", rate: 6 },
+      { value: "Teenager", rate: 3 },
+      { value: "Twenties", rate: 4 },
+      { value: "Thirties", rate: 6 },
+      { value: "Upper then Forties", rate: 6 },
+      { value: "Shopping", rate: 6 },
+      { value: "Night Life", rate: 8 },
+      { value: "Chillin", rate: 5 },
+      { value: "Luxury", rate: 3 },
+    ],
+    tags: ["Shopping", "Good Access"],
     overview: {
       _text: `
       Yeongdeungpo District has been heavily developed as an office, commercial, and residential district. Yeouido Dong is home to DLI 63 Building, the highest office building in South Korea and currently the 3rd tallest building in the country. The National Assembly Building is located in Yeouido-dong. Other organisations, such as the Financial Union of Korea are also based in Yeongdeungpo. There are also mass-media corporations in the area, including; Kookmin Newspaper Corporation; Munhwa Broadcasting Corporation and Korean Broadcasting System.`,

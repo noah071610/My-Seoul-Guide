@@ -19,7 +19,7 @@ const mapContainerStyle = {
 };
 
 const Home = observer(() => {
-  const [onOverlay, setOnOverlay] = useState(true);
+  const [overlayCnt, setOverlayCnt] = useState(2);
   const onClickDeleteTogo = useCallback((id: string) => {
     mainStore.deleteTogoList(id);
   }, []);
@@ -28,10 +28,16 @@ const Home = observer(() => {
     if (localStorage.getItem("togo_list")) {
       mainStore.setTogoList(JSON.parse(localStorage.getItem("togo_list")!));
     }
+    if (localStorage.getItem("recommend_places")) {
+      mainStore.setRecommend_places(JSON.parse(localStorage.getItem("recommend_places")!));
+    }
+    if (localStorage.getItem("userInfo")) {
+      mainStore.setUserInfo(JSON.parse(localStorage.getItem("userInfo")!));
+    }
   }, []);
   return (
     <div css={HomeWrapper(checkListStore.isSubmit)}>
-      {/* <LandingPage />
+      <LandingPage />
       {checkListStore.isSubmit && (
         <MainPageWrapper>
           <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
@@ -39,42 +45,33 @@ const Home = observer(() => {
               mapContainerStyle={mapContainerStyle}
               center={{ lat: 37.549687466128496, lng: 126.9809660539474 }}
               zoom={11}
-            ></GoogleMap>
+            >
+              {mainStore.togoLists.length > 0 &&
+                mainStore.togoLists.map((v, i) => {
+                  return (
+                    <OverlayView
+                      key={i}
+                      position={v.path}
+                      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                    >
+                      <div onClick={() => onClickDeleteTogo(v.contentid)} className="togo_preview">
+                        <h3>List No.{i + 1}</h3>
+                        <h4>{v.title}</h4>
+                        <span>📍</span>
+                      </div>
+                    </OverlayView>
+                  );
+                })}
+            </GoogleMap>
           </LoadScript>
           <div
-            style={onOverlay ? { display: "block" } : { display: "none" }}
-            onClick={() => setOnOverlay(false)}
+            style={overlayCnt <= 0 ? { display: "none" } : { display: "block" }}
+            onClick={() => setOverlayCnt((prev) => --prev)}
             className="overlay"
           />
-          <HomeModal onOverlay={onOverlay} />
+          <HomeModal overlayCnt={overlayCnt} />
         </MainPageWrapper>
-      )} */}
-      <MainPageWrapper>
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={{ lat: 37.549687466128496, lng: 126.9809660539474 }}
-            zoom={11}
-          >
-            {mainStore.togoLists.length > 0 &&
-              mainStore.togoLists.map((v, i) => {
-                return (
-                  <OverlayView
-                    key={i}
-                    position={v.path}
-                    mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                  >
-                    <div onClick={() => onClickDeleteTogo(v.contentid)} className="togo_preview">
-                      <h3>OverlayView</h3>
-                      <h4>{v.title}</h4>
-                      <span>📍</span>
-                    </div>
-                  </OverlayView>
-                );
-              })}
-          </GoogleMap>
-        </LoadScript>
-      </MainPageWrapper>
+      )}
     </div>
   );
 });

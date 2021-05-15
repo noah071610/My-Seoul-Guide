@@ -1,0 +1,20 @@
+{
+  "name": "my_seoul_guide",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noah071610/My-Seoul-Guide.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noah071610/My-Seoul-Guide/issues"
+  },
+  "homepage": "https://github.com/noah071610/My-Seoul-Guide#readme",
+  "description": ""
+}

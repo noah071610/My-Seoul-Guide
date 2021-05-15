@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { mainStore } from "../../../@store/store";
 import { airportList } from "../../../config";
 
-const ContentSmallBox = observer(() => {
+const AirportCard = observer(() => {
   return (
     <div style={{ display: "flex" }}>
       <div onClick={() => mainStore.setAirport(0)} className="content_small_box">
@@ -25,4 +25,4 @@ const ContentSmallBox = observer(() => {
   );
 });
 
-export default ContentSmallBox;
+export default AirportCard;

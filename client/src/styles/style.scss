@@ -390,6 +390,9 @@ p {
   transform: translateY(-100%);
   z-index: 1;
   cursor: pointer;
+  h3 {
+    color: $BLUE_COLOR;
+  }
   span {
     position: absolute;
     font-size: 2rem;
@@ -436,6 +439,31 @@ p {
   height: 340px;
 }
 
+.home_recommend_modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 80%;
+  height: 520px;
+  ul {
+    margin: 1rem 0;
+    .tag {
+      margin-right: 0.5rem;
+      cursor: default;
+    }
+  }
+  .modal_acm_box {
+    width: 100%;
+    display: flex;
+    span {
+      background-color: rgba(0, 0, 0, 0);
+      color: black;
+      text-decoration: underline;
+    }
+  }
+}
+
 //====================== Header ========================
 
 header {
@@ -466,6 +494,7 @@ header {
 
 .nav {
   width: 320px;
+  height: calc(100vh - 59.26px);
   font-size: 1.1rem;
   background-color: $MAIN_COLOR;
   display: flex;
@@ -483,12 +512,21 @@ header {
   }
   .footer {
     padding: 1rem;
-    &_desc {
-      margin-bottom: 0.5rem;
-      color: $WHITE_COLOR;
-      font-size: 0.9rem;
+    &:hover {
+      .footer_desc {
+        visibility: visible;
+      }
     }
-    ul {
+    &_desc {
+      visibility: hidden;
+      h4 {
+        margin-bottom: 0.5rem;
+        color: $WHITE_COLOR;
+        font-size: 0.9rem;
+      }
+    }
+    &_list {
+      z-index: 1;
       display: flex;
       a {
         color: $WHITE_COLOR;
@@ -519,7 +557,10 @@ header {
   &_box {
     padding: 2rem;
     width: 100%;
-    height: 50%;
+    height: 450px;
+    @media only screen and (max-width: $lg) {
+      height: 620px;
+    }
   }
   &_article {
     &_img {
@@ -539,6 +580,13 @@ header {
       @media only screen and (max-width: $lg) {
         padding-top: 1rem;
         padding-left: 0;
+        height: 170px;
+        display: -webkit-box;
+        word-wrap: break-word;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -580,6 +628,7 @@ header {
 }
 
 .content_small_box {
+  position: relative;
   padding: 1rem;
   transition: 0.4s all;
   width: 100%;
@@ -598,17 +647,22 @@ header {
   .image_wrapper {
     overflow: hidden;
     border-radius: 10px;
-    img {
+    .place_img {
       width: 100%;
       height: 240px;
       transition: 0.4s all;
       border-radius: 10px;
     }
   }
-
+  .crown {
+    position: absolute;
+    top: 3rem;
+    right: -1rem;
+    transform: rotate(45deg);
+  }
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    img {
+    .place_img {
       transform: scale(1.05);
     }
   }

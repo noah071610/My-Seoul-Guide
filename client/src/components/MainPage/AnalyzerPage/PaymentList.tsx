@@ -5,7 +5,7 @@ import { Button, Divider, Input, message, Select } from "antd";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import useInput from "../../../hooks/useInput";
-import { analyzerStore } from "../../../@store/store";
+import analyzerStore from "../../../@store/analyzerStore";
 import { observer } from "mobx-react";
 const { Option } = Select;
 
@@ -16,7 +16,7 @@ const PaymentList: FC = observer(() => {
   const [budget, onChangeBudget] = useInput(null);
   const [isbudgetChange, setIsbudgetChage] = useState(false);
   const [select, setSelect] = useState("");
-
+  let originalTotal = analyzerStore.originalTotal;
   const onChangeSelect = useCallback((value: string) => {
     setSelect(value);
   }, []);
@@ -73,7 +73,10 @@ const PaymentList: FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    analyzerStore.setPaymentList(JSON.parse(localStorage.getItem("payment_list")!));
+    analyzerStore.setPaymentList(
+      JSON.parse(localStorage.getItem("payment_list")!),
+      JSON.parse(localStorage.getItem("original_total")!)
+    );
     return () => {
       localStorage.setItem("payment_list", JSON.stringify(analyzerStore.paymentList));
     };
@@ -82,7 +85,7 @@ const PaymentList: FC = observer(() => {
   return (
     <>
       <div className="analyzer_budget">
-        <h2>Total your budget : {analyzerStore.chartValue.total} KRW</h2>
+        <h2>Total your budget : {originalTotal} KRW</h2>
         {isbudgetChange && (
           <Input
             onChange={onChangeBudget}
@@ -98,12 +101,12 @@ const PaymentList: FC = observer(() => {
       </div>
       <div className="analyzer_input">
         <Select className="type_selector" onChange={onChangeSelect} defaultValue="Payment type">
-          <Option value="Airfare">Airfare</Option>
-          <Option value="Transport">Transport</Option>
-          <Option value="Stay">Stay</Option>
-          <Option value="Food">Food</Option>
-          <Option value="Attractions">Attractions</Option>
-          <Option value="Shopping">Shopping</Option>
+          <Option value="Airfare ✈">Airfare</Option>
+          <Option value="Transport 🚝">Transport</Option>
+          <Option value="Stay 🛌">Stay</Option>
+          <Option value="Food 🍝">Food</Option>
+          <Option value="Attractions 🎢">Attractions</Option>
+          <Option value="Shopping 🥼">Shopping</Option>
         </Select>
         <Input onChange={onChangeMemo} value={memo} placeholder="memo about payment simply" />
         <Input
@@ -123,27 +126,29 @@ const PaymentList: FC = observer(() => {
         />
         <Button onClick={onSubmit}>ADD</Button>
       </div>
-      {analyzerStore?.paymentList?.map((v, i) => (
-        <ul className="analyzer_list" key={i}>
-          <li>
-            {v.date} <Divider type="vertical" /> {v.type} <Divider type="vertical" /> {v.payment}{" "}
-            KRW <Divider type="vertical" />
-            {v.memo}
-          </li>
-          <div>
-            <span>Rest budget : 32493 KRW</span>
-            <a
-              data-id={i}
-              data-type={v.type}
-              data-payment={v.payment}
-              className="delete_btn"
-              onClick={onClickDeleteBtn}
-            >
-              <DeleteOutlined />
-            </a>
-          </div>
-        </ul>
-      ))}
+      {analyzerStore?.paymentList?.map((v, i) => {
+        return (
+          <ul className="analyzer_list" key={i}>
+            <li>
+              {v.date} <Divider type="vertical" /> {v.type}
+              <Divider type="vertical" /> {v.payment} KRW <Divider type="vertical" />
+              {v.memo}
+            </li>
+            <div>
+              <span>Rest budget : {((originalTotal as number) -= v.payment)} KRW</span>
+              <a
+                data-id={i}
+                data-type={v.type}
+                data-payment={v.payment}
+                className="delete_btn"
+                onClick={onClickDeleteBtn}
+              >
+                <DeleteOutlined />
+              </a>
+            </div>
+          </ul>
+        );
+      })}
     </>
   );
 });

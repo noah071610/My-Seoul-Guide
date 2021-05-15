@@ -1,8 +1,9 @@
 import { createContext, FC, ReactNode } from "react";
-import { checkListStore, mainStore, analyzerStore } from "./@store/store";
+import { checkListStore, mainStore } from "./@store/store";
 import { ApolloProvider } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import ReactDOM from "react-dom";
+import analyzerStore from "./@store/analyzerStore";
 import App from "./App";
 
 const client = new ApolloClient({

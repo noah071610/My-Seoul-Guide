@@ -8,11 +8,12 @@ import { Suspense } from "react";
 import ActivityContent from "./components/MainPage/ActivityPage/ActivityContent";
 import AnalyzerContent from "./components/MainPage/AnalyzerPage/AnalyzerContent";
 import MainPage from "./components/MainPage/Acm&AirportPage/MainPage";
+import LoadingPage from "./components/MainPage/LoadingPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingPage />}>
         <Route exact path="/" component={Home} />
         <Route exact path="/stay" component={MainPage} />
         <Route exact path="/airport_route" component={MainPage} />

@@ -3,11 +3,26 @@ export interface PathObj {
   lng: number;
 }
 
-export interface AcmCard {
+export interface UserInfo {
+  gender: string;
+  age: string;
+  party: string;
+  purpose: string[];
+  acm: string[];
+}
+
+export interface PlaceValues {
+  value: string;
+  rate: number;
+}
+
+export interface PlaceCardInter {
+  id: number;
   title: CardText;
   firstimage: CardText;
   href: string;
   overview: CardText;
+  valueList: PlaceValues[];
   rate: number;
   tags: string[];
   path: PathObj[];
@@ -39,9 +54,10 @@ export interface ChartInter {
 export interface AnalyzerStore {
   deletePaymentList: (id: number, type: string, cost: number) => void;
   addPaymentList: (data: PaymentListInter) => void;
-  setPaymentList: (data: PaymentListInter[]) => void;
+  setPaymentList: (paylist: PaymentListInter[], originalTotal: number) => void;
   paymentList: PaymentListInter[] | null;
   chartValue: ChartInter;
+  originalTotal: number | null;
   setTotal: (data: number) => void;
   setChart: (chart: ChartInter) => void;
 }
@@ -53,20 +69,23 @@ export interface TogoInter {
 }
 
 export interface MainStore {
-  acmCard: AcmCard | null;
+  userInfo: UserInfo | null;
+  recommend_places: PlaceCardInter[];
   activeMenuIdx: IdxHash | null;
   onSmallNav: boolean;
   airport: AirportInter | null;
   togoLists: TogoInter[];
+  place: PlaceCardInter | null;
   addTogoList: (form: TogoInter) => void;
   deleteTogoList: (contentid: string) => void;
   setAirport: (number: number) => void;
-  addAcmCard: (data: number) => void;
-  deleteAcmCard: () => void;
+  changePlace: (listNum: number) => void;
+  // deleteAcmCard: () => void;
   onChangeActiveMenu: (data: IdxHash | null) => void;
   onToggleSmallNav: () => void;
-  getContents: (res: any) => void;
   setTogoList: (form: TogoInter[]) => void;
+  setRecommend_places: (form: PlaceCardInter[]) => void;
+  setUserInfo: (form: UserInfo) => void;
 
   itemList: any;
 }
@@ -75,8 +94,8 @@ export interface CheckListStore {
   gender: string | null;
   age: string | null;
   party: string | null;
-  purpose: string[] | null;
-  acm: string[] | null;
+  purpose: string[];
+  acm: string[];
   isSubmit: boolean;
   changeTaste: (data: string[], name: string) => void;
   changeInfo: (data: string, name: string) => void;
@@ -88,6 +107,7 @@ export interface CardText {
 }
 
 export interface ContentCardInter {
+  id?: number;
   title: CardText;
   firstimage?: CardText;
   contentid?: CardText;

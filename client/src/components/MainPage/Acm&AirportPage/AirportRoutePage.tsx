@@ -2,11 +2,12 @@
 import Slider from "react-slick";
 import { observer } from "mobx-react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
-import ContentSmallBox from "../_Common/ContentSmallBox";
 import { useCallback } from "react";
-import { acmCardList } from "../../../config";
+import { placeList } from "../../../config";
 import { Select } from "antd";
 import { mainStore } from "../../../@store/store";
+import AirportCard from "../_Common/AirportCard";
+import PlaceCard from "../_Common/PlaceCard";
 const { Option } = Select;
 
 function PrevArrow(props: any) {
@@ -34,10 +35,6 @@ const settings = {
 };
 
 const AirportRoutePage = observer(() => {
-  const onClickAcmCard = useCallback((listNum: number) => {
-    mainStore.addAcmCard(listNum);
-  }, []);
-
   const onChangeAirport = useCallback((value) => {
     mainStore.setAirport(value);
   }, []);
@@ -73,20 +70,12 @@ const AirportRoutePage = observer(() => {
       </div>
       {mainStore.airport ? (
         <Slider {...settings}>
-          {acmCardList.map((v, i) => (
-            <div key={i} onClick={() => onClickAcmCard(i)} className="content_small_box">
-              <h2>
-                <span>{v.title._text}</span>
-                <a>View Route 📍</a>
-              </h2>
-              <div className="image_wrapper">
-                <img alt="tour_acm_redcommendation_img" src={v.firstimage._text} />
-              </div>
-            </div>
+          {placeList.map((place, i) => (
+            <PlaceCard key={i} place={place} index={i} />
           ))}
         </Slider>
       ) : (
-        <ContentSmallBox />
+        <AirportCard />
       )}
     </>
   );

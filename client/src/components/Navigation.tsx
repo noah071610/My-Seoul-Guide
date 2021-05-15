@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /** @jsxImportSource @emotion/react */
-import { GithubFilled, InstagramFilled, MailFilled } from "@ant-design/icons";
 import { css } from "@emotion/react";
 import { observer } from "mobx-react";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
@@ -9,6 +8,7 @@ import { Link, useHistory } from "react-router-dom";
 import { mainStore } from "../@store/store";
 import { main_nav_list, MD_SIZE } from "../config";
 import { IdxHash } from "../types";
+import Footer from "./Footer";
 
 interface NavProps {
   isSmall: boolean;
@@ -32,7 +32,12 @@ const navCSS = (onSmallNav: boolean) => css`
   transition: 0.3s all;
   @media only screen and (max-width: ${MD_SIZE}) {
     ${onSmallNav &&
-    "transform:translateX(0); width:200px; position:absolute; top:59.26px;left:0;z-index:1; font-size:0.8rem; height:100%"};
+    "transform:translateX(0); width:200px; position:absolute; top:59.26px;left:0;z-index:1; font-size:0.8rem;"};
+    .footer {
+      h4 {
+        font-size: 0.7rem;
+      }
+    }
   }
 `;
 
@@ -55,8 +60,14 @@ const Navigation: FC<NavProps> = observer(() => {
     navRefs?.current[menuIdxWithActiveIdx?.activeIdx as number].classList.toggle("onSubMenu");
   }, []);
 
-  const onClickSubMenu = useCallback((path: string) => {
-    history.push(`/activity/${path.toLowerCase()}`);
+  const onClickSubMenu = useCallback((menuName: string, path: string, subMenuIdx: number) => {
+    if (menuName === "activity") {
+      history.push(`/${menuName}/${path.toLowerCase()}`);
+    }
+    if (menuName === "stay") {
+      history.push("/stay");
+      mainStore.changePlace(mainStore.recommend_places[subMenuIdx].id - 1);
+    }
   }, []);
 
   const onClickNoSubMenu = useCallback(() => {
@@ -103,7 +114,10 @@ const Navigation: FC<NavProps> = observer(() => {
                   >
                     {list.slice(2, list.length).map((subList, subMenuIdx) => (
                       <li key={subMenuIdx}>
-                        <a className="sub_menu_link" onClick={() => onClickSubMenu(subList)}>
+                        <a
+                          className="sub_menu_link"
+                          onClick={() => onClickSubMenu(list[1], subList, subMenuIdx)}
+                        >
                           {subList}
                         </a>
                       </li>
@@ -115,27 +129,7 @@ const Navigation: FC<NavProps> = observer(() => {
           );
         })}
       </ul>
-      <div className="footer">
-        <h4 className="footer_desc">ⓒ 2021, Jang Hyun Soo. All Rights Resrved.</h4>
-        <h4 className="footer_desc">Support by Korea Tourism Organization's</h4>
-        <ul>
-          <li>
-            <a href="https://github.com/noah071610" target="_blank" rel="noreferrer">
-              <GithubFilled />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/salmonchobab/" target="_blank" rel="noreferrer">
-              <InstagramFilled />
-            </a>
-          </li>
-          <li>
-            <a href="mailto:noah071610@naver.com">
-              <MailFilled />
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Footer />
     </nav>
   );
 });

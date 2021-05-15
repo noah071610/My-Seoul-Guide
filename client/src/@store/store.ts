@@ -1,23 +1,16 @@
-import { acmCardList, airportList } from "./../config";
+import { PlaceCardInter, UserInfo } from "./../types";
+import { placeList, airportList } from "./../config";
 import { observable, configure, action } from "mobx";
-import {
-  AnalyzerStore,
-  ChartInter,
-  CheckListStore,
-  IdxHash,
-  MainStore,
-  PaymentListInter,
-  TogoInter,
-} from "../types";
+import { CheckListStore, IdxHash, MainStore, TogoInter } from "../types";
 
 configure({ enforceActions: "always" });
 
 const checkListStore = observable<CheckListStore>({
-  gender: null,
   age: null,
+  gender: null,
   party: null,
-  purpose: null,
-  acm: null,
+  purpose: [],
+  acm: [],
   isSubmit: false,
   changeTaste: action((data: string[], name: string) => {
     if (name === "purpose") {
@@ -36,118 +29,83 @@ const checkListStore = observable<CheckListStore>({
     }
   }),
   onSubmit: action(() => {
-    checkListStore.isSubmit = true;
-  }),
-});
+    let userInfo = {
+      gender: checkListStore.gender!,
+      age: checkListStore.age!,
+      party: checkListStore.party!,
+      acm: checkListStore.acm,
+      purpose: checkListStore.purpose,
+    };
+    const userPick = [...checkListStore.purpose, ...checkListStore.acm, checkListStore.age];
 
-const analyzerStore = observable<AnalyzerStore>({
-  paymentList: null,
-  chartValue: {
-    total: 0,
-    airfare: 1,
-    transport: 1,
-    stay: 1,
-    food: 1,
-    attractions: 1,
-    shopping: 1,
-  },
-  addPaymentList: action((form: PaymentListInter) => {
-    if (analyzerStore.paymentList) {
-      analyzerStore.paymentList.push(form);
-    } else {
-      analyzerStore.paymentList = [form];
+    const map = new Map();
+    const list = placeList.map((v) => {
+      return { id: v.id, valueList: v.valueList.sort() };
+    });
+
+    for (let i = 0; i < userPick.length; i++) {
+      for (let j = 0; j < list.length; j++) {
+        list[j].valueList.forEach((placeValues) => {
+          if (placeValues.value === userPick[i]) {
+            if (map.get(list[j].id)) {
+              map.set(list[j].id, map.get(list[j].id) + placeValues.rate);
+            } else {
+              map.set(list[j].id, placeValues.rate);
+            }
+          }
+          //========================
+        });
+      }
     }
-    switch (form.type) {
-      case "Stay":
-        if (analyzerStore.chartValue.stay === 1) {
-          analyzerStore.chartValue.stay = form.payment;
-        } else {
-          analyzerStore.chartValue.stay += form.payment;
-        }
-        break;
-      case "Airfare":
-        if (analyzerStore.chartValue.airfare === 1) {
-          analyzerStore.chartValue.airfare = form.payment;
-        } else {
-          analyzerStore.chartValue.airfare += form.payment;
-        }
-        break;
-      case "Shopping":
-        if (analyzerStore.chartValue.shopping === 1) {
-          analyzerStore.chartValue.shopping = form.payment;
-        } else {
-          analyzerStore.chartValue.shopping += form.payment;
-        }
-        break;
-      case "Transport":
-        if (analyzerStore.chartValue.transport === 1) {
-          analyzerStore.chartValue.transport = form.payment;
-        } else {
-          analyzerStore.chartValue.transport += form.payment;
-        }
-        break;
-      case "Attractions":
-        if (analyzerStore.chartValue.attractions === 1) {
-          analyzerStore.chartValue.attractions = form.payment;
-        } else {
-          analyzerStore.chartValue.attractions += form.payment;
-        }
-        break;
-      case "Food":
-        if (analyzerStore.chartValue.food === 1) {
-          analyzerStore.chartValue.food = form.payment;
-        } else {
-          analyzerStore.chartValue.food += form.payment;
-        }
-        break;
+
+    let rankPlace = Array.from(map, ([id, cnt]) => ({ id, cnt })).sort((a, b) => b.cnt - a.cnt);
+
+    //========= special Key =================================
+
+    if (userPick.includes("Native Recommendation")) {
+      rankPlace = rankPlace.filter((v) => v.id !== 1);
     }
-    localStorage.setItem("payment_list", JSON.stringify(analyzerStore.paymentList));
-    localStorage.setItem("chartValue", JSON.stringify(analyzerStore.chartValue));
-  }),
-  setPaymentList: action((storelists: PaymentListInter[]) => {
-    analyzerStore.paymentList = storelists;
-  }),
-  deletePaymentList: action((id: number, type: string, cost: number) => {
-    if (analyzerStore.paymentList?.length === 1) {
-      analyzerStore.paymentList = null;
-      localStorage.removeItem("payment_list");
-    } else {
-      analyzerStore.paymentList?.splice(id, 1);
-      localStorage.setItem("payment_list", JSON.stringify(analyzerStore.paymentList));
+
+    if (userPick.includes("Native Recommendation") && !userPick.includes("Luxury")) {
+      rankPlace = rankPlace.filter((v) => v.id !== 1);
+      if (!userPick.includes("Plastic surgery")) {
+        rankPlace = rankPlace.filter((v) => v.id !== 3);
+      }
     }
-    switch (type) {
-      case "Stay":
-        analyzerStore.chartValue.stay -= cost;
-        break;
-      case "Airfare":
-        analyzerStore.chartValue.airfare -= cost;
-        break;
-      case "Shopping":
-        analyzerStore.chartValue.shopping -= cost;
-        break;
-      case "Transport":
-        analyzerStore.chartValue.transport -= cost;
-        break;
-      case "Attractions":
-        analyzerStore.chartValue.attractions -= cost;
-        break;
-      case "Food":
-        analyzerStore.chartValue.food -= cost;
-        break;
+
+    if (userPick.includes("Plastic surgery")) {
+      rankPlace.unshift(rankPlace.splice(rankPlace.map((v) => v.id).indexOf(3), 1)[0]);
     }
-  }),
-  setTotal: action((total: number) => {
-    analyzerStore.chartValue.total = total;
-    localStorage.setItem("chartValue", JSON.stringify(analyzerStore.chartValue));
-  }),
-  setChart: action((chart: ChartInter) => {
-    analyzerStore.chartValue = chart;
+
+    //=======================================================
+
+    let solution = rankPlace
+      .map((v) => v.id)
+      .slice(0, 2)
+      .map((v) => {
+        return placeList[v - 1];
+      });
+
+    mainStore.userInfo = userInfo;
+    mainStore.recommend_places = solution;
+
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    localStorage.setItem("recommend_places", JSON.stringify(solution));
+
+    setTimeout(
+      action(() => {
+        checkListStore.isSubmit = true;
+      }),
+      3000
+    );
   }),
 });
 
 const mainStore = observable<MainStore>({
-  acmCard: null,
+  recommend_places: [],
+  userInfo: null,
   togoLists: [],
+  place: null,
   activeMenuIdx: null,
   onSmallNav: false,
   itemList: null,
@@ -163,6 +121,13 @@ const mainStore = observable<MainStore>({
   setTogoList: action((form: TogoInter[]) => {
     mainStore.togoLists = form;
   }),
+  setUserInfo: action((form: UserInfo) => {
+    mainStore.userInfo = form;
+  }),
+  setRecommend_places: action((form: PlaceCardInter[]) => {
+    mainStore.recommend_places = form;
+    checkListStore.isSubmit = true;
+  }),
   deleteTogoList: action((contentid: string) => {
     mainStore.togoLists = mainStore.togoLists.filter((v) => {
       return v.contentid !== contentid;
@@ -176,11 +141,11 @@ const mainStore = observable<MainStore>({
   setAirport: action((number: number) => {
     mainStore.airport = airportList[number];
   }),
-  deleteAcmCard: action(() => {
-    mainStore.acmCard = null;
-  }),
-  addAcmCard: action((data: number) => {
-    mainStore.acmCard = acmCardList[data];
+  // deleteAcmCard: action(() => {
+  //   mainStore.recommend_place = null;
+  // }),
+  changePlace: action((data: number) => {
+    mainStore.place = placeList[data];
   }),
   onChangeActiveMenu: action((data: IdxHash | null) => {
     mainStore.activeMenuIdx = data !== null ? data : null;
@@ -188,36 +153,6 @@ const mainStore = observable<MainStore>({
   onToggleSmallNav: action(() => {
     mainStore.onSmallNav = !mainStore.onSmallNav;
   }),
-  getContents: action((res: any) => {
-    let itemList: any = [];
-    let itemArr = res.data.elements[0].elements[1].elements[0].elements.map((v: any) => {
-      return v.elements;
-    });
-    for (const itemList of itemArr) {
-      let item: any = {};
-      let path: any = [];
-      itemList.forEach((e: any) => {
-        if (e.name === "title") {
-          item.title = e.elements[0].text;
-        }
-        if (e.name === "firstimage") {
-          item.image = e.elements[0].text;
-        }
-        if (e.name === "addr1") {
-          item.adr = e.elements[0].text;
-        }
-        if (e.name === "mapx") {
-          path.push(parseFloat(e.elements[0].text));
-        }
-        if (e.name === "mapy") {
-          path.push(parseFloat(e.elements[0].text));
-        }
-      });
-      item.path = path;
-      itemList.push(item);
-    }
-    mainStore.itemList = itemList;
-  }),
 });
 
-export { checkListStore, mainStore, analyzerStore };
+export { checkListStore, mainStore };

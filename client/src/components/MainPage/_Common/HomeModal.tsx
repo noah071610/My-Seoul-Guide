@@ -1,11 +1,14 @@
 import { Divider } from "antd";
 import { observer } from "mobx-react";
+import { Link } from "react-router-dom";
+import { mainStore } from "../../../@store/store";
+import PlaceCard from "./PlaceCard";
 
-const HomeModal = observer(({ onOverlay }: { onOverlay: boolean }) => {
+const HomeModal = observer(({ overlayCnt }: { overlayCnt: number }) => {
   return (
     <>
       <div
-        style={onOverlay ? { display: "block" } : { display: "none" }}
+        style={overlayCnt > 1 ? { display: "block" } : { display: "none" }}
         className="home_map_modal home_modal"
       >
         <h3>Let`s start to make Your own Seoul Travel Map!</h3>
@@ -18,12 +21,12 @@ const HomeModal = observer(({ onOverlay }: { onOverlay: boolean }) => {
           Accomodation.
         </h4>
         <h4>
-          <span>Third</span> Check Activities and Festivals out, and pich your own's good
+          <span>Third</span> Check Activities and Festivals out, and pick your own's like
           Attractions.
         </h4>
       </div>
       <div
-        style={onOverlay ? { display: "block" } : { display: "none" }}
+        style={overlayCnt > 1 ? { display: "block" } : { display: "none" }}
         className="home_menu_modal home_modal"
       >
         <h3>Menu is simply to use</h3>
@@ -43,6 +46,28 @@ const HomeModal = observer(({ onOverlay }: { onOverlay: boolean }) => {
         <h4>
           <span>Analyzer</span>You can manage budget for travel here.
         </h4>
+      </div>
+      <div
+        style={overlayCnt === 1 ? { display: "block" } : { display: "none" }}
+        className="home_recommend_modal home_modal"
+      >
+        <h3>Here is our Recommendation place to stay for you 😘</h3>
+        <ul>
+          {mainStore.userInfo?.purpose.concat(mainStore.userInfo?.acm).map((v, i) => (
+            <li className="tag" key={i}>
+              {v}
+            </li>
+          ))}
+        </ul>
+        <Divider />
+        <div className="modal_acm_box">
+          <PlaceCard isBest={true} place={mainStore.recommend_places[0]} />
+          <PlaceCard place={mainStore.recommend_places[1]} />
+        </div>
+        <Divider />
+        <h3>
+          <Link to="/stay">Check Accommodation page and choose one which you like !</Link>
+        </h3>
       </div>
     </>
   );
