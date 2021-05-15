@@ -43,9 +43,23 @@ const Home = observer(() => {
           <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
-              center={{ lat: 37.549687466128496, lng: 126.9809660539474 }}
-              zoom={11}
+              center={
+                mainStore.place?.stationPath || { lat: 37.549687466128496, lng: 126.9809660539474 }
+              }
+              zoom={13}
             >
+              {mainStore.place && (
+                <OverlayView
+                  position={mainStore.place?.stationPath}
+                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                >
+                  <div className="togo_preview">
+                    <h3>Your base place</h3>
+                    <h4>{mainStore.place?.title._text}</h4>
+                    <span>🌟</span>
+                  </div>
+                </OverlayView>
+              )}
               {mainStore.togoLists.length > 0 &&
                 mainStore.togoLists.map((v, i) => {
                   return (

@@ -10,7 +10,11 @@ const AirportCard = observer(() => {
           <span>From {airportList[0]?.name}</span>
         </h2>
         <div className="image_wrapper">
-          <img alt="tour_acm_redcommendation_img" src={airportList[0]?.src} />
+          <img
+            className="airport_img"
+            alt="tour_acm_redcommendation_img"
+            src={airportList[0]?.src}
+          />
         </div>
       </div>
       <div onClick={() => mainStore.setAirport(1)} className="content_small_box">
@@ -18,7 +22,11 @@ const AirportCard = observer(() => {
           <span>From {airportList[1]?.name}</span>
         </h2>
         <div className="image_wrapper">
-          <img alt="tour_acm_redcommendation_img" src={airportList[1]?.src} />
+          <img
+            className="airport_img"
+            alt="tour_acm_redcommendation_img"
+            src={airportList[1]?.src}
+          />
         </div>
       </div>
     </div>

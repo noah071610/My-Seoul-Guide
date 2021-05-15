@@ -5,6 +5,7 @@ import { ContentCardInter } from "../../../types";
 import parser from "html-react-parser";
 import { useCallback } from "react";
 import { mainStore } from "../../../@store/store";
+import { useHistory } from "react-router";
 
 interface ContentBoxProps {
   card: ContentCardInter;
@@ -12,6 +13,7 @@ interface ContentBoxProps {
 }
 
 const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
+  const history = useHistory();
   const onClickAddTogo = useCallback(() => {
     let form = {
       path: {
@@ -25,33 +27,41 @@ const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
     message.success("Successfully added! check Home out 🤩");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const onClickSetbase = useCallback(() => {
+    message.success("Successfully set your main place for trip");
+    history.push("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="content_box">
       <div className="content_top">
         <h2>
           {isAcmCard && <strong>I recommend you to stay here!</strong>}
           {/* add href soon */}
-          <a href="#" target="_blank" rel="noreferrer">
-            {card?.title?._text}
-          </a>
+          <a>{card?.title?._text}</a>
         </h2>
         {isAcmCard ? (
-          <ul>
-            <li className="content_list">
-              <Rate style={{ fontSize: "1rem" }} disabled value={card?.rate} />
-            </li>
-            {card?.tags?.map((tag, i) => {
-              return (
-                <li key={i} className="content_tag tag">
-                  {tag}
-                </li>
-              );
-            })}
-          </ul>
+          <div className="content_subtitle">
+            <ul>
+              <li className="content_list">
+                <Rate style={{ fontSize: "1rem" }} disabled value={card?.rate} />
+              </li>
+              {card?.tags?.map((tag, i) => {
+                return (
+                  <li key={i} className="content_tag tag">
+                    {tag}
+                  </li>
+                );
+              })}
+            </ul>
+            <span onClick={onClickSetbase} className="addBtn tag">
+              🌟 Set base place
+            </span>
+          </div>
         ) : (
           <div className="content_subtitle">
             <h3>🗺 {card.addr1?._text}</h3>
-            <span onClick={onClickAddTogo} className="tag">
+            <span onClick={onClickAddTogo} className="addBtn tag">
               🌟 Add trip route
             </span>
           </div>

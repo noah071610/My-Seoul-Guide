@@ -593,11 +593,10 @@ header {
   &_subtitle {
     display: flex;
     justify-content: space-between;
-    span {
+    .addBtn {
       cursor: pointer;
       margin-left: 1rem;
-      padding-top: 0.2rem;
-      transition: 0.3s;
+      transition: 0.3s all;
     }
   }
   &_top {
@@ -647,7 +646,8 @@ header {
   .image_wrapper {
     overflow: hidden;
     border-radius: 10px;
-    .place_img {
+    .place_img,
+    .airport_img {
       width: 100%;
       height: 240px;
       transition: 0.4s all;
@@ -662,7 +662,8 @@ header {
   }
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    .place_img {
+    .place_img,
+    .airport_img {
       transform: scale(1.05);
     }
   }
