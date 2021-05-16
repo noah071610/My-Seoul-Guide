@@ -1,5 +1,5 @@
 import { PlaceCardInter, UserInfo } from "./../types";
-import { placeList, airportList } from "./../config";
+import { placeList, airportList, valueList } from "./../config";
 import { observable, configure, action } from "mobx";
 import { CheckListStore, IdxHash, MainStore, TogoInter } from "../types";
 
@@ -11,7 +11,9 @@ const checkListStore = observable<CheckListStore>({
   party: null,
   purpose: [],
   acm: [],
+  overlayCnt: 3,
   isSubmit: false,
+  isPermanetSubmit: false,
   changeTaste: action((data: string[], name: string) => {
     if (name === "purpose") {
       checkListStore.purpose = data;
@@ -28,6 +30,18 @@ const checkListStore = observable<CheckListStore>({
       checkListStore.party = data;
     }
   }),
+  discountOverlayCnt: action(() => {
+    --checkListStore.overlayCnt;
+  }),
+  clearOverlayCnt: action((num: number) => {
+    checkListStore.overlayCnt = num;
+  }),
+  goBack: action(() => {
+    localStorage.clear();
+    checkListStore.clearOverlayCnt(3);
+    checkListStore.isPermanetSubmit = false;
+    checkListStore.isSubmit = false;
+  }),
   onSubmit: action(() => {
     let userInfo = {
       gender: checkListStore.gender!,
@@ -36,24 +50,27 @@ const checkListStore = observable<CheckListStore>({
       acm: checkListStore.acm,
       purpose: checkListStore.purpose,
     };
+
     const userPick = [...checkListStore.purpose, ...checkListStore.acm, checkListStore.age];
 
     const map = new Map();
-    const list = placeList.map((v) => {
-      return { id: v.id, valueList: v.valueList.sort() };
+    const places = valueList.map((v) => {
+      return { id: v.id, valueList: v.values.sort() };
     });
 
     for (let i = 0; i < userPick.length; i++) {
-      for (let j = 0; j < list.length; j++) {
-        list[j].valueList.forEach((placeValues) => {
-          if (placeValues.value === userPick[i]) {
-            if (map.get(list[j].id)) {
-              map.set(list[j].id, map.get(list[j].id) + placeValues.rate);
+      for (let j = 0; j < places.length; j++) {
+        places[j].valueList.forEach((place) => {
+          if (place.value === userPick[i]) {
+            if (map.get(places[j].id)) {
+              map.set(
+                places[j].id,
+                map.get(places[j].id) + Math.floor(place.rate / userPick.length)
+              );
             } else {
-              map.set(list[j].id, placeValues.rate);
+              map.set(places[j].id, Math.floor(place.rate / userPick.length));
             }
           }
-          //========================
         });
       }
     }
@@ -79,25 +96,20 @@ const checkListStore = observable<CheckListStore>({
 
     //=======================================================
 
-    let solution = rankPlace
-      .map((v) => v.id)
-      .slice(0, 2)
-      .map((v) => {
-        return placeList[v - 1];
-      });
+    let solution = rankPlace.slice(0, 2).map((v) => {
+      return placeList[v.id - 1];
+    });
+
+    solution.forEach((v, i) => (v.point = rankPlace[i].cnt));
 
     mainStore.userInfo = userInfo;
     mainStore.recommend_places = solution;
+    mainStore.place = solution[0];
+    checkListStore.isSubmit = true;
 
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     localStorage.setItem("recommend_places", JSON.stringify(solution));
-
-    setTimeout(
-      action(() => {
-        checkListStore.isSubmit = true;
-      }),
-      3000
-    );
+    localStorage.setItem("place", JSON.stringify(solution[0]));
   }),
 });
 
@@ -106,6 +118,7 @@ const mainStore = observable<MainStore>({
   userInfo: null,
   togoLists: [],
   place: null,
+  destination: null,
   activeMenuIdx: null,
   onSmallNav: false,
   itemList: null,
@@ -127,6 +140,7 @@ const mainStore = observable<MainStore>({
   setRecommend_places: action((form: PlaceCardInter[]) => {
     mainStore.recommend_places = form;
     checkListStore.isSubmit = true;
+    checkListStore.isPermanetSubmit = true;
   }),
   deleteTogoList: action((contentid: string) => {
     mainStore.togoLists = mainStore.togoLists.filter((v) => {
@@ -141,11 +155,11 @@ const mainStore = observable<MainStore>({
   setAirport: action((number: number) => {
     mainStore.airport = airportList[number];
   }),
-  // deleteAcmCard: action(() => {
-  //   mainStore.recommend_place = null;
-  // }),
   changePlace: action((data: number) => {
     mainStore.place = placeList[data];
+  }),
+  changeDestination: action((data: number) => {
+    mainStore.destination = placeList[data];
   }),
   onChangeActiveMenu: action((data: IdxHash | null) => {
     mainStore.activeMenuIdx = data !== null ? data : null;

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { observer } from "mobx-react";
 import { useCallback } from "react";
+import CountUp from "react-countup";
 import { useHistory } from "react-router";
 import { mainStore } from "../../../@store/store";
 import { PlaceCardInter } from "../../../types";
@@ -11,7 +12,7 @@ const PlaceCard = observer(
     const onClickPlaceCard = useCallback(
       (listNum?: number) => {
         if (listNum) {
-          mainStore.changePlace(listNum);
+          mainStore.changeDestination(listNum);
         } else {
           mainStore.changePlace(place.id - 1);
           history.push("/stay");
@@ -33,6 +34,11 @@ const PlaceCard = observer(
             src={place.firstimage._text}
           />
         </div>
+        {place.point > 0 && (
+          <h3>
+            Get Point : <CountUp duration={5} start={0} end={place.point} />{" "}
+          </h3>
+        )}
         {isBest && (
           <img
             className="crown"

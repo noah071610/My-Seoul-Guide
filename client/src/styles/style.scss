@@ -250,6 +250,18 @@ p {
   }
 }
 
+@keyframes border {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 1px 1px 10px $BLUE_COLOR;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
 @keyframes underLining {
   100% {
     background-size: 100% 100%;
@@ -401,6 +413,15 @@ p {
   }
 }
 
+.popup_togo {
+  display: flex;
+  width: 200px;
+  a {
+    width: 50%;
+    text-align: center;
+  }
+}
+
 .home_modal {
   background-color: $WHITE_COLOR;
   border-radius: 5px;
@@ -444,8 +465,8 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -60%);
-  width: 80%;
-  height: 520px;
+  width: 90%;
+  height: 550px;
   ul {
     margin: 1rem 0;
     .tag {

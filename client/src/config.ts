@@ -1,5 +1,3 @@
-import { PlaceCardInter } from "./types";
-
 export const WHITE_COLOR = "#fff" as const;
 export const BLUE_COLOR = "#1187cf" as const;
 export const GRAY_COLOR = "rgba(0, 0, 0, 0.25)" as const;
@@ -11,7 +9,9 @@ export const SM_SIZE = "576px" as const;
 export const MD_SIZE = "768px" as const;
 export const LG_SIZE = "992px" as const;
 
-export let page_images = [
+export const localStorage_list = ["togo_list", "recommend_places", "userInfo", "chartValue"];
+
+export const page_images = [
   "https://images.unsplash.com/photo-1588458746815-e957c89f3a1e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
   "https://images.unsplash.com/photo-1533637324006-841a6da5300e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
   "https://images.unsplash.com/photo-1574442274210-ba4925b7ae61?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
@@ -39,13 +39,7 @@ export const check_acm_list = [
 
 export const main_nav_list = [
   ["Home 🗺", ""],
-  [
-    "Accommodation 🛌",
-    "stay",
-    ...JSON.parse(localStorage.getItem("recommend_places")!).map(
-      (v: PlaceCardInter) => v.title._text
-    ),
-  ],
+  ["Accommodation 🛌", "stay", "recome1", "recome2"],
   ["From Airport ✈", "airport_route"],
   ["Attractions 🏂", "activity", "Popular", "Facilities", "Experience"],
   ["Analyzer 📈", "analyzer"],
@@ -76,6 +70,114 @@ export const airportList = [
   },
 ];
 
+export const valueList = [
+  {
+    id: 1,
+    values: [
+      { value: "Easy to access", rate: 95 },
+      { value: "Near Transportation", rate: 90 },
+      { value: "Teenager", rate: 60 },
+      { value: "Twenties", rate: 70 },
+      { value: "Thirties", rate: 70 },
+      { value: "Upper then Forties", rate: 70 },
+      { value: "Shopping", rate: 80 },
+      { value: "Night Life", rate: -30 },
+      { value: "Chillin", rate: 20 },
+      { value: "Luxury", rate: 70 },
+    ],
+  },
+  {
+    id: 2,
+    values: [
+      { value: "Easy to access", rate: 80 },
+      { value: "Near Transportation", rate: 75 },
+      { value: "Teenager", rate: 85 },
+      { value: "Twenties", rate: 80 },
+      { value: "Thirties", rate: 30 },
+      { value: "Upper then Forties", rate: -50 },
+      { value: "Shopping", rate: 70 },
+      { value: "Night Life", rate: 80 },
+      { value: "Chillin", rate: 55 },
+      { value: "Luxury", rate: 30 },
+    ],
+  },
+  {
+    id: 3,
+    values: [
+      { value: "Easy to access", rate: 60 },
+      { value: "Near Transportation", rate: 80 },
+      { value: "Teenager", rate: 60 },
+      { value: "Twenties", rate: 60 },
+      { value: "Thirties", rate: 80 },
+      { value: "Upper then Forties", rate: 15 },
+      { value: "Shopping", rate: 80 },
+      { value: "Night Life", rate: 80 },
+      { value: "Chillin", rate: 30 },
+      { value: "Luxury", rate: 85 },
+    ],
+  },
+  {
+    id: 4,
+    values: [
+      { value: "Easy to access", rate: 90 },
+      { value: "Near Transportation", rate: 80 },
+      { value: "Teenager", rate: 70 },
+      { value: "Twenties", rate: 60 },
+      { value: "Thirties", rate: 80 },
+      { value: "Upper then Forties", rate: 70 },
+      { value: "Shopping", rate: 95 },
+      { value: "Night Life", rate: 50 },
+      { value: "Chillin", rate: 30 },
+      { value: "Luxury", rate: 50 },
+    ],
+  },
+  {
+    id: 5,
+    values: [
+      { value: "Easy to access", rate: 60 },
+      { value: "Near Transportation", rate: 70 },
+      { value: "Teenager", rate: 80 },
+      { value: "Twenties", rate: 80 },
+      { value: "Thirties", rate: 30 },
+      { value: "Upper then Forties", rate: -100 },
+      { value: "Shopping", rate: 40 },
+      { value: "Night Life", rate: 95 },
+      { value: "Chillin", rate: 10 },
+      { value: "Luxury", rate: 30 },
+    ],
+  },
+  {
+    id: 6,
+    values: [
+      { value: "Easy to access", rate: 50 },
+      { value: "Near Transportation", rate: 50 },
+      { value: "Teenager", rate: 85 },
+      { value: "Twenties", rate: 80 },
+      { value: "Thirties", rate: 50 },
+      { value: "Upper then Forties", rate: 15 },
+      { value: "Shopping", rate: 50 },
+      { value: "Night Life", rate: 75 },
+      { value: "Chillin", rate: 50 },
+      { value: "Luxury", rate: 30 },
+    ],
+  },
+  {
+    id: 7,
+    values: [
+      { value: "Easy to access", rate: 50 },
+      { value: "Near Transportation", rate: 60 },
+      { value: "Teenager", rate: 30 },
+      { value: "Twenties", rate: 40 },
+      { value: "Thirties", rate: 60 },
+      { value: "Upper then Forties", rate: 60 },
+      { value: "Shopping", rate: 60 },
+      { value: "Night Life", rate: 75 },
+      { value: "Chillin", rate: 50 },
+      { value: "Luxury", rate: 30 },
+    ],
+  },
+];
+
 export const placeList = [
   {
     id: 1,
@@ -86,18 +188,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Myeong-dong",
     rate: 4,
-    valueList: [
-      { value: "Easy to access", rate: 9 },
-      { value: "Near Transportation", rate: 9 },
-      { value: "Teenager", rate: 6 },
-      { value: "Twenties", rate: 7 },
-      { value: "Thirties", rate: 7 },
-      { value: "Upper then Forties", rate: 7 },
-      { value: "Shopping", rate: 8 },
-      { value: "Night Life", rate: -3 },
-      { value: "Chillin", rate: 2 },
-      { value: "Luxury", rate: 7 },
-    ],
+    point: 0,
     tags: ["Center of Seoul", "Shopping", "Awesome Access"],
     overview: {
       _text: `Myeongdong (Korean: 명동; Hanja: 明洞; lit. 'bright cave' or 'bright tunnel') is a dong in
@@ -124,18 +215,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Hongdae%2C_Seoul",
     rate: 5,
-    valueList: [
-      { value: "Easy to access", rate: 8 },
-      { value: "Near Transportation", rate: 7 },
-      { value: "Teenager", rate: 8 },
-      { value: "Twenties", rate: 8 },
-      { value: "Thirties", rate: 3 },
-      { value: "Upper then Forties", rate: -5 },
-      { value: "Shopping", rate: 7 },
-      { value: "Night Life", rate: 8 },
-      { value: "Chillin", rate: 5 },
-      { value: "Luxury", rate: 2 },
-    ],
+    point: 0,
     tags: ["University", "Food", "Young", "Trandy", "Music"],
     overview: {
       _text: `Hongdae (Korean: 홍대; Hanja: 弘大) is a neighborhood in Seoul, South Korea near Hongik University, after which it is named. It is known for its urban arts and indie music culture, local shops, clubs and entertainment. The area is located in Mapo-gu in the western end of Seoul, stretching from Seogyo-dong to Hapjeong-dong.`,
@@ -157,18 +237,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Gangnam_District",
     rate: 4,
-    valueList: [
-      { value: "Easy to access", rate: 6 },
-      { value: "Near Transportation", rate: 6 },
-      { value: "Teenager", rate: 6 },
-      { value: "Twenties", rate: 6 },
-      { value: "Thirties", rate: 8 },
-      { value: "Upper then Forties", rate: 2 },
-      { value: "Shopping", rate: 8 },
-      { value: "Night Life", rate: 8 },
-      { value: "Chillin", rate: 3 },
-      { value: "Luxury", rate: 8 },
-    ],
+    point: 0,
     tags: ["Luxury", "Shopping", "MICE industry", "Trandy"],
     overview: {
       _text: `Gangnam District (/ˈɡæŋnæm, ˈɡɑːŋnɑːm/; Korean: 강남구; Hanja: 江南區; RR: Gangnam-gu, Korean pronunciation: [kaŋ nam gu]) is one of the 25 local government districts which make up the city of Seoul, South Korea. Gangnam literally means "South of the (Han) River". Gangnam District is the third largest district in Seoul, with an area of 39.5 km2 (15.3 sq mi). As of the 2017 census, Gangnam District had a population of 561,052. There is a high concentration of wealth in the district with prices for an apartment as of 2020 having risen by 83 times in 40 years compared to just 6 times in the rest of Seoul.`,
@@ -190,18 +259,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Gangnam_District",
     rate: 5,
-    valueList: [
-      { value: "Easy to access", rate: 9 },
-      { value: "Near Transportation", rate: 8 },
-      { value: "Teenager", rate: 7 },
-      { value: "Twenties", rate: 6 },
-      { value: "Thirties", rate: 8 },
-      { value: "Upper then Forties", rate: 7 },
-      { value: "Shopping", rate: 11 },
-      { value: "Night Life", rate: 5 },
-      { value: "Chillin", rate: 3 },
-      { value: "Luxury", rate: 5 },
-    ],
+    point: 0,
     tags: ["Art", "Shopping", "Trandy", "Fashion"],
     overview: {
       _text: `Dongdaemun District (Korean: 동대문구, romanized: Dongdaemun-gu, "Great Eastern Gate") is one of the 25 districts of Seoul, South Korea.
@@ -226,18 +284,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Itaewon",
     rate: 4,
-    valueList: [
-      { value: "Easy to access", rate: 6 },
-      { value: "Near Transportation", rate: 7 },
-      { value: "Teenager", rate: 8 },
-      { value: "Twenties", rate: 8 },
-      { value: "Thirties", rate: 3 },
-      { value: "Upper then Forties", rate: -10 },
-      { value: "Shopping", rate: 4 },
-      { value: "Night Life", rate: 11 },
-      { value: "Chillin", rate: 1 },
-      { value: "Luxury", rate: 3 },
-    ],
+    point: 0,
     tags: ["Global", "Night Life", "World-wild", "Club"],
     overview: {
       _text: `Itaewon is known as the place to go when you want to get your foreign food fix. Restaurants featuring cuisine from all over the world can be found here including Indian, Thai, Pakistani, Greek, German, French, Italian, Australian, English, American, and Mexican, cuisines which are not easily found in Korea. Itaewon is also famous for its nightlife. Among foreigners, it is often considered the most popular area of Seoul for bars and clubs other than Hongdae. A range of drinking establishments can be found here including pubs, wine bars, hip-hop clubs, salsa clubs, lounges and cafes.`,
@@ -259,18 +306,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Itaewon",
     rate: 3,
-    valueList: [
-      { value: "Easy to access", rate: 5 },
-      { value: "Near Transportation", rate: 5 },
-      { value: "Teenager", rate: 8 },
-      { value: "Twenties", rate: 8 },
-      { value: "Thirties", rate: 5 },
-      { value: "Upper then Forties", rate: 2 },
-      { value: "Shopping", rate: 5 },
-      { value: "Night Life", rate: 8 },
-      { value: "Chillin", rate: 5 },
-      { value: "Luxury", rate: 3 },
-    ],
+    point: 0,
     tags: ["Musical", "Shopping", "Young", "University"],
     overview: {
       _text: `Hyehwa-dong is an administrative and legal dong in Jongno-gu, Seoul. Hyehwa-dong is in charge of Hyehwa-dong, Myeongryun 1-ga, Myeongryun 2-ga, Myeongryun 3-ga, and Myeongryun 4-ga. There are many educational institutions, including Sungkyunkwan University, Catholic University, Dongsung High School, Seoul Science High School, Kyungshin High School, and Seoul International High School. The Dong Community Center is the first to use hanok in Korea.`,
@@ -294,18 +330,7 @@ export const placeList = [
     },
     href: "https://en.wikipedia.org/wiki/Yeongdeungpo_District",
     rate: 3,
-    valueList: [
-      { value: "Easy to access", rate: 5 },
-      { value: "Near Transportation", rate: 6 },
-      { value: "Teenager", rate: 3 },
-      { value: "Twenties", rate: 4 },
-      { value: "Thirties", rate: 6 },
-      { value: "Upper then Forties", rate: 6 },
-      { value: "Shopping", rate: 6 },
-      { value: "Night Life", rate: 8 },
-      { value: "Chillin", rate: 5 },
-      { value: "Luxury", rate: 3 },
-    ],
+    point: 0,
     tags: ["Shopping", "Good Access"],
     overview: {
       _text: `

@@ -22,11 +22,11 @@ export interface PlaceCardInter {
   firstimage: CardText;
   href: string;
   overview: CardText;
-  valueList: PlaceValues[];
   rate: number;
   tags: string[];
   path: PathObj[];
   stationPath: PathObj;
+  point: number;
 }
 
 export interface AirportInter {
@@ -76,11 +76,12 @@ export interface MainStore {
   airport: AirportInter | null;
   togoLists: TogoInter[];
   place: PlaceCardInter | null;
+  destination: PlaceCardInter | null;
   addTogoList: (form: TogoInter) => void;
   deleteTogoList: (contentid: string) => void;
   setAirport: (number: number) => void;
   changePlace: (listNum: number) => void;
-  // deleteAcmCard: () => void;
+  changeDestination: (listNum: number) => void;
   onChangeActiveMenu: (data: IdxHash | null) => void;
   onToggleSmallNav: () => void;
   setTogoList: (form: TogoInter[]) => void;
@@ -97,9 +98,14 @@ export interface CheckListStore {
   purpose: string[];
   acm: string[];
   isSubmit: boolean;
+  overlayCnt: number;
+  isPermanetSubmit: boolean;
   changeTaste: (data: string[], name: string) => void;
   changeInfo: (data: string, name: string) => void;
   onSubmit: () => void;
+  discountOverlayCnt: () => void;
+  clearOverlayCnt: (num: number) => void;
+  goBack: () => void;
 }
 
 export interface CardText {

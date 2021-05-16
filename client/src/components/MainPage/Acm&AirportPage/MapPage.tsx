@@ -7,7 +7,7 @@ import { useRouteMatch } from "react-router";
 import { polygonOption } from "../../../config";
 import { useCalcCenter } from "../../../hooks/useCalcCenter";
 import { Directions } from "../_Common/Directions";
-import AirportPage from "./AirportRoutePage";
+import AirportRouteContent from "./AirportRouteContent";
 import { PathObj } from "../../../types";
 import { mainStore } from "../../../@store/store";
 
@@ -18,25 +18,20 @@ const mapContainerStyle = {
 
 const MainPage: FC = observer(() => {
   const { path } = useRouteMatch();
+  let isAirportRoutePath = path.slice(1) === "airport_route";
   const [center, setCenter] = useState<PathObj>({
     lat: 37.517146640932296,
     lng: 126.80792769408053,
   });
 
-  let isAirportRoutePath = path.slice(1) === "airport_route";
-
   useEffect(() => {
-    if (!isAirportRoutePath) {
+    if (!isAirportRoutePath && mainStore.place) {
       let centerXY = useCalcCenter(mainStore.place?.path as PathObj[]);
       //doubleCheck
-      setCenter(
-        centerXY === undefined || null
-          ? { lat: 37.517146640932296, lng: 126.80792769408053 }
-          : centerXY
-      );
+      setCenter(centerXY);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mainStore.place]);
+  }, [isAirportRoutePath, mainStore.place]);
 
   return (
     <MainPageWrapper>
@@ -51,22 +46,26 @@ const MainPage: FC = observer(() => {
             mainStore.airport && (
               <Directions
                 origin={{
-                  lat: mainStore.airport?.path.lat,
-                  lng: mainStore.airport?.path.lng,
+                  lat: mainStore.airport.path.lat,
+                  lng: mainStore.airport.path.lng,
                 }}
                 destination={{
-                  lat: mainStore.place?.stationPath.lat,
-                  lng: mainStore.place?.stationPath.lng,
+                  lat: mainStore.destination?.stationPath.lat,
+                  lng: mainStore.destination?.stationPath.lng,
                 }}
               />
             )
           ) : (
             //Polygon map area for acm page
-            <Polygon paths={mainStore.place?.path} options={polygonOption} />
+            <Polygon paths={mainStore?.place?.path} options={polygonOption} />
           )}
         </GoogleMap>
       </LoadScript>
-      {isAirportRoutePath ? <AirportPage /> : <AcmPage card={mainStore.place!} isAcmCard={true} />}
+      {isAirportRoutePath ? (
+        <AirportRouteContent />
+      ) : (
+        mainStore.place && <AcmPage card={mainStore.place} isAcmCard={true} />
+      )}
     </MainPageWrapper>
   );
 });

@@ -3,11 +3,11 @@
 import { css } from "@emotion/react";
 import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react";
-import { FC, MouseEvent } from "react";
-import { Link } from "react-router-dom";
+import { FC } from "react";
+import { Link, useHistory } from "react-router-dom";
 import useToggle from "../hooks/useToggle";
 import { Divider, Popconfirm } from "antd";
-import { mainStore } from "../@store/store";
+import { checkListStore, mainStore } from "../@store/store";
 
 const settingBar = (onSetting: boolean) => css`
   display: flex;
@@ -17,11 +17,13 @@ const settingBar = (onSetting: boolean) => css`
     display: ${onSetting ? "flex" : "none"};
   }
 `;
-function confirm(e: MouseEvent<HTMLElement, MouseEvent>) {
-  console.log(e);
-}
 
 const Header: FC = observer(() => {
+  const history = useHistory();
+  const confirm = () => {
+    checkListStore.goBack();
+    history.push("/");
+  };
   const [onSetting, onChangeSetting] = useToggle(false);
   return (
     <header>
@@ -32,8 +34,8 @@ const Header: FC = observer(() => {
         <ul className="settingBar">
           <li className="settingIcon">
             <Popconfirm
-              title="Are you sure to go back first page?"
-              onConfirm={() => confirm}
+              title="Are you sure to go back first page? We delete your all infomations."
+              onConfirm={confirm}
               okText="Yes"
               cancelText="No"
             >

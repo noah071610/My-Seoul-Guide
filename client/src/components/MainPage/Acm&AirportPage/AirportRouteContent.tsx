@@ -34,9 +34,13 @@ const settings = {
   nextArrow: <NextArrow />,
 };
 
-const AirportRoutePage = observer(() => {
+const AirportContent = observer(() => {
   const onChangeAirport = useCallback((value) => {
     mainStore.setAirport(value);
+  }, []);
+
+  const onClickRecomPlace = useCallback((id: number) => {
+    mainStore.changeDestination(id - 1);
   }, []);
   return (
     <>
@@ -55,12 +59,13 @@ const AirportRoutePage = observer(() => {
               </Select>
               Recommendation :
               <ul>
-                <li>
-                  <a className="tag">Myeong-Dong</a>
-                </li>
-                <li>
-                  <a className="tag">Hong-Dae</a>
-                </li>
+                {mainStore.recommend_places.map((v, i) => (
+                  <li key={i}>
+                    <a onClick={() => onClickRecomPlace(v.id)} className="tag">
+                      {v.title._text}🌟
+                    </a>
+                  </li>
+                ))}
               </ul>
             </>
           ) : (
@@ -81,4 +86,4 @@ const AirportRoutePage = observer(() => {
   );
 });
 
-export default AirportRoutePage;
+export default AirportContent;

@@ -269,6 +269,36 @@ p {
   }
 }
 
+@-webkit-keyframes border {
+  0% {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  50% {
+    -webkit-box-shadow: 1px 1px 10px #1187cf;
+            box-shadow: 1px 1px 10px #1187cf;
+  }
+  100% {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+}
+
+@keyframes border {
+  0% {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  50% {
+    -webkit-box-shadow: 1px 1px 10px #1187cf;
+            box-shadow: 1px 1px 10px #1187cf;
+  }
+  100% {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+}
+
 @-webkit-keyframes underLining {
   100% {
     background-size: 100% 100%;
@@ -489,6 +519,18 @@ p {
   left: -1rem;
 }
 
+.popup_togo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 200px;
+}
+
+.popup_togo a {
+  width: 50%;
+  text-align: center;
+}
+
 .home_modal {
   background-color: #fff;
   border-radius: 5px;
@@ -537,8 +579,8 @@ p {
   left: 50%;
   -webkit-transform: translate(-50%, -60%);
           transform: translate(-50%, -60%);
-  width: 80%;
-  height: 520px;
+  width: 90%;
+  height: 550px;
 }
 
 .home_recommend_modal ul {

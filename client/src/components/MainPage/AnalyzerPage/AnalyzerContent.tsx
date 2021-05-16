@@ -1,6 +1,5 @@
 import { ResponsivePie } from "@nivo/pie";
 import { observer } from "mobx-react";
-import { useEffect } from "react";
 import analyzerStore from "../../../@store/analyzerStore";
 import MainPageWrapper from "../MainPageWrapper";
 import PaymentList from "./PaymentList";
@@ -50,12 +49,6 @@ const AnalyzerContent = observer(() => {
       color: "hsl(155, 40%, 77%)",
     },
   ];
-
-  useEffect(() => {
-    if (localStorage.getItem("chartValue")) {
-      analyzerStore.setChart(JSON.parse(localStorage.getItem("chartValue")!));
-    }
-  }, []);
 
   return (
     <MainPageWrapper>

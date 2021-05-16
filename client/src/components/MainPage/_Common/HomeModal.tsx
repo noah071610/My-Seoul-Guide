@@ -1,14 +1,18 @@
 import { Divider } from "antd";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import { mainStore } from "../../../@store/store";
+import { checkListStore, mainStore } from "../../../@store/store";
 import PlaceCard from "./PlaceCard";
 
-const HomeModal = observer(({ overlayCnt }: { overlayCnt: number }) => {
+const HomeModal = observer(() => {
   return (
     <>
       <div
-        style={overlayCnt > 1 ? { display: "block" } : { display: "none" }}
+        style={
+          checkListStore.overlayCnt > 2
+            ? { display: "block", animation: "border 2s infinite" }
+            : { display: "none" }
+        }
         className="home_map_modal home_modal"
       >
         <h3>Let`s start to make Your own Seoul Travel Map!</h3>
@@ -26,7 +30,11 @@ const HomeModal = observer(({ overlayCnt }: { overlayCnt: number }) => {
         </h4>
       </div>
       <div
-        style={overlayCnt > 1 ? { display: "block" } : { display: "none" }}
+        style={
+          checkListStore.overlayCnt === 2
+            ? { display: "block", animation: "border 2s infinite" }
+            : { display: "none" }
+        }
         className="home_menu_modal home_modal"
       >
         <h3>Menu is simply to use</h3>
@@ -41,14 +49,14 @@ const HomeModal = observer(({ overlayCnt }: { overlayCnt: number }) => {
           <span>From Airport</span>Check direction from Airport to Acommodation.
         </h4>
         <h4>
-          <span>Activity&Festival</span>Check popular play place in Seoul.
+          <span>Attractions</span>Check popular play place in Seoul.
         </h4>
         <h4>
-          <span>Analyzer</span>You can manage budget for travel here.
+          <span>Analyzer</span>You can manage budget and payment for travel here.
         </h4>
       </div>
       <div
-        style={overlayCnt === 1 ? { display: "block" } : { display: "none" }}
+        style={checkListStore.overlayCnt === 1 ? { display: "block" } : { display: "none" }}
         className="home_recommend_modal home_modal"
       >
         <h3>Here is our Recommendation place to stay for you 😘</h3>

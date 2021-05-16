@@ -50,6 +50,7 @@ const Navigation: FC<NavProps> = observer(() => {
   let idxHash: IdxHash[] = [];
 
   const [stopAnimation, setStopAnimation] = useState<number | null>(null);
+
   const onClickMenu = useCallback((menuIdx: number) => {
     let menuIdxWithActiveIdx = idxHash.find((v) => {
       return v.menuIdx === menuIdx;
@@ -118,7 +119,9 @@ const Navigation: FC<NavProps> = observer(() => {
                           className="sub_menu_link"
                           onClick={() => onClickSubMenu(list[1], subList, subMenuIdx)}
                         >
-                          {subList}
+                          {list[1] === "stay"
+                            ? mainStore.recommend_places[subMenuIdx]?.title._text
+                            : subList}
                         </a>
                       </li>
                     ))}
