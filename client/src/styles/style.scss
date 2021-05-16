@@ -197,6 +197,13 @@ p {
   background: rgb(153, 153, 153);
 }
 
+.sm_visible {
+  display: none;
+  @media only screen and (max-width: $sm) {
+    display: block;
+  }
+}
+
 .md_visible {
   display: none;
   @media only screen and (max-width: $md) {
@@ -236,6 +243,14 @@ p {
   margin: 0 0.5rem;
   font-weight: bold;
   color: $BLUE_COLOR;
+}
+
+@media only screen and (max-width: $sm) {
+  html,
+  body,
+  span {
+    font-size: 0.9rem;
+  }
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
@@ -382,14 +397,28 @@ p {
 
 .main_page_wrapper {
   width: 100%;
-  height: 100vh;
   .main_wrapper {
-    height: calc(100% - 59.26px);
+    height: calc(100vh - 59.26px);
     display: flex;
+    position: relative;
     .main_content_wrapper {
       width: 100%;
       overflow: auto;
       position: relative;
+    }
+  }
+  .map {
+    &_route {
+      height: 50%;
+      width: 100%;
+    }
+    &_acm {
+      height: 30%;
+      width: 100%;
+      transition: 0.3s all;
+      &:hover {
+        height: 70%;
+      }
     }
   }
 }
@@ -491,23 +520,58 @@ header {
   position: relative;
   padding: 1rem;
   display: flex;
+  height: 61px;
   justify-content: space-between;
-  border-bottom: 1px solid $GRAY_COLOR;
   .header_logo {
     color: black;
     font-family: "Kaushan Script", cursive;
     font-weight: bold;
   }
-  .settingIcon {
-    margin: 0 0.4rem;
-    font-size: 1.1rem;
+  div {
+    display: flex;
+    .settingIcon {
+      font-size: 1.2rem;
+      margin-left: 1rem;
+      a {
+        display: inline-block;
+      }
+    }
   }
-  span {
-    margin-right: 0.5rem;
-    font-size: 0.9rem;
+  @media only screen and (max-width: $md) {
+    .header_logo {
+      font-size: 1.2rem;
+    }
   }
-  a {
+}
+
+//====================== Footer ============================
+
+.footer {
+  position: fixed;
+  width: 100%;
+  top: 3.438rem;
+  transition: 0.4s all;
+  padding: 1rem 1rem 2rem 1rem;
+  right: 0;
+  background-color: #fff;
+  z-index: 1;
+  text-align: end;
+  border-bottom: 1px solid $GRAY_COLOR;
+  &_list {
+    li {
+      display: inline-block;
+      margin-left: 0.8rem;
+      font-size: 1.5rem;
+    }
+  }
+  &_goback_btn {
     display: inline-block;
+    font-size: 1rem;
+    margin: 0.3rem 0 1rem 0;
+  }
+  @media only screen and (max-width: $md) {
+    width: 100%;
+    font-size: 0.9rem;
   }
 }
 
@@ -515,7 +579,7 @@ header {
 
 .nav {
   width: 320px;
-  height: calc(100vh - 59.26px);
+  height: 100vh;
   font-size: 1.1rem;
   background-color: $MAIN_COLOR;
   display: flex;
@@ -531,34 +595,10 @@ header {
       }
     }
   }
-  .footer {
-    padding: 1rem;
-    &:hover {
-      .footer_desc {
-        visibility: visible;
-      }
-    }
-    &_desc {
-      visibility: hidden;
-      h4 {
-        margin-bottom: 0.5rem;
-        color: $WHITE_COLOR;
-        font-size: 0.9rem;
-      }
-    }
-    &_list {
-      z-index: 1;
-      display: flex;
-      a {
-        color: $WHITE_COLOR;
-        margin-right: 0.5rem;
-      }
-    }
-  }
-
   @media only screen and (max-width: $md) {
     transform: translateX(-100px);
     width: 0px;
+    height: 100%;
   }
 }
 
@@ -578,10 +618,6 @@ header {
   &_box {
     padding: 2rem;
     width: 100%;
-    height: 450px;
-    @media only screen and (max-width: $lg) {
-      height: 620px;
-    }
   }
   &_article {
     &_img {
@@ -598,16 +634,8 @@ header {
       line-height: 2.2;
       height: 250px;
       overflow-y: auto;
-      @media only screen and (max-width: $lg) {
-        padding-top: 1rem;
-        padding-left: 0;
-        height: 170px;
-        display: -webkit-box;
-        word-wrap: break-word;
-        -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      p {
+        height: 250px;
       }
     }
   }
@@ -645,6 +673,73 @@ header {
       }
     }
   }
+  @media only screen and (max-width: $lg) {
+    &_box {
+      padding: 1rem;
+    }
+    &_article {
+      &_text {
+        padding: 1rem 0 2rem 0;
+        height: 100%;
+        p {
+          height: 100%;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    &_box {
+      h2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        strong {
+          display: none;
+        }
+      }
+    }
+    &_subtitle {
+      display: flex;
+      flex-direction: column-reverse;
+      ul {
+        .content_list {
+          display: none;
+        }
+        .content_tag {
+          margin-top: 0.5rem;
+          font-size: 0.6rem;
+        }
+      }
+      .addBtn {
+        display: none;
+      }
+    }
+    &_article {
+      &_img {
+        img {
+          height: 150px;
+        }
+        a {
+          font-size: 1rem;
+          position: absolute;
+          bottom: 10px;
+          right: 5px;
+          background-color: $WHITE_COLOR;
+          display: inline-block;
+          padding: 0 0.5rem;
+          border-radius: 5px;
+        }
+      }
+      &_text {
+        padding: 0 0 1rem 0;
+        height: 100%;
+        p {
+          height: 100%;
+        }
+      }
+    }
+  }
 }
 
 .content_small_box {
@@ -657,7 +752,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    span {
+    .card_title {
       font-family: "Kaushan Script", cursive;
     }
     a:last-child {
@@ -670,7 +765,7 @@ header {
     .place_img,
     .airport_img {
       width: 100%;
-      height: 240px;
+      height: 175px;
       transition: 0.4s all;
       border-radius: 10px;
     }
@@ -688,6 +783,28 @@ header {
       transform: scale(1.05);
     }
   }
+  @media only screen and (max-width: $md) {
+    h2 {
+      a {
+        display: none;
+      }
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    h2 {
+      .card_title {
+        font-size: 0.8rem;
+      }
+      a {
+      }
+    }
+    .image_wrapper {
+      .place_img,
+      .airport_img {
+        height: 120px;
+      }
+    }
+  }
 }
 
 // ================= Airport route =======================
@@ -700,14 +817,25 @@ header {
   &_info {
     display: flex;
     align-items: center;
-    span {
-      margin: 0 0.5rem;
-    }
-    ul {
-      display: flex;
-      li {
+    .route_title {
+      &_from {
+        &_name {
+          margin-right: 1rem;
+        }
+      }
+      &_recm {
         display: flex;
         align-items: center;
+        &_name {
+          margin: 0 0.5rem 0 1.5rem;
+        }
+        ul {
+          display: flex;
+          align-items: center;
+          li {
+            margin: 0;
+          }
+        }
       }
     }
     .ant-select-selection-item {
@@ -721,6 +849,41 @@ header {
         color: $WHITE_COLOR;
       }
       margin-left: 0.5rem;
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    &_header {
+      padding: 1rem;
+    }
+    &_info {
+      display: block;
+      .route_title {
+        &_from {
+          &_name {
+            margin-right: 1rem;
+          }
+        }
+        &_recm {
+          margin-top: 1.5rem;
+          &_name {
+            margin: 0 0.5rem 0 0;
+          }
+          ul {
+            li {
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+      ul {
+        display: inline-block;
+        li {
+          margin: 0.5rem 0.5rem 0 0;
+          .tag {
+            margin: 0;
+          }
+        }
+      }
     }
   }
 }
@@ -741,6 +904,9 @@ header {
     &:hover {
       color: $BLUE_COLOR;
     }
+  }
+  @media only screen and (max-width: $sm) {
+    display: none;
   }
 }
 

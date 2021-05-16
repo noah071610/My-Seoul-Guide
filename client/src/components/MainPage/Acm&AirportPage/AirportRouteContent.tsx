@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Slider from "react-slick";
 import { observer } from "mobx-react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
@@ -7,7 +6,7 @@ import { placeList } from "../../../config";
 import { Select } from "antd";
 import { mainStore } from "../../../@store/store";
 import AirportCard from "../_Common/AirportCard";
-import PlaceCard from "../_Common/PlaceCard";
+import PlaceCard from "../_Common/ContentSmallBox";
 const { Option } = Select;
 
 function PrevArrow(props: any) {
@@ -32,6 +31,14 @@ const settings = {
   slidesToShow: 3,
   prevArrow: <PrevArrow />,
   nextArrow: <NextArrow />,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+  ],
 };
 
 const AirportContent = observer(() => {
@@ -45,33 +52,33 @@ const AirportContent = observer(() => {
   return (
     <>
       <div className="route_content_header">
-        <h3 className="route_content_info">
+        <div className="route_content_info">
           {mainStore.airport ? (
             <>
-              Route from :
-              <Select
-                style={{ margin: "0 1rem" }}
-                onChange={onChangeAirport}
-                defaultValue={mainStore.airport.name}
-              >
-                <Option value="0">Incheon-Airport</Option>
-                <Option value="1">Gimpo-Airport</Option>
-              </Select>
-              Recommendation :
-              <ul>
-                {mainStore.recommend_places.map((v, i) => (
-                  <li key={i}>
-                    <a onClick={() => onClickRecomPlace(v.id)} className="tag">
-                      {v.title._text}🌟
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div className="route_title_from">
+                <span className="route_title_from_name">Route from :</span>
+                <Select onChange={onChangeAirport} defaultValue={mainStore.airport.name}>
+                  <Option value="0">Incheon-Airport</Option>
+                  <Option value="1">Gimpo-Airport</Option>
+                </Select>
+              </div>
+              <div className="route_title_recm">
+                <span className="route_title_recm_name">Recommendation :</span>
+                <ul>
+                  {mainStore.recommend_places.map((v, i) => (
+                    <li key={i}>
+                      <a onClick={() => onClickRecomPlace(v.id)} className="tag">
+                        {v.title._text}🌟
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </>
           ) : (
             "✈ Select your arrival airport"
           )}
-        </h3>
+        </div>
       </div>
       {mainStore.airport ? (
         <Slider {...settings}>

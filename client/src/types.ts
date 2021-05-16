@@ -73,6 +73,7 @@ export interface MainStore {
   recommend_places: PlaceCardInter[];
   activeMenuIdx: IdxHash | null;
   onSmallNav: boolean;
+  onInfoModal: boolean;
   airport: AirportInter | null;
   togoLists: TogoInter[];
   place: PlaceCardInter | null;
@@ -84,10 +85,12 @@ export interface MainStore {
   changeDestination: (listNum: number) => void;
   onChangeActiveMenu: (data: IdxHash | null) => void;
   onToggleSmallNav: () => void;
+  onToggleInfoModal: () => void;
+  offSmallNav: () => void;
+  offInfoModal: () => void;
   setTogoList: (form: TogoInter[]) => void;
   setRecommend_places: (form: PlaceCardInter[]) => void;
   setUserInfo: (form: UserInfo) => void;
-
   itemList: any;
 }
 

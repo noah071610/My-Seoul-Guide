@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Divider, Input, message, Select } from "antd";

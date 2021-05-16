@@ -2,7 +2,7 @@ import { Divider } from "antd";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import { checkListStore, mainStore } from "../../../@store/store";
-import PlaceCard from "./PlaceCard";
+import PlaceCard from "./ContentSmallBox";
 
 const HomeModal = observer(() => {
   return (

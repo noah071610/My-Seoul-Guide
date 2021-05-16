@@ -1,18 +1,17 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { observer } from "mobx-react";
 import { useCallback } from "react";
 import CountUp from "react-countup";
 import { useHistory } from "react-router";
-import { mainStore } from "../../../@store/store";
+import { checkListStore, mainStore } from "../../../@store/store";
 import { PlaceCardInter } from "../../../types";
 
-const PlaceCard = observer(
+const ContentSmallBox = observer(
   ({ place, index, isBest }: { place: PlaceCardInter; index?: number; isBest?: boolean }) => {
     const history = useHistory();
     const onClickPlaceCard = useCallback(
       (listNum?: number) => {
-        if (listNum) {
-          mainStore.changeDestination(listNum);
+        if (!isNaN(listNum!)) {
+          mainStore.changeDestination(listNum!);
         } else {
           mainStore.changePlace(place.id - 1);
           history.push("/stay");
@@ -24,7 +23,7 @@ const PlaceCard = observer(
     return (
       <div onClick={() => onClickPlaceCard(index)} className="content_small_box">
         <h2>
-          <span>{place.title._text}</span>
+          <span className="card_title">{place.title._text}</span>
           <a>View Route 📍</a>
         </h2>
         <div className="image_wrapper">
@@ -34,9 +33,9 @@ const PlaceCard = observer(
             src={place.firstimage._text}
           />
         </div>
-        {place.point > 0 && (
+        {checkListStore.overlayCnt === 1 && (
           <h3>
-            Get Point : <CountUp duration={5} start={0} end={place.point} />{" "}
+            Get Points : <CountUp className="countUp" duration={5} start={0} end={place.point} />{" "}
           </h3>
         )}
         {isBest && (
@@ -51,4 +50,4 @@ const PlaceCard = observer(
   }
 );
 
-export default PlaceCard;
+export default ContentSmallBox;

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { observer } from "mobx-react";
@@ -8,7 +7,6 @@ import { Link, useHistory } from "react-router-dom";
 import { mainStore } from "../@store/store";
 import { main_nav_list, MD_SIZE } from "../config";
 import { IdxHash } from "../types";
-import Footer from "./Footer";
 
 interface NavProps {
   isSmall: boolean;
@@ -32,7 +30,7 @@ const navCSS = (onSmallNav: boolean) => css`
   transition: 0.3s all;
   @media only screen and (max-width: ${MD_SIZE}) {
     ${onSmallNav &&
-    "transform:translateX(0); width:200px; position:absolute; top:59.26px;left:0;z-index:1; font-size:0.8rem;"};
+    "transform:translateX(0); width:200px; position:absolute; top:0; left:0;z-index:1; font-size:0.8rem;"};
     .footer {
       h4 {
         font-size: 0.7rem;
@@ -62,6 +60,9 @@ const Navigation: FC<NavProps> = observer(() => {
   }, []);
 
   const onClickSubMenu = useCallback((menuName: string, path: string, subMenuIdx: number) => {
+    if (mainStore.onSmallNav) {
+      mainStore.onToggleSmallNav();
+    }
     if (menuName === "activity") {
       history.push(`/${menuName}/${path.toLowerCase()}`);
     }
@@ -132,7 +133,6 @@ const Navigation: FC<NavProps> = observer(() => {
           );
         })}
       </ul>
-      <Footer />
     </nav>
   );
 });

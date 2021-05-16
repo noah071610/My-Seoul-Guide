@@ -11,11 +11,6 @@ import AirportRouteContent from "./AirportRouteContent";
 import { PathObj } from "../../../types";
 import { mainStore } from "../../../@store/store";
 
-const mapContainerStyle = {
-  height: "50%",
-  width: "100%",
-};
-
 const MainPage: FC = observer(() => {
   const { path } = useRouteMatch();
   let isAirportRoutePath = path.slice(1) === "airport_route";
@@ -35,9 +30,9 @@ const MainPage: FC = observer(() => {
 
   return (
     <MainPageWrapper>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
+      <LoadScript googleMapsApiKey={"1"}>
         <GoogleMap
-          mapContainerStyle={mapContainerStyle}
+          mapContainerClassName={isAirportRoutePath ? "map_route" : "map_acm"}
           center={center}
           zoom={isAirportRoutePath ? 10 : 13}
         >

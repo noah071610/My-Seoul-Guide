@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Col, Divider, message, Rate, Row } from "antd";
 import { observer } from "mobx-react";
 import { ContentCardInter } from "../../../types";
@@ -37,8 +36,8 @@ const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
       <div className="content_top">
         <h2>
           {isAcmCard && <strong>I recommend you to stay here!</strong>}
-          {/* add href soon */}
           <a>{card?.title?._text}</a>
+          <Rate className="sm_visible" style={{ fontSize: "1rem" }} disabled value={card?.rate} />
         </h2>
         {isAcmCard ? (
           <div className="content_subtitle">
@@ -71,6 +70,9 @@ const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
       <Row className="content_article">
         <Col className="content_article_img" sm={24} md={24} lg={10}>
           <img alt="tour_acm_redcommendation_img" src={card?.firstimage?._text} />
+          <a onClick={onClickSetbase} className="sm_visible">
+            🌟 Set base place
+          </a>
         </Col>
         <Col className="content_article_text" sm={24} md={24} lg={14}>
           <p>{parser(card?.overview._text as string)}</p>

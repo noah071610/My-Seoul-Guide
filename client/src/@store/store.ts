@@ -121,6 +121,7 @@ const mainStore = observable<MainStore>({
   destination: null,
   activeMenuIdx: null,
   onSmallNav: false,
+  onInfoModal: false,
   itemList: null,
   airport: null,
   addTogoList: action((form: TogoInter) => {
@@ -166,6 +167,15 @@ const mainStore = observable<MainStore>({
   }),
   onToggleSmallNav: action(() => {
     mainStore.onSmallNav = !mainStore.onSmallNav;
+  }),
+  onToggleInfoModal: action(() => {
+    mainStore.onInfoModal = !mainStore.onInfoModal;
+  }),
+  offSmallNav: action(() => {
+    mainStore.onSmallNav = false;
+  }),
+  offInfoModal: action(() => {
+    mainStore.onInfoModal = false;
   }),
 });
 
