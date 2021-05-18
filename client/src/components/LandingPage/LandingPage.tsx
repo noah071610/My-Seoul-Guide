@@ -20,7 +20,7 @@ const settings = {
 };
 
 const TitleUp = (onForm: boolean) => css`
-  ${onForm ? "transform:translateY(-200%)" : "transform:translateY(-20%)"};
+  ${onForm ? "transform:translateY(-210%)" : "transform:translateY(-20%)"};
   ${onForm && "animation: underLining 0.3s 0.4s forwards"};
 `;
 

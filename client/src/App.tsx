@@ -31,6 +31,12 @@ const App = observer(() => {
     if (localStorage.getItem("chartValue")) {
       analyzerStore.setChart(JSON.parse(localStorage.getItem("chartValue")!));
     }
+    if (localStorage.getItem("payment_list")) {
+      analyzerStore.setPaymentList(
+        JSON.parse(localStorage.getItem("payment_list")!),
+        JSON.parse(localStorage.getItem("original_total")!)
+      );
+    }
   }, []);
 
   useEffect(() => {

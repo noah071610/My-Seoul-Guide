@@ -6,7 +6,7 @@ $GRAY_COLOR: rgba(0, 0, 0, 0.25);
 $RED_COLOR: #d21f3c;
 $MAIN_COLOR: #263238;
 $ORANGE_COLOR: #ed6f63;
-
+$GOLD_COLOR: #fc0;
 $sm: 576px;
 $md: 768px;
 $lg: 992px;
@@ -345,11 +345,20 @@ p {
     button {
       transition: 0.3s;
       font-size: 2rem;
-      width: 30%;
       font-weight: bold;
       color: $WHITE_COLOR;
       &:hover {
         color: $BLUE_COLOR;
+      }
+    }
+  }
+  @media only screen and (max-width: $md) {
+    .landing_title {
+      h1 {
+        font-size: 2.5rem;
+      }
+      button {
+        font-size: 1.5rem;
       }
     }
   }
@@ -391,6 +400,16 @@ p {
       margin: 0.5rem 1rem 0.5rem 0;
     }
   }
+  @media only screen and (max-width: $md) {
+    height: 230px;
+    width: 90%;
+  }
+  @media only screen and (max-width: $sm) {
+    width: 95%;
+    &_form {
+      font-size: 0.8rem;
+    }
+  }
 }
 
 //======================= MainPage =====================
@@ -418,6 +437,11 @@ p {
       transition: 0.3s all;
       &:hover {
         height: 70%;
+      }
+    }
+    @media only screen and (max-width: $sm) {
+      &_route {
+        height: 55%;
       }
     }
   }
@@ -451,6 +475,8 @@ p {
   }
 }
 
+//============================ MODAL ====================================
+
 .home_modal {
   background-color: $WHITE_COLOR;
   border-radius: 5px;
@@ -474,7 +500,7 @@ p {
 }
 
 .home_map_modal {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
   width: 620px;
@@ -486,7 +512,7 @@ p {
   top: 0;
   left: 0;
   width: 500px;
-  height: 340px;
+  height: 370px;
 }
 
 .home_recommend_modal {
@@ -510,6 +536,42 @@ p {
       background-color: rgba(0, 0, 0, 0);
       color: black;
       text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (max-width: $sm) {
+  .home_map_modal {
+    width: 80%;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+  .home_menu_modal {
+    width: 85%;
+    top: 0;
+    left: 8%;
+    height: 370px;
+  }
+  .home_recommend_modal {
+    font-size: 0.8rem;
+    width: 95%;
+    top: 12%;
+    left: 2.5%;
+    transform: inherit;
+    height: 420px;
+    margin: 0;
+    .modal_acm_box {
+      span {
+        font-size: 1rem;
+      }
+      .card_title {
+        font-size: 1.2rem;
+      }
+    }
+    .crown {
+      width: 3rem;
     }
   }
 }
@@ -542,6 +604,16 @@ header {
       font-size: 1.2rem;
     }
   }
+  @media only screen and (max-width: $sm) {
+    div {
+      .settingIcon {
+        margin-left: 1.5rem;
+        span {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
 }
 
 //====================== Footer ============================
@@ -567,11 +639,23 @@ header {
   &_goback_btn {
     display: inline-block;
     font-size: 1rem;
+    font-weight: bold;
     margin: 0.3rem 0 1rem 0;
+    background-image: linear-gradient(transparent calc(100% - 1.5px), $BLUE_COLOR 5px);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    &:hover {
+      animation: underLining 0.3s forwards;
+    }
   }
-  @media only screen and (max-width: $md) {
-    width: 100%;
-    font-size: 0.9rem;
+  @media only screen and (max-width: $sm) {
+    &_list {
+      li {
+        span {
+          font-size: 1.3rem;
+        }
+      }
+    }
   }
 }
 
@@ -599,6 +683,11 @@ header {
     transform: translateX(-100px);
     width: 0px;
     height: 100%;
+    .nav_menu {
+      &_link {
+        font-size: 1rem;
+      }
+    }
   }
 }
 
@@ -628,7 +717,8 @@ header {
         border-radius: 8px;
       }
     }
-    &_text {
+    &_text,
+    &_text_attractions {
       padding-left: 1.5rem;
       font-size: 0.9rem;
       line-height: 2.2;
@@ -685,6 +775,14 @@ header {
           height: 100%;
         }
       }
+      &_text_attractions {
+        margin: 1rem 0 1.5rem 0;
+        padding: 0;
+        height: 150px;
+        p {
+          height: 100%;
+        }
+      }
     }
   }
   @media only screen and (max-width: $sm) {
@@ -714,21 +812,30 @@ header {
       .addBtn {
         display: none;
       }
+      h3 {
+        margin-top: 1rem;
+      }
     }
     &_article {
       &_img {
         img {
           height: 150px;
         }
-        a {
-          font-size: 1rem;
+        button {
+          font-size: 0.9rem;
           position: absolute;
           bottom: 10px;
           right: 5px;
-          background-color: $WHITE_COLOR;
+          background-color: $BLUE_COLOR;
+          color: $WHITE_COLOR;
           display: inline-block;
           padding: 0 0.5rem;
           border-radius: 5px;
+          transition: 0.3s all;
+          &:hover {
+            color: black;
+            background-color: $WHITE_COLOR;
+          }
         }
       }
       &_text {
@@ -791,11 +898,10 @@ header {
     }
   }
   @media only screen and (max-width: $sm) {
+    padding: 0.5rem;
     h2 {
       .card_title {
         font-size: 0.8rem;
-      }
-      a {
       }
     }
     .image_wrapper {
@@ -917,13 +1023,10 @@ header {
     display: flex;
     padding: 1rem;
     font-weight: normal;
+    justify-content: space-between;
     align-items: center;
     h2 {
       margin-right: 1rem;
-    }
-    &_btn {
-      height: 50%;
-      font-size: 0.8rem;
     }
     &_input {
       border: none;
@@ -935,36 +1038,100 @@ header {
         border-bottom: 1px solid $GRAY_COLOR;
       }
     }
+    &_btns {
+      a {
+        display: inline-block;
+        margin-left: 1rem;
+        background-image: linear-gradient(transparent calc(100% - 1.5px), $BLUE_COLOR 5px);
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        &:hover {
+          animation: underLining 0.3s forwards;
+        }
+      }
+    }
   }
   &_input {
-    display: flex;
-    padding: 1rem;
+    h3:first-of-type {
+      margin-bottom: 0.5rem;
+    }
+    h3:nth-child(n + 2) {
+      margin: 1rem 0 0.5rem 0;
+    }
     .type_selector {
-      width: 30%;
-      margin-right: 1rem;
+      width: 40%;
     }
     .payment {
-      width: 40%;
       &_usd {
-        margin-left: 1rem;
+        width: 30%;
       }
       &_krw {
-        margin-right: 1rem;
+        width: 40%;
+      }
+      &_memo {
+        width: 70%;
+      }
+      &_btn {
+        margin-top: 1rem;
+        width: 30%;
       }
     }
   }
   &_list {
     padding: 1rem;
     display: flex;
+    font-size: 0.9rem;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     transition: 0.3s all;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+    .memo_list {
+      display: inline-block;
     }
     .delete_btn {
       display: inline-block;
       margin-left: 1rem;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    &_budget {
+      flex-direction: column;
+      align-items: flex-start;
+      &_btns {
+        margin-top: 1rem;
+        a {
+          font-size: 1.1rem;
+          margin: 0 1rem 0 0;
+        }
+      }
+    }
+    &_list {
+      flex-direction: column;
+      .rest_list {
+        display: none;
+      }
+      .memo_list {
+        display: block;
+        margin-top: 1rem;
+      }
+    }
+    &_input {
+      .type_selector {
+        width: 60%;
+      }
+      .payment {
+        &_usd {
+          width: 40%;
+        }
+        &_krw {
+          width: 50%;
+        }
+        &_btn {
+          width: 50%;
+        }
+      }
     }
   }
 }

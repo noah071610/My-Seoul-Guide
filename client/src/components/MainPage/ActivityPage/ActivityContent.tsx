@@ -25,7 +25,7 @@ const ActivityContent = observer(() => {
 
   const GET_CONTENTS = gql`
     query {
-      ActivityCard(typeNum: ${pageType}) {
+      ActivityCards(typeNum: ${pageType}) {
         contentid{
           _text
         }

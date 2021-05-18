@@ -41,8 +41,10 @@ const checkListStore = observable<CheckListStore>({
     checkListStore.clearOverlayCnt(3);
     checkListStore.isPermanetSubmit = false;
     checkListStore.isSubmit = false;
+    mainStore.onInfoModal = false;
   }),
   onSubmit: action(() => {
+    const map = new Map();
     let userInfo = {
       gender: checkListStore.gender!,
       age: checkListStore.age!,
@@ -50,13 +52,12 @@ const checkListStore = observable<CheckListStore>({
       acm: checkListStore.acm,
       purpose: checkListStore.purpose,
     };
-
-    const userPick = [...checkListStore.purpose, ...checkListStore.acm, checkListStore.age];
-
-    const map = new Map();
+    let userPick = [...checkListStore.purpose, ...checkListStore.acm, checkListStore.age];
     const places = valueList.map((v) => {
       return { id: v.id, valueList: v.values.sort() };
     });
+
+    //=========== Recommend Stay finder start =================
 
     for (let i = 0; i < userPick.length; i++) {
       for (let j = 0; j < places.length; j++) {
@@ -77,7 +78,7 @@ const checkListStore = observable<CheckListStore>({
 
     let rankPlace = Array.from(map, ([id, cnt]) => ({ id, cnt })).sort((a, b) => b.cnt - a.cnt);
 
-    //========= special Key =================================
+    //===== special Key ======
 
     if (userPick.includes("Native Recommendation")) {
       rankPlace = rankPlace.filter((v) => v.id !== 1);
@@ -94,13 +95,33 @@ const checkListStore = observable<CheckListStore>({
       rankPlace.unshift(rankPlace.splice(rankPlace.map((v) => v.id).indexOf(3), 1)[0]);
     }
 
-    //=======================================================
-
     let solution = rankPlace.slice(0, 2).map((v) => {
       return placeList[v.id - 1];
     });
 
     solution.forEach((v, i) => (v.point = rankPlace[i].cnt));
+
+    //=================^^ Recommend Stay finder done. ^^=====================
+
+    //================ Recommend Attraction finder start .. ================
+
+    let arr: string[] = [];
+    userInfo?.purpose.forEach((v) => {
+      switch (v) {
+        case "Food":
+          arr.push(v);
+          break;
+        case "Shopping":
+          arr.push(v);
+          break;
+        case "K-pop":
+          arr.push(v);
+          break;
+        default:
+          break;
+      }
+    });
+    userInfo.purpose = arr;
 
     mainStore.userInfo = userInfo;
     mainStore.recommend_places = solution;

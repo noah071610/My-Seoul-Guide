@@ -1,5 +1,5 @@
 import { ApolloServer, gql } from "apollo-server";
-import { getItems, getOverViews } from "./db";
+import { getActivities, getFoodRecommends, getShoppingRecommends, getNearRecommends } from "./db";
 
 const typeDefs = gql`
   type Content {
@@ -8,7 +8,7 @@ const typeDefs = gql`
   type Id {
     _text: String
   }
-  type List {
+  type ActivityObj {
     title: Content
     firstimage: Content
     addr1: Content
@@ -17,14 +17,27 @@ const typeDefs = gql`
     contentid: Id
     overview: Content
   }
+  type RecommendObj {
+    title: Content
+    firstimage: Content
+    mapx: Content
+    mapy: Content
+  }
   type Query {
-    ActivityCard(typeNum: Int!): [List]
+    ActivityCards(typeNum: Int!): [ActivityObj]
+    FoodRecommendCards: [RecommendObj]
+    ShoppingRecommendCards: [RecommendObj]
+    NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
   }
 `;
 
 const resolvers = {
   Query: {
-    ActivityCard: (_: any, { typeNum }: { typeNum: number }) => getItems(typeNum),
+    ActivityCards: (_: any, { typeNum }: { typeNum: number }) => getActivities(typeNum),
+    FoodRecommendCards: () => getFoodRecommends(),
+    ShoppingRecommendCards: () => getShoppingRecommends(),
+    NearRecommendCards: (_: any, { mapx, mapy }: { mapx: number; mapy: number }) =>
+      getNearRecommends(mapx, mapy),
   },
 };
 

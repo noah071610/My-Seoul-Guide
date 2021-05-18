@@ -17,7 +17,7 @@ const Footer = observer(() => {
     history.push("/");
   };
   return (
-    <footer css={OnInfoModal(mainStore.onInfoModal)} className="footer">
+    <footer css={OnInfoModal(mainStore?.onInfoModal)} className="footer">
       <ul className="footer_list">
         <li>
           <a href="https://github.com/noah071610" target="_blank" rel="noreferrer">

@@ -30,12 +30,7 @@ const navCSS = (onSmallNav: boolean) => css`
   transition: 0.3s all;
   @media only screen and (max-width: ${MD_SIZE}) {
     ${onSmallNav &&
-    "transform:translateX(0); width:200px; position:absolute; top:0; left:0;z-index:1; font-size:0.8rem;"};
-    .footer {
-      h4 {
-        font-size: 0.7rem;
-      }
-    }
+    "transform:translateX(0); width:200px; position:absolute; top:0; left:0;z-index:1;"};
   }
 `;
 

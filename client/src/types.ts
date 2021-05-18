@@ -20,7 +20,6 @@ export interface PlaceCardInter {
   id: number;
   title: CardText;
   firstimage: CardText;
-  href: string;
   overview: CardText;
   rate: number;
   tags: string[];

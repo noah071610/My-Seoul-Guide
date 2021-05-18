@@ -14,6 +14,7 @@ const ContentSmallBox = observer(
           mainStore.changeDestination(listNum!);
         } else {
           mainStore.changePlace(place.id - 1);
+          checkListStore.discountOverlayCnt();
           history.push("/stay");
         }
       },

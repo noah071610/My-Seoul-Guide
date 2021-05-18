@@ -5,6 +5,7 @@ import MainPageWrapper from "../MainPageWrapper";
 import PaymentList from "./PaymentList";
 
 const AnalyzerContent = observer(() => {
+  const isSmallscreen = window.innerWidth;
   const data = [
     {
       id: "Airfare",
@@ -105,7 +106,7 @@ const AnalyzerContent = observer(() => {
         legends={[
           {
             anchor: "bottom",
-            direction: "row",
+            direction: isSmallscreen > 552 ? "row" : "column",
             justify: false,
             translateX: 0,
             translateY: 56,

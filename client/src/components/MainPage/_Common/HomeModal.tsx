@@ -1,10 +1,68 @@
+import { gql, useQuery } from "@apollo/client";
 import { Divider } from "antd";
 import { observer } from "mobx-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { checkListStore, mainStore } from "../../../@store/store";
+import { kpop_recommends } from "../../../config";
+import LoadingPage from "../LoadingPage";
 import PlaceCard from "./ContentSmallBox";
+import useShuffle from "../../../hooks/useShuffle";
+
+const GET_RECOMMEND = gql`
+  query {
+    FoodRecommendCards {
+      title {
+        _text
+      }
+      firstimage {
+        _text
+      }
+      mapx {
+        _text
+      }
+      mapy {
+        _text
+      }
+    }
+    ShoppingRecommendCards {
+      title {
+        _text
+      }
+      firstimage {
+        _text
+      }
+      mapx {
+        _text
+      }
+      mapy {
+        _text
+      }
+    }
+    NearRecommendCards(mapx: number, mapy: number) {
+      title {
+        _text
+      }
+      firstimage {
+        _text
+      }
+      mapx {
+        _text
+      }
+      mapy {
+        _text
+      }
+    }
+  }
+`;
 
 const HomeModal = observer(() => {
+  const { loading, error, data } = useQuery(GET_RECOMMEND, {
+    variables: { mapx: mainStore.place?.stationPath.lng, mapy: mainStore.place?.stationPath.lat },
+  });
+  if (loading) return <LoadingPage />;
+  if (error) return <p className="error">Error :(</p>;
+
   return (
     <>
       <div
@@ -76,6 +134,15 @@ const HomeModal = observer(() => {
         <h3>
           <Link to="/stay">Check Accommodation page and choose one which you like !</Link>
         </h3>
+      </div>
+      <div className="home_recommend_modal home_modal">
+        <h3>Hello, {mainStore.userInfo?.gender}! I found attraction you may like</h3>
+        <ul>
+          <li className="tag">Food</li>
+        </ul>
+        <Divider />
+        <div>{data?.TypeRecommendCard?.map((v: any) => v.title._text)}</div>
+        <Divider />
       </div>
     </>
   );

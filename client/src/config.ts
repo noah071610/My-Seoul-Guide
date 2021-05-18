@@ -186,7 +186,6 @@ export const placeList = [
       _text:
         "https://www.lottehotel.com/content/dam/lotte-hotel/lotte/seoul/overview/e-concierge/shopping-performance/190320-4-768-ove-LTSE.jpg.thumb.768.768.jpg",
     },
-    href: "https://en.wikipedia.org/wiki/Myeong-dong",
     rate: 4,
     point: 0,
     tags: ["Center of Seoul", "Shopping", "Awesome Access"],
@@ -213,7 +212,6 @@ export const placeList = [
     firstimage: {
       _text: "https://ak-d.tripcdn.com/images/22080y000000masslABEB_Z_550_412_R5_Q70_D.jpg",
     },
-    href: "https://en.wikipedia.org/wiki/Hongdae%2C_Seoul",
     rate: 5,
     point: 0,
     tags: ["University", "Food", "Young", "Trandy", "Music"],
@@ -235,7 +233,6 @@ export const placeList = [
     firstimage: {
       _text: "https://image.여기유.com/content_travel/2020021412015815816493185544.jpg",
     },
-    href: "https://en.wikipedia.org/wiki/Gangnam_District",
     rate: 4,
     point: 0,
     tags: ["Luxury", "Shopping", "MICE industry", "Trandy"],
@@ -257,7 +254,6 @@ export const placeList = [
       _text:
         "https://pds.joins.com/news/component/htmlphoto_mmdata/201406/29/htm_2014062922222430103011.jpg",
     },
-    href: "https://en.wikipedia.org/wiki/Gangnam_District",
     rate: 5,
     point: 0,
     tags: ["Art", "Shopping", "Trandy", "Fashion"],
@@ -282,7 +278,6 @@ export const placeList = [
       _text:
         "https://3aij0xs1tvo2l5now3runyvz-wpengine.netdna-ssl.com/wp-content/uploads/2013/09/outside_itaewon_station_at_night.jpg",
     },
-    href: "https://en.wikipedia.org/wiki/Itaewon",
     rate: 4,
     point: 0,
     tags: ["Global", "Night Life", "World-wild", "Club"],
@@ -304,7 +299,6 @@ export const placeList = [
       _text:
         "http://2.bp.blogspot.com/-ILeMpKHyApE/U0fGvVEUTsI/AAAAAAAALyw/zUc_E4lEutU/s1600/IMG_2371.JPG",
     },
-    href: "https://en.wikipedia.org/wiki/Itaewon",
     rate: 3,
     point: 0,
     tags: ["Musical", "Shopping", "Young", "University"],
@@ -328,7 +322,6 @@ export const placeList = [
       _text:
         "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99D0F7465C0DC75425",
     },
-    href: "https://en.wikipedia.org/wiki/Yeongdeungpo_District",
     rate: 3,
     point: 0,
     tags: ["Shopping", "Good Access"],
@@ -345,5 +338,42 @@ export const placeList = [
       { lat: 37.52480920491636, lng: 126.90922973454022 },
     ],
     stationPath: { lat: 37.51551880880889, lng: 126.90613447023699 },
+  },
+];
+
+export const kpop_recommends = [
+  {
+    title: { _text: "Yujeong Restaurant" },
+    firstimage: {
+      _text:
+        "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99F7333B5C636CEE38",
+    },
+    mapx: { _text: "127.02707531416009" },
+    mapy: { _text: "37.51868576912025" },
+  },
+  {
+    title: { _text: "Music Korea" },
+    firstimage: {
+      _text: "https://www.ivisitkorea.com/wp-content/uploads/2020/04/k-pop-goods-seoul.jpg",
+    },
+    mapx: { _text: "126.98486789768863" },
+    mapy: { _text: "37.56136640359879" },
+  },
+  {
+    title: { _text: "K-STAR ROAD" },
+    firstimage: {
+      _text: "https://gangnam.go.kr/assets/images/contents/01/kstarRoad/001_tour_kstarroad_07.png",
+    },
+    mapx: { _text: "127.04199774213608" },
+    mapy: { _text: "37.52733821667861" },
+  },
+  {
+    title: { _text: "Real K-Pop Dance studio" },
+    firstimage: {
+      _text:
+        "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/ekmfziehszvifjci9tko/SeoulK-PopDanceClassforBeginnersbyFanxyStudio.webp",
+    },
+    mapx: { _text: "126.91340998782832" },
+    mapy: { _text: "37.554678110010535" },
   },
 ];
