@@ -257,6 +257,17 @@ p {
   color: #1187cf;
 }
 
+.underLineBtn {
+  background-image: linear-gradient(transparent calc(100% - 1.5px), #1187cf 5px);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+}
+
+.underLineBtn:hover {
+  -webkit-animation: underLining 0.3s forwards;
+          animation: underLining 0.3s forwards;
+}
+
 @media only screen and (max-width: 576px) {
   html,
   body,
@@ -637,7 +648,7 @@ p {
   height: 370px;
 }
 
-.home_recommend_modal {
+.home_recommend_acm_modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -647,26 +658,103 @@ p {
   height: 550px;
 }
 
-.home_recommend_modal ul {
+.home_recommend_acm_modal ul {
   margin: 1rem 0;
 }
 
-.home_recommend_modal ul .tag {
-  margin-right: 0.5rem;
+.home_recommend_acm_modal ul .tag {
+  margin: 1rem 0.5rem 1rem 0;
   cursor: default;
 }
 
-.home_recommend_modal .modal_acm_box {
+.home_recommend_acm_modal .modal_acm_box {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.home_recommend_modal .modal_acm_box span {
+.home_recommend_acm_modal .modal_acm_box span {
   background-color: rgba(0, 0, 0, 0);
   color: black;
   text-decoration: underline;
+}
+
+.home_recommend_togo_modal {
+  position: absolute;
+  top: 2.5%;
+  left: 2.5%;
+  margin: 0;
+  width: 95%;
+  height: 95%;
+  overflow-y: auto;
+}
+
+.home_recommend_togo_modal .recommend_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (32%)[3];
+      grid-template-rows: repeat(3, 32%);
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  height: 80%;
+  gap: 7px;
+}
+
+.home_recommend_togo_modal .recommend_tags {
+  margin: 0.5rem 0;
+}
+
+.home_recommend_togo_modal .recommend_tags li {
+  margin-right: 0.5rem;
+}
+
+.home_recommend_togo_modal .recommend_card {
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: 0.4s all;
+  transition: 0.4s all;
+}
+
+.home_recommend_togo_modal .recommend_card:hover h4 {
+  opacity: 1;
+}
+
+.home_recommend_togo_modal .recommend_card:hover .recommend_img {
+  opacity: 0.3;
+}
+
+.home_recommend_togo_modal .recommend_card .recommend_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.home_recommend_togo_modal .recommend_card h4 {
+  opacity: 0;
+  position: absolute;
+  width: 80%;
+  font-size: 0.9rem;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.home_recommend_togo_modal .recommend_submit_btn button {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.home_recommend_togo_modal .recommend_submit_btn button:hover {
+  color: #1187cf;
+}
+
+.home_recommend_togo_modal .recommend_checked {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @media only screen and (max-width: 576px) {
@@ -684,7 +772,7 @@ p {
     left: 8%;
     height: 370px;
   }
-  .home_recommend_modal {
+  .home_recommend_acm_modal {
     font-size: 0.8rem;
     width: 95%;
     top: 12%;
@@ -694,14 +782,28 @@ p {
     height: 420px;
     margin: 0;
   }
-  .home_recommend_modal .modal_acm_box span {
+  .home_recommend_acm_modal .modal_acm_box span {
     font-size: 1rem;
   }
-  .home_recommend_modal .modal_acm_box .card_title {
+  .home_recommend_acm_modal .modal_acm_box .card_title {
     font-size: 1.2rem;
   }
-  .home_recommend_modal .crown {
+  .home_recommend_acm_modal .crown {
     width: 3rem;
+  }
+  .home_recommend_togo_modal {
+    top: 10%;
+    height: 70%;
+  }
+  .home_recommend_togo_modal .recommend_container {
+    gap: 4px;
+  }
+  .home_recommend_togo_modal .recommend_card h4 {
+    width: 100%;
+    font-size: 0.5rem;
+  }
+  .home_recommend_togo_modal .recommend_checked {
+    width: 30%;
   }
 }
 
@@ -756,7 +858,6 @@ header div .settingIcon a {
 .footer {
   position: fixed;
   width: 100%;
-  top: 3.438rem;
   -webkit-transition: 0.4s all;
   transition: 0.4s all;
   padding: 1rem 1rem 2rem 1rem;
@@ -778,14 +879,6 @@ header div .settingIcon a {
   font-size: 1rem;
   font-weight: bold;
   margin: 0.3rem 0 1rem 0;
-  background-image: linear-gradient(transparent calc(100% - 1.5px), #1187cf 5px);
-  background-repeat: no-repeat;
-  background-size: 0% 100%;
-}
-
-.footer_goback_btn:hover {
-  -webkit-animation: underLining 0.3s forwards;
-          animation: underLining 0.3s forwards;
 }
 
 @media only screen and (max-width: 576px) {
@@ -1241,14 +1334,6 @@ header div .settingIcon a {
 .analyzer_budget_btns a {
   display: inline-block;
   margin-left: 1rem;
-  background-image: linear-gradient(transparent calc(100% - 1.5px), #1187cf 5px);
-  background-repeat: no-repeat;
-  background-size: 0% 100%;
-}
-
-.analyzer_budget_btns a:hover {
-  -webkit-animation: underLining 0.3s forwards;
-          animation: underLining 0.3s forwards;
 }
 
 .analyzer_input h3:first-of-type {

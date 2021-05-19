@@ -22,11 +22,12 @@ const typeDefs = gql`
     firstimage: Content
     mapx: Content
     mapy: Content
+    contentid: Id
   }
   type Query {
     ActivityCards(typeNum: Int!): [ActivityObj]
-    FoodRecommendCards: [RecommendObj]
-    ShoppingRecommendCards: [RecommendObj]
+    FoodRecommendCards(isFood: Boolean!): [RecommendObj]
+    ShoppingRecommendCards(isShopping: Boolean!): [RecommendObj]
     NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
   }
 `;
@@ -34,8 +35,9 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     ActivityCards: (_: any, { typeNum }: { typeNum: number }) => getActivities(typeNum),
-    FoodRecommendCards: () => getFoodRecommends(),
-    ShoppingRecommendCards: () => getShoppingRecommends(),
+    FoodRecommendCards: (_: any, { isFood }: { isFood: boolean }) => getFoodRecommends(isFood),
+    ShoppingRecommendCards: (_: any, { isShopping }: { isShopping: boolean }) =>
+      getShoppingRecommends(isShopping),
     NearRecommendCards: (_: any, { mapx, mapy }: { mapx: number; mapy: number }) =>
       getNearRecommends(mapx, mapy),
   },
