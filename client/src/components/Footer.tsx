@@ -8,6 +8,11 @@ import { checkListStore, mainStore } from "../@store/store";
 
 const OnInfoModal = (onInfo: boolean) => css`
   transform: ${onInfo ? "translateX(0)" : "translateX(100%)"};
+  top: ${checkListStore.isSubmit
+    ? checkListStore.isPermanetSubmit
+      ? "3.438rem"
+      : "calc(50% + 3.438rem)"
+    : "3.438rem"};
 `;
 
 const Footer = observer(() => {
@@ -42,7 +47,7 @@ const Footer = observer(() => {
         okText="Yes"
         cancelText="No"
       >
-        <a className="footer_goback_btn">Go back first page</a>
+        <a className="footer_goback_btn underLineBtn">Go back first page</a>
       </Popconfirm>
       <h4>ⓒ 2021, Jang Hyun Soo, All Rights Resrved</h4>
       <h4>Supported by Korea Tourism Organization's open API</h4>

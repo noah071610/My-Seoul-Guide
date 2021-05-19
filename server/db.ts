@@ -27,30 +27,34 @@ const getActivities = async (typeNum: number) => {
   return contents.item;
 };
 
-const getFoodRecommends = async () => {
-  return fetch(
-    `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=82&areaCode=1&sigunguCode=&cat1=A05&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=12&pageNo=1`
-  )
-    .then((res) => res.text())
-    .then((data) => {
-      let contents = JSON.parse(
-        convert.xml2json(data, { compact: true })
-      ).response.body.items.item.slice(0, 3);
-      return contents;
-    });
+const getFoodRecommends = async (isFood: boolean) => {
+  if (isFood) {
+    return fetch(
+      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=82&areaCode=1&sigunguCode=&cat1=A05&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=12&pageNo=1`
+    )
+      .then((res) => res.text())
+      .then((data) => {
+        let contents = JSON.parse(
+          convert.xml2json(data, { compact: true })
+        ).response.body.items.item.slice(0, 3);
+        return contents;
+      });
+  }
 };
 
-const getShoppingRecommends = async () => {
-  return fetch(
-    `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=79&areaCode=1&sigunguCode=&cat1=A04&cat2=A0401&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=1`
-  )
-    .then((res) => res.text())
-    .then((data) => {
-      let contents = JSON.parse(
-        convert.xml2json(data, { compact: true })
-      ).response.body.items.item.slice(0, 3);
-      return contents;
-    });
+const getShoppingRecommends = async (isShopping: boolean) => {
+  if (isShopping) {
+    return fetch(
+      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=79&areaCode=1&sigunguCode=&cat1=A04&cat2=A0401&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=1`
+    )
+      .then((res) => res.text())
+      .then((data) => {
+        let contents = JSON.parse(
+          convert.xml2json(data, { compact: true })
+        ).response.body.items.item.slice(0, 3);
+        return contents;
+      });
+  }
 };
 
 const getNearRecommends = async (mapx: number, mapy: number) => {

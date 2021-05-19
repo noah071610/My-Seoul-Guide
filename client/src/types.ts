@@ -67,6 +67,14 @@ export interface TogoInter {
   contentid: string;
 }
 
+export interface TogoRecommedInter {
+  mapx: CardText;
+  mapy: CardText;
+  title: CardText;
+  firstimage: CardText;
+  contentid: CardText;
+}
+
 export interface MainStore {
   userInfo: UserInfo | null;
   recommend_places: PlaceCardInter[];
