@@ -1,11 +1,13 @@
 import { observer } from "mobx-react";
 import { useCallback } from "react";
 import CountUp from "react-countup";
+import { useHistory } from "react-router";
 import { checkListStore, mainStore } from "../../../@store/store";
 import { PlaceCardInter } from "../../../types";
 
 const ContentSmallBox = observer(
   ({ place, index, isBest }: { place: PlaceCardInter; index?: number; isBest?: boolean }) => {
+    const history = useHistory();
     const onClickPlaceCard = useCallback(
       (listNum?: number) => {
         if (!isNaN(listNum!)) {
@@ -13,9 +15,10 @@ const ContentSmallBox = observer(
         } else {
           mainStore.changePlace(place.id - 1);
           checkListStore.discountOverlayCnt();
+          history.push("/stay");
         }
       },
-      [place.id]
+      [history, place.id]
     );
 
     return (
@@ -31,7 +34,7 @@ const ContentSmallBox = observer(
             src={place.firstimage._text}
           />
         </div>
-        {checkListStore.overlayCnt === 2 && (
+        {checkListStore.overlayCnt === 1 && (
           <h3>
             Get Points : <CountUp className="countUp" duration={5} start={0} end={place.point} />{" "}
           </h3>

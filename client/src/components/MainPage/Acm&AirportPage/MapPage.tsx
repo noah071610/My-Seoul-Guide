@@ -30,7 +30,7 @@ const MainPage: FC = observer(() => {
 
   return (
     <MainPageWrapper>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
+      <LoadScript googleMapsApiKey={"1"}>
         <GoogleMap
           mapContainerClassName={isAirportRoutePath ? "map_route" : "map_acm"}
           center={center}

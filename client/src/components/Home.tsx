@@ -53,7 +53,7 @@ const Home = observer(() => {
       {!checkListStore.isPermanetSubmit && <LandingPage />}
       {checkListStore.isSubmit && (
         <MainPageWrapper>
-          <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
+          <LoadScript googleMapsApiKey={"1"}>
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={
@@ -97,7 +97,7 @@ const Home = observer(() => {
             </GoogleMap>
           </LoadScript>
           <div
-            style={checkListStore.overlayCnt === 0 ? { display: "none" } : { display: "block" }}
+            style={checkListStore.overlayCnt <= 0 ? { display: "none" } : { display: "block" }}
             onClick={() => checkListStore.discountOverlayCnt()}
             className="overlay"
           />

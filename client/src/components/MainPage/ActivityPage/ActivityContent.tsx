@@ -56,7 +56,7 @@ const ActivityContent = observer(() => {
   if (error) return <p className="error">Error :(</p>;
   return (
     <MainPageWrapper>
-      {data.ActivityCards.map((card: ContentCardInter, i: number) => {
+      {data.ActivityCard.map((card: ContentCardInter, i: number) => {
         return <ContentCard key={i} card={card} />;
       })}
     </MainPageWrapper>

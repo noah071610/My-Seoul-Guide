@@ -5,7 +5,6 @@ import parser from "html-react-parser";
 import { useCallback } from "react";
 import { mainStore } from "../../../@store/store";
 import { useHistory } from "react-router";
-import { NO_IMAGE_URL } from "../../../config";
 
 interface ContentBoxProps {
   card: ContentCardInter;
@@ -72,7 +71,13 @@ const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
       <Divider />
       <Row className="content_article">
         <Col className="content_article_img" sm={24} md={24} lg={10}>
-          <img alt="tour_acm_redcommendation_img" src={card?.firstimage?._text || NO_IMAGE_URL} />
+          <img
+            alt="tour_acm_redcommendation_img"
+            src={
+              card?.firstimage?._text ||
+              "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+            }
+          />
           {isAcmCard ? (
             <button onClick={onClickSetbase} className="sm_visible">
               🌟 Set base place

@@ -4,8 +4,6 @@ export const GRAY_COLOR = "rgba(0, 0, 0, 0.25)" as const;
 export const RED_COLOR = "#d21f3c" as const;
 export const MAIN_COLOR = "#263238" as const;
 export const ORANGE_COLOR = "#ed6f63" as const;
-export const NO_IMAGE_URL =
-  "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png";
 
 export const SM_SIZE = "576px" as const;
 export const MD_SIZE = "768px" as const;

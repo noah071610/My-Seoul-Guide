@@ -11,7 +11,7 @@ const checkListStore = observable<CheckListStore>({
   party: null,
   purpose: [],
   acm: [],
-  overlayCnt: 4,
+  overlayCnt: 3,
   isSubmit: false,
   isPermanetSubmit: false,
   changeTaste: action((data: string[], name: string) => {
@@ -38,7 +38,7 @@ const checkListStore = observable<CheckListStore>({
   }),
   goBack: action(() => {
     localStorage.clear();
-    checkListStore.clearOverlayCnt(4);
+    checkListStore.clearOverlayCnt(3);
     checkListStore.isPermanetSubmit = false;
     checkListStore.isSubmit = false;
     mainStore.onInfoModal = false;

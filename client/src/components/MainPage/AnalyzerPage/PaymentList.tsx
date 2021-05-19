@@ -57,12 +57,8 @@ const PaymentList: FC = observer(() => {
           KRW
         </h2>
         <div className="analyzer_budget_btns">
-          <a className="underLineBtn" onClick={onChangeIsbudgetChange}>
-            Budget Change
-          </a>
-          <a className="underLineBtn" onClick={() => setIsModalVisible(true)}>
-            Keep Ledger
-          </a>
+          <a onClick={onChangeIsbudgetChange}>Budget Change</a>
+          <a onClick={() => setIsModalVisible(true)}>Keep Ledger</a>
         </div>
       </div>
       {analyzerStore?.paymentList?.map((v, i) => {
@@ -87,7 +83,7 @@ const PaymentList: FC = observer(() => {
               <div className="memo_list">{v.memo}</div>
             </li>
             <li className="rest_list">
-              <span>Rest : {originalTotal as number} KRW</span>
+              <span>Rest : {((originalTotal as number) -= v.payment)} KRW</span>
               <a
                 data-id={i}
                 data-type={v.type}
