@@ -50,10 +50,11 @@ const checkListStore = observable<CheckListStore>({
       gender: checkListStore.gender!,
       age: checkListStore.age!,
       party: checkListStore.party!,
-      acm: checkListStore.acm,
-      purpose: checkListStore.purpose,
+      acm: [...checkListStore.acm],
+      purpose: [...checkListStore.purpose],
     };
-    userInfo?.purpose.forEach((v) => {
+
+    for (const v of checkListStore?.purpose) {
       switch (v) {
         case "Food":
           recommendsArr.push(userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1)[0]);
@@ -64,10 +65,14 @@ const checkListStore = observable<CheckListStore>({
         case "K-pop":
           recommendsArr.push(userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1)[0]);
           break;
-        default:
+        case "Native Recommendation":
+          userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1);
+          break;
+        case "Plastic surgery":
+          userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1);
           break;
       }
-    });
+    }
 
     let userPick = [...userInfo.purpose, ...userInfo.acm, userInfo.age];
 
@@ -98,18 +103,11 @@ const checkListStore = observable<CheckListStore>({
 
     //===== special Key ======
 
-    if (userPick.includes("Native Recommendation")) {
+    if (checkListStore.purpose.includes("Native Recommendation")) {
       rankPlace = rankPlace.filter((v) => v.id !== 1);
     }
 
-    if (userPick.includes("Native Recommendation") && !userPick.includes("Luxury")) {
-      rankPlace = rankPlace.filter((v) => v.id !== 1);
-      if (!userPick.includes("Plastic surgery")) {
-        rankPlace = rankPlace.filter((v) => v.id !== 3);
-      }
-    }
-
-    if (userPick.includes("Plastic surgery")) {
+    if (checkListStore.purpose.includes("Plastic surgery")) {
       rankPlace.unshift(rankPlace.splice(rankPlace.map((v) => v.id).indexOf(3), 1)[0]);
     }
 

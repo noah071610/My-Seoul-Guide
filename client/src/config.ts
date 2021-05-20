@@ -25,7 +25,6 @@ export const check_purpose_list = [
   { label: "Shopping", value: "Shopping" },
   { label: "Night Life", value: "Night Life" },
   { label: "Chillin", value: "Chillin" },
-  { label: "Activity", value: "Activity" },
   { label: "Plastic surgery", value: "Plastic surgery" },
 ];
 export const check_party_list = ["Single", "Family", "Friend", "Lover"];
