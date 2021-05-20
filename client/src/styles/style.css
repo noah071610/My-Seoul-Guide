@@ -1163,6 +1163,15 @@ header div .settingIcon a {
           transform: scale(1.05);
 }
 
+.content_small_box .airport_title {
+  font-family: "Kaushan Script", cursive;
+  font-weight: bold;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 @media only screen and (max-width: 768px) {
   .content_small_box h2 a {
     display: none;

@@ -977,6 +977,11 @@ header {
       transform: scale(1.05);
     }
   }
+  .airport_title {
+    font-family: "Kaushan Script", cursive;
+    font-weight: bold;
+    user-select: none;
+  }
   @media only screen and (max-width: $md) {
     h2 {
       a {

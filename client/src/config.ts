@@ -345,21 +345,15 @@ export const placeList = [
 
 export const kpop_recommends = [
   {
-    title: { _text: "Yujeong Restaurant" },
-    firstimage: {
-      _text:
-        "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99F7333B5C636CEE38",
-    },
-    mapx: { _text: "127.02707531416009" },
-    mapy: { _text: "37.51868576912025" },
-  },
-  {
     title: { _text: "Music Korea" },
     firstimage: {
       _text: "https://www.ivisitkorea.com/wp-content/uploads/2020/04/k-pop-goods-seoul.jpg",
     },
     mapx: { _text: "126.98486789768863" },
     mapy: { _text: "37.56136640359879" },
+    contentid: {
+      _text: "984867",
+    },
   },
   {
     title: { _text: "K-STAR ROAD" },
@@ -368,6 +362,9 @@ export const kpop_recommends = [
     },
     mapx: { _text: "127.04199774213608" },
     mapy: { _text: "37.52733821667861" },
+    contentid: {
+      _text: "041997",
+    },
   },
   {
     title: { _text: "Real K-Pop Dance studio" },
@@ -377,5 +374,8 @@ export const kpop_recommends = [
     },
     mapx: { _text: "126.91340998782832" },
     mapy: { _text: "37.554678110010535" },
+    contentid: {
+      _text: "913409",
+    },
   },
 ];

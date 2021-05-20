@@ -1,5 +1,5 @@
+import { resolvers } from "./resolvers";
 import { ApolloServer, gql } from "apollo-server";
-import { getActivities, getFoodRecommends, getShoppingRecommends, getNearRecommends } from "./db";
 
 const typeDefs = gql`
   type Content {
@@ -31,17 +31,6 @@ const typeDefs = gql`
     NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
   }
 `;
-
-const resolvers = {
-  Query: {
-    ActivityCards: (_: any, { typeNum }: { typeNum: number }) => getActivities(typeNum),
-    FoodRecommendCards: (_: any, { isFood }: { isFood: boolean }) => getFoodRecommends(isFood),
-    ShoppingRecommendCards: (_: any, { isShopping }: { isShopping: boolean }) =>
-      getShoppingRecommends(isShopping),
-    NearRecommendCards: (_: any, { mapx, mapy }: { mapx: number; mapy: number }) =>
-      getNearRecommends(mapx, mapy),
-  },
-};
 
 const server = new ApolloServer({ typeDefs, resolvers });
 server.listen().then(({ url }) => {

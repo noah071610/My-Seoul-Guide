@@ -45,6 +45,7 @@ const checkListStore = observable<CheckListStore>({
   }),
   onSubmit: action(() => {
     const map = new Map();
+    const recommendsArr: string[] = [];
     let userInfo = {
       gender: checkListStore.gender!,
       age: checkListStore.age!,
@@ -52,7 +53,24 @@ const checkListStore = observable<CheckListStore>({
       acm: checkListStore.acm,
       purpose: checkListStore.purpose,
     };
-    let userPick = [...checkListStore.purpose, ...checkListStore.acm, checkListStore.age];
+    userInfo?.purpose.forEach((v) => {
+      switch (v) {
+        case "Food":
+          recommendsArr.push(userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1)[0]);
+          break;
+        case "Shopping":
+          recommendsArr.push(userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1)[0]);
+          break;
+        case "K-pop":
+          recommendsArr.push(userInfo.purpose.splice(userInfo.purpose.indexOf(v), 1)[0]);
+          break;
+        default:
+          break;
+      }
+    });
+
+    let userPick = [...userInfo.purpose, ...userInfo.acm, userInfo.age];
+
     const places = valueList.map((v) => {
       return { id: v.id, valueList: v.values.sort() };
     });
@@ -103,26 +121,7 @@ const checkListStore = observable<CheckListStore>({
 
     //=================^^ Recommend Stay finder done. ^^=====================
 
-    //================ Recommend Attraction finder start .. ================
-
-    let arr: string[] = [];
-    userInfo?.purpose.forEach((v) => {
-      switch (v) {
-        case "Food":
-          arr.push(v);
-          break;
-        case "Shopping":
-          arr.push(v);
-          break;
-        case "K-pop":
-          arr.push(v);
-          break;
-        default:
-          break;
-      }
-    });
-    userInfo.purpose = arr;
-
+    userInfo.purpose = recommendsArr;
     mainStore.userInfo = userInfo;
     mainStore.recommend_places = solution;
     mainStore.place = solution[0];

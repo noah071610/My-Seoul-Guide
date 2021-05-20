@@ -64,7 +64,7 @@ const GET_RECOMMEND = gql`
   }
 `;
 export const HomeModalTogo = observer(() => {
-  const onClickAddCard = useCallback((arg: TogoRecommedInter) => {
+  const onClickCard = useCallback((arg: TogoRecommedInter) => {
     let form = {
       path: { lat: parseFloat(arg.mapy._text), lng: parseFloat(arg.mapx._text) },
       title: arg.title._text,
@@ -105,23 +105,25 @@ export const HomeModalTogo = observer(() => {
       </ul>
       <Divider />
       <div className="recommend_container">
-        {useSortList(data)?.map((v: TogoRecommedInter, i: number) => (
-          <div key={i} onClick={() => onClickAddCard(v)} className="recommend_card">
-            <img
-              className="recommend_img"
-              src={v.firstimage?._text || NO_IMAGE_URL}
-              alt={v.firstimage?._text || "no_image"}
-            />
-            <h4>{v.title._text}</h4>
-            {mainStore.togoLists.find((togo) => togo.contentid === v.contentid._text) && (
+        {useSortList({ data: data, isKpop: mainStore.userInfo?.purpose.includes("K-pop") })?.map(
+          (v: TogoRecommedInter, i: number) => (
+            <div key={i} onClick={() => onClickCard(v)} className="recommend_card">
               <img
-                alt="checked"
-                className="recommend_checked"
-                src="https://img.icons8.com/emoji/48/000000/check-box-with-check-emoji.png"
+                className="recommend_img"
+                src={v.firstimage?._text || NO_IMAGE_URL}
+                alt={v.firstimage?._text || "no_image"}
               />
-            )}
-          </div>
-        ))}
+              <h4>{v.title._text}</h4>
+              {mainStore.togoLists.find((togo) => togo.contentid === v.contentid._text) && (
+                <img
+                  alt="checked"
+                  className="recommend_checked"
+                  src="https://img.icons8.com/emoji/48/000000/check-box-with-check-emoji.png"
+                />
+              )}
+            </div>
+          )
+        )}
       </div>
       <Divider />
       <div className="recommend_submit_btn">

@@ -6,7 +6,7 @@ const AirportCard = observer(() => {
   return (
     <div style={{ display: "flex" }}>
       <div onClick={() => mainStore.setAirport(0)} className="content_small_box">
-        <h2>
+        <h2 className="airport_title">
           <span>From {airportList[0]?.name}</span>
         </h2>
         <div className="image_wrapper">
@@ -18,7 +18,7 @@ const AirportCard = observer(() => {
         </div>
       </div>
       <div onClick={() => mainStore.setAirport(1)} className="content_small_box">
-        <h2>
+        <h2 className="airport_title">
           <span>From {airportList[1]?.name}</span>
         </h2>
         <div className="image_wrapper">
