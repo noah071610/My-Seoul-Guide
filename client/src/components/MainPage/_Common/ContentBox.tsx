@@ -21,24 +21,27 @@ const Content = styled.div`
         .title_name {
           font-family: "Kaushan Script", cursive;
           font-size: 1.7rem;
-          margin-left: 1rem;
+        }
+        .title_desc {
+          margin-right: 1rem;
         }
       }
       &_subtitle {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .content_list {
           display: flex;
-          .content_rate {
-            margin-right: 1rem;
+        }
+        .content_tag {
+          user-select: none;
+          margin-right: 0.5rem;
+          &:hover {
+            transform: scale(1.05);
           }
-          .content_tag {
-            user-select: none;
-            margin-right: 0.5rem;
-            &:hover {
-              transform: scale(1.05);
-            }
-          }
+        }
+        .content_rate {
+          margin-right: 1rem;
         }
         .addBtn {
           cursor: pointer;
@@ -104,16 +107,12 @@ const Content = styled.div`
           }
         }
         &_subtitle {
-          display: flex;
-          flex-direction: column-reverse;
-          .content_list {
-            .content_rate {
-              display: none;
-            }
-            .content_tag {
-              margin-top: 0.5rem;
-              font-size: 0.6rem;
-            }
+          .content_rate {
+            display: none;
+          }
+          .content_tag {
+            margin-top: 0.5rem;
+            font-size: 0.6rem;
           }
           .addBtn {
             display: none;
@@ -183,7 +182,7 @@ const ContentBox = observer(({ card, isAcmCard }: ContentBoxProps) => {
     <Content>
       <div className="content_top">
         <h2 className="content_top_title">
-          <span className="title_desc">{isAcmCard && "We recommend you to stay here!"}</span>
+          {isAcmCard && <span className="title_desc">We recommend you to stay here!</span>}
           <span className="title_name">{card?.title?._text}</span>
           {isAcmCard && (
             <Rate

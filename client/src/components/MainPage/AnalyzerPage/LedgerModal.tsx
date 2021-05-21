@@ -6,7 +6,52 @@ import TextArea from "antd/lib/input/TextArea";
 import useInput from "../../../hooks/useInput";
 import analyzerStore from "../../../@store/analyzerStore";
 import useExchageClac from "../../../hooks/useExchangeCalc";
+import styled from "@emotion/styled";
+import { SM_SIZE } from "../../../config";
 const { Option } = Select;
+
+const LedgerModalComponent = styled(Modal)`
+  h3:first-of-type {
+    margin-bottom: 0.5rem;
+  }
+  h3:nth-of-type(n + 2) {
+    margin: 1rem 0 0.5rem 0;
+  }
+  .type_selector {
+    width: 40%;
+  }
+  .payment {
+    &_usd {
+      width: 30%;
+    }
+    &_krw {
+      width: 40%;
+    }
+    &_memo {
+      width: 70%;
+    }
+    &_btn {
+      margin-top: 1rem;
+      width: 30%;
+    }
+  }
+  @media only screen and (max-width: ${SM_SIZE}) {
+    .type_selector {
+      width: 60%;
+    }
+    .payment {
+      &_usd {
+        width: 40%;
+      }
+      &_krw {
+        width: 50%;
+      }
+      &_btn {
+        width: 50%;
+      }
+    }
+  }
+`;
 
 interface AnalyzerContentProps {
   setIsModalVisible: (data: boolean) => void;
@@ -14,7 +59,7 @@ interface AnalyzerContentProps {
   currentExchage: number;
 }
 
-const AnalyzerContent = observer(
+const LedgerModal = observer(
   ({ currentExchage, isModalVisible, setIsModalVisible }: AnalyzerContentProps) => {
     const [memo, onChangeMemo, setMemo] = useInput("");
     const [payment, onChangePayment, setPayment] = useInput(null);
@@ -44,7 +89,7 @@ const AnalyzerContent = observer(
     }, [currentExchage, memo, payment, select, setMemo, setPayment]);
 
     return (
-      <Modal
+      <LedgerModalComponent
         title="Ledger"
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
@@ -81,9 +126,9 @@ const AnalyzerContent = observer(
         <Button className="payment_btn" onClick={onSubmit}>
           ADD 📌
         </Button>
-      </Modal>
+      </LedgerModalComponent>
     );
   }
 );
 
-export default AnalyzerContent;
+export default LedgerModal;

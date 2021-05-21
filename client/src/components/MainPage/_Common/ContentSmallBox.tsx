@@ -6,7 +6,7 @@ import { checkListStore, mainStore } from "../../../@store/store";
 import { MD_SIZE, SM_SIZE } from "../../../config";
 import { PlaceCardInter } from "../../../types";
 
-const ContentSmall = styled.div`
+export const ContentSmall = styled.div`
   position: relative;
   padding: 1rem;
   transition: 0.4s all;
@@ -27,8 +27,7 @@ const ContentSmall = styled.div`
   .image_wrapper {
     overflow: hidden;
     border-radius: 10px;
-    .place_img,
-    .airport_img {
+    .place_img {
       width: 100%;
       height: 175px;
       transition: 0.4s all;
@@ -43,8 +42,7 @@ const ContentSmall = styled.div`
   }
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    .place_img,
-    .airport_img {
+    .place_img {
       transform: scale(1.05);
     }
   }

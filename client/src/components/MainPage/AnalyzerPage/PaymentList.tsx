@@ -8,6 +8,79 @@ import analyzerStore from "../../../@store/analyzerStore";
 import { observer } from "mobx-react";
 import useExchageClac from "../../../hooks/useExchangeCalc";
 import LedgerModal from "./LedgerModal";
+import styled from "@emotion/styled";
+import { SM_SIZE } from "../../../config";
+
+const Budget = styled.div`
+  display: flex;
+  padding: 1rem;
+  font-weight: normal;
+  justify-content: space-between;
+  align-items: center;
+  .budget_title {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    &_input {
+      border: none;
+      border-bottom: 1px solid $GRAY_COLOR;
+      width: 20%;
+      &:focus {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid $GRAY_COLOR;
+      }
+    }
+  }
+  .budget_btns {
+    a {
+      display: inline-block;
+      margin-left: 1rem;
+    }
+  }
+  @media only screen and (max-width: ${SM_SIZE}) {
+    flex-direction: column;
+    align-items: flex-start;
+    .budget_title {
+      font-size: 1.4rem;
+    }
+    .budget_btns {
+      margin-top: 1rem;
+      a {
+        font-size: 1.1rem;
+        margin: 0 1rem 0 0;
+      }
+    }
+  }
+`;
+
+const PaymentLists = styled.ul`
+  padding: 1rem;
+  display: flex;
+  font-size: 0.9rem;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: 0.3s all;
+  .memo_list {
+    display: inline-block;
+  }
+  .delete_btn {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  @media only screen and (max-width: ${SM_SIZE}) {
+    flex-direction: column;
+    .rest_list {
+      display: none;
+    }
+    .memo_list {
+      display: block;
+      margin-top: 1rem;
+    }
+  }
+`;
 
 const PaymentList: FC = observer(() => {
   const [currentExchage, setCurrentExchage] = useState<number>(0);
@@ -39,15 +112,15 @@ const PaymentList: FC = observer(() => {
 
   return (
     <>
-      <div className="analyzer_budget">
-        <h2>
+      <Budget>
+        <h2 className="budget_title">
           Total your budget :{" "}
           {isbudgetChange ? (
             <Input
               onChange={onChangeBudget}
               value={budget}
               placeholder="USD"
-              className="analyzer_budget_input"
+              className="budget_title_input"
               type="number"
               onPressEnter={onChangeIsbudgetChange}
             />
@@ -56,25 +129,24 @@ const PaymentList: FC = observer(() => {
           )}{" "}
           KRW
         </h2>
-        <div className="analyzer_budget_btns">
-          <a className="underLineBtn" onClick={onChangeIsbudgetChange}>
+        <div className="budget_btns">
+          <a className="btn-underLine" onClick={onChangeIsbudgetChange}>
             Budget Change
           </a>
-          <a className="underLineBtn" onClick={() => setIsModalVisible(true)}>
+          <a className="btn-underLine" onClick={() => setIsModalVisible(true)}>
             Keep Ledger
           </a>
         </div>
-      </div>
+      </Budget>
       {analyzerStore?.paymentList?.map((v, i) => {
         return (
-          <ul className="analyzer_list" key={i}>
+          <PaymentLists key={i}>
             <li className="sm_visible">
               <span>Rest : {((originalTotal as number) -= v.payment)} KRW </span>
               <a
                 data-id={i}
                 data-type={v.type}
                 data-payment={v.payment}
-                style={{ marginLeft: "0.5rem" }}
                 className="delete_btn sm_visible"
                 onClick={onClickDeleteBtn}
               >
@@ -98,7 +170,7 @@ const PaymentList: FC = observer(() => {
                 <DeleteOutlined />
               </a>
             </li>
-          </ul>
+          </PaymentLists>
         );
       })}
       <LedgerModal
