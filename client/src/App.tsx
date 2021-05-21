@@ -7,7 +7,7 @@ import { Route, useHistory, withRouter } from "react-router-dom";
 import { Suspense, useEffect } from "react";
 import ActivityContent from "./components/MainPage/ActivityPage/ActivityContent";
 import AnalyzerContent from "./components/MainPage/AnalyzerPage/AnalyzerContent";
-import MainPage from "./components/MainPage/Acm&AirportPage/MapPage";
+import MapPage from "./components/MainPage/MapPage/MapPage";
 import LoadingPage from "./components/MainPage/LoadingPage";
 import { checkListStore, mainStore } from "./@store/store";
 import analyzerStore from "./@store/analyzerStore";
@@ -48,8 +48,8 @@ const App = observer(() => {
   return (
     <Suspense fallback={<LoadingPage />}>
       <Route exact path="/" component={Home} />
-      <Route exact path="/stay" component={MainPage} />
-      <Route exact path="/airport_route" component={MainPage} />
+      <Route exact path="/stay" component={MapPage} />
+      <Route exact path="/airport_route" component={MapPage} />
       <Route exact path="/activity/:category" component={ActivityContent} />
       <Route exact path="/analyzer" component={AnalyzerContent} />
     </Suspense>

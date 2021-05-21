@@ -2,12 +2,12 @@ import { observer } from "mobx-react";
 import { FC, useEffect, useState } from "react";
 import MainPageWrapper from "../MainPageWrapper";
 import { GoogleMap, LoadScript, Polygon } from "@react-google-maps/api";
-import AcmPage from "../_Common/ContentBox";
+import PlaceCards from "../_Common/ContentBox";
 import { useRouteMatch } from "react-router";
 import { polygonOption } from "../../../config";
 import { useCalcCenter } from "../../../hooks/useCalcCenter";
 import { Directions } from "../_Common/Directions";
-import AirportRouteContent from "./AirportRouteContent";
+import AirportRouteCards from "./AirportRouteContent";
 import { PathObj } from "../../../types";
 import { mainStore } from "../../../@store/store";
 
@@ -57,9 +57,9 @@ const MainPage: FC = observer(() => {
         </GoogleMap>
       </LoadScript>
       {isAirportRoutePath ? (
-        <AirportRouteContent />
+        <AirportRouteCards />
       ) : (
-        mainStore.place && <AcmPage card={mainStore.place} isAcmCard={true} />
+        mainStore.place && <PlaceCards card={mainStore.place} isAcmCard={true} />
       )}
     </MainPageWrapper>
   );

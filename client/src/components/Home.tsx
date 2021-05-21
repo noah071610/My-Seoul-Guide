@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { GoogleMap, LoadScript, OverlayView } from "@react-google-maps/api";
 import { Popover } from "antd";
 import { observer } from "mobx-react";
@@ -10,6 +11,35 @@ import LandingPage from "./LandingPage/LandingPage";
 import MainPageWrapper from "./MainPage/MainPageWrapper";
 import { Directions } from "./MainPage/_Common/Directions";
 import HomeModal from "./MainPage/_Common/HomeModal";
+import { BLUE_COLOR, WHITE_COLOR } from "../config";
+
+const Preview = styled.div`
+  background-color: ${WHITE_COLOR};
+  padding: 1rem;
+  border-radius: 5px;
+  position: relative;
+  transform: translateY(-100%);
+  z-index: 1;
+  cursor: pointer;
+  h3 {
+    color: ${BLUE_COLOR};
+  }
+  span {
+    position: absolute;
+    font-size: 2rem;
+    bottom: -1rem;
+    left: -1rem;
+  }
+`;
+
+const Popup = styled.div`
+  display: flex;
+  width: 200px;
+  a {
+    width: 50%;
+    text-align: center;
+  }
+`;
 
 const HomeWrapper = (isSubmit: boolean, isPermanetSubmit: boolean) => css`
   transition: 0.8s all;
@@ -25,10 +55,10 @@ const Home = observer(() => {
   const [toPlacePath, setToPlacePath] = useState<PathObj | null>(null);
 
   const togoPopup = (id: string, path: PathObj) => (
-    <div className="popup_togo">
+    <Popup>
       <a onClick={() => setToPlacePath(path)}>Direction 🚘</a>
       <a onClick={() => onClickDeleteTogo(id)}>Delete ❌</a>
-    </div>
+    </Popup>
   );
 
   const onClickDeleteTogo = useCallback((id: string) => {
@@ -66,11 +96,11 @@ const Home = observer(() => {
                   position={mainStore.place?.stationPath}
                   mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                 >
-                  <div className="togo_preview">
+                  <Preview>
                     <h3>Your base place</h3>
                     <h4>{mainStore.place?.title._text}</h4>
                     <span>🌟</span>
-                  </div>
+                  </Preview>
                 </OverlayView>
               )}
               {mainStore.togoLists.length > 0 &&
@@ -82,11 +112,11 @@ const Home = observer(() => {
                       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                     >
                       <Popover content={() => togoPopup(v.contentid, v.path)}>
-                        <div className="togo_preview">
+                        <Preview>
                           <h3>List No.{i + 1}</h3>
                           <h4>{v.title}</h4>
                           <span>📍</span>
-                        </div>
+                        </Preview>
                       </Popover>
                     </OverlayView>
                   );

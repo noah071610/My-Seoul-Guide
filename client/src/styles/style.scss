@@ -225,13 +225,7 @@ a {
   }
 }
 
-.strong {
-  margin: 0 0.5rem;
-  font-weight: bold;
-  color: $BLUE_COLOR;
-}
-
-.underLineBtn {
+.btn-underLine {
   background-image: linear-gradient(transparent calc(100% - 1.5px), $BLUE_COLOR 5px);
   background-repeat: no-repeat;
   background-size: 0% 100%;
@@ -302,11 +296,6 @@ a {
 //================ LANDING PAGE ========================
 
 .loadingPage {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .home_landing {
 }
@@ -319,64 +308,12 @@ a {
 //======================= MainPage =====================
 
 .main_page_wrapper {
-  width: 100%;
-  .main_wrapper {
-    height: calc(100vh - 59.26px);
-    display: flex;
-    position: relative;
-    .main_content_wrapper {
-      width: 100%;
-      overflow: auto;
-      position: relative;
-    }
-  }
-  .map {
-    &_route {
-      height: 50%;
-      width: 100%;
-    }
-    &_acm {
-      height: 30%;
-      width: 100%;
-      transition: 0.3s all;
-      &:hover {
-        height: 70%;
-      }
-    }
-    @media only screen and (max-width: $sm) {
-      &_route {
-        height: 55%;
-      }
-    }
-  }
 }
 
-.togo_preview {
-  background-color: $WHITE_COLOR;
-  padding: 1rem;
-  border-radius: 5px;
-  position: relative;
-  transform: translateY(-100%);
-  z-index: 1;
-  cursor: pointer;
-  h3 {
-    color: $BLUE_COLOR;
-  }
-  span {
-    position: absolute;
-    font-size: 2rem;
-    bottom: -1rem;
-    left: -1rem;
-  }
+.map_preview {
 }
 
-.popup_togo {
-  display: flex;
-  width: 200px;
-  a {
-    width: 50%;
-    text-align: center;
-  }
+.map_popup {
 }
 
 //============================ MODAL ====================================
@@ -429,439 +366,32 @@ a {
 //====================== Header ========================
 
 header {
-  position: relative;
-  padding: 1rem;
-  display: flex;
-  height: 61px;
-  justify-content: space-between;
-  .header_logo {
-    color: black;
-    font-family: "Kaushan Script", cursive;
-    font-weight: bold;
-  }
-  div {
-    display: flex;
-    .settingIcon {
-      font-size: 1.2rem;
-      margin-left: 1rem;
-      a {
-        display: inline-block;
-      }
-    }
-  }
-  @media only screen and (max-width: $md) {
-    .header_logo {
-      font-size: 1.2rem;
-    }
-  }
-  @media only screen and (max-width: $sm) {
-    div {
-      .settingIcon {
-        margin-left: 1.5rem;
-        span {
-          font-size: 1.3rem;
-        }
-      }
-    }
-  }
 }
 
 //====================== Footer ============================
 
 .footer {
-  position: fixed;
-  width: 100%;
-  transition: 0.4s all;
-  padding: 1rem 1rem 2rem 1rem;
-  right: 0;
-  background-color: #fff;
-  z-index: 1;
-  text-align: end;
-  border-bottom: 1px solid $GRAY_COLOR;
-  &_list {
-    li {
-      display: inline-block;
-      margin-left: 0.8rem;
-      font-size: 1.5rem;
-    }
-  }
-  &_goback_btn {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 0.3rem 0 1rem 0;
-  }
-  @media only screen and (max-width: $sm) {
-    &_list {
-      li {
-        span {
-          font-size: 1.3rem;
-        }
-      }
-    }
-  }
 }
 
 //=================== Navigation =========================
 
 .nav {
-  width: 320px;
-  height: 100vh;
-  font-size: 1.1rem;
-  background-color: $MAIN_COLOR;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  .nav_menu {
-    &_link {
-      padding: 1.5rem;
-      color: $WHITE_COLOR;
-      background-color: $MAIN_COLOR;
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-      }
-    }
-  }
-  @media only screen and (max-width: $md) {
-    transform: translateX(-100px);
-    width: 0px;
-    height: 100%;
-    .nav_menu {
-      &_link {
-        font-size: 1rem;
-      }
-    }
-  }
-}
-
-.offSubMenu {
-  transform: translateY(-100%);
-  height: 0;
-}
-
-.onSubMenu {
-  transform: translateY(0);
-  height: 100%;
 }
 
 //================= Content Box =======================
 
 .content {
-  &_box {
-    padding: 2rem;
-    width: 100%;
-  }
-  &_article {
-    &_img {
-      border-radius: 10px;
-      img {
-        width: 100%;
-        height: 250px;
-        border-radius: 8px;
-      }
-    }
-    &_text,
-    &_text_attractions {
-      padding-left: 1.5rem;
-      font-size: 0.9rem;
-      line-height: 2.2;
-      height: 250px;
-      overflow-y: auto;
-      p {
-        height: 250px;
-      }
-    }
-  }
-  &_subtitle {
-    display: flex;
-    justify-content: space-between;
-    .addBtn {
-      cursor: pointer;
-      margin-left: 1rem;
-      transition: 0.3s all;
-    }
-  }
-  &_top {
-    h2 {
-      display: flex;
-      margin-bottom: 0.8rem;
-      strong {
-        margin-right: 1rem;
-      }
-      a {
-        font-family: "Kaushan Script", cursive;
-      }
-    }
-    ul {
-      .content_list {
-        display: inline-block;
-        margin-right: 1rem;
-      }
-      .content_tag {
-        user-select: none;
-        margin-right: 0.5rem;
-        &:hover {
-          transform: scale(1.05);
-        }
-      }
-    }
-  }
-  @media only screen and (max-width: $lg) {
-    &_box {
-      padding: 1rem;
-    }
-    &_article {
-      &_text {
-        padding: 1rem 0 2rem 0;
-        height: 100%;
-        p {
-          height: 100%;
-        }
-      }
-      &_text_attractions {
-        margin: 1rem 0 1.5rem 0;
-        padding: 0;
-        height: 150px;
-        p {
-          height: 100%;
-        }
-      }
-    }
-  }
-  @media only screen and (max-width: $sm) {
-    &_box {
-      h2 {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0;
-        strong {
-          display: none;
-        }
-      }
-    }
-    &_subtitle {
-      display: flex;
-      flex-direction: column-reverse;
-      ul {
-        .content_list {
-          display: none;
-        }
-        .content_tag {
-          margin-top: 0.5rem;
-          font-size: 0.6rem;
-        }
-      }
-      .addBtn {
-        display: none;
-      }
-      h3 {
-        margin-top: 1rem;
-      }
-    }
-    &_article {
-      &_img {
-        img {
-          height: 150px;
-        }
-        button {
-          font-size: 0.9rem;
-          position: absolute;
-          bottom: 10px;
-          right: 5px;
-          background-color: $BLUE_COLOR;
-          color: $WHITE_COLOR;
-          display: inline-block;
-          padding: 0 0.5rem;
-          border-radius: 5px;
-          transition: 0.3s all;
-          &:hover {
-            color: black;
-            background-color: $WHITE_COLOR;
-          }
-        }
-      }
-      &_text {
-        padding: 0 0 1rem 0;
-        height: 100%;
-        p {
-          height: 100%;
-        }
-      }
-    }
-  }
 }
 
 .content_small_box {
-  position: relative;
-  padding: 1rem;
-  transition: 0.4s all;
-  width: 100%;
-  h2 {
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    .card_title {
-      font-family: "Kaushan Script", cursive;
-    }
-    a:last-child {
-      font-size: 0.9rem;
-    }
-  }
-  .image_wrapper {
-    overflow: hidden;
-    border-radius: 10px;
-    .place_img,
-    .airport_img {
-      width: 100%;
-      height: 175px;
-      transition: 0.4s all;
-      border-radius: 10px;
-    }
-  }
-  .crown {
-    position: absolute;
-    top: 3rem;
-    right: -1rem;
-    transform: rotate(45deg);
-  }
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    .place_img,
-    .airport_img {
-      transform: scale(1.05);
-    }
-  }
-  .airport_title {
-    font-family: "Kaushan Script", cursive;
-    font-weight: bold;
-    user-select: none;
-  }
-  @media only screen and (max-width: $md) {
-    h2 {
-      a {
-        display: none;
-      }
-    }
-  }
-  @media only screen and (max-width: $sm) {
-    padding: 0.5rem;
-    h2 {
-      .card_title {
-        font-size: 0.8rem;
-      }
-    }
-    .image_wrapper {
-      .place_img,
-      .airport_img {
-        height: 120px;
-      }
-    }
-  }
 }
 
 // ================= Airport route =======================
 
 .route_content {
-  &_header {
-    padding: 1rem;
-    font-size: 0.9rem;
-  }
-  &_info {
-    display: flex;
-    align-items: center;
-    .route_title {
-      &_from {
-        &_name {
-          margin-right: 1rem;
-        }
-      }
-      &_recm {
-        display: flex;
-        align-items: center;
-        &_name {
-          margin: 0 0.5rem 0 1.5rem;
-        }
-        ul {
-          display: flex;
-          align-items: center;
-          li {
-            margin: 0;
-          }
-        }
-      }
-    }
-    .ant-select-selection-item {
-      padding: 0 !important;
-    }
-    .ant-select-arrow {
-      display: none;
-    }
-    a {
-      &:hover {
-        color: $WHITE_COLOR;
-      }
-      margin-left: 0.5rem;
-    }
-  }
-  @media only screen and (max-width: $sm) {
-    &_header {
-      padding: 1rem;
-    }
-    &_info {
-      display: block;
-      .route_title {
-        &_from {
-          &_name {
-            margin-right: 1rem;
-          }
-        }
-        &_recm {
-          margin-top: 1.5rem;
-          &_name {
-            margin: 0 0.5rem 0 0;
-          }
-          ul {
-            li {
-              margin-right: 0.5rem;
-            }
-          }
-        }
-      }
-      ul {
-        display: inline-block;
-        li {
-          margin: 0.5rem 0.5rem 0 0;
-          .tag {
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
 }
 
 .route_btn {
-  position: absolute;
-  z-index: 1;
-  top: -3rem;
-  font-size: 1.5rem;
-  &_prev {
-    right: 3rem;
-    &:hover {
-      color: $BLUE_COLOR;
-    }
-  }
-  &_next {
-    right: 1rem;
-    &:hover {
-      color: $BLUE_COLOR;
-    }
-  }
-  @media only screen and (max-width: $sm) {
-    display: none;
-  }
 }
 
 //================== Analyzer =============================

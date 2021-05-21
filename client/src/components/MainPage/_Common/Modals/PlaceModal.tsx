@@ -27,6 +27,9 @@ const PlaceModalComponent = styled.div`
       color: black;
       text-decoration: underline;
     }
+    .card_title {
+      font-size: 1.7rem;
+    }
   }
   @media only screen and (max-width: ${SM_SIZE}) {
     font-size: 0.8rem;

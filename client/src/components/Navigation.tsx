@@ -5,16 +5,53 @@ import { observer } from "mobx-react";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { mainStore } from "../@store/store";
-import { main_nav_list, MD_SIZE } from "../config";
+import { MAIN_COLOR, main_nav_list, MD_SIZE, WHITE_COLOR } from "../config";
 import { IdxHash } from "../types";
 
-interface NavProps {
-  isSmall: boolean;
-}
+const navCSS = (onSmallNav: boolean) => css`
+  transition: 0.3s all;
+  width: 320px;
+  height: 100vh;
+  font-size: 1.1rem;
+  background-color: ${MAIN_COLOR};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .nav_menu {
+    &_link {
+      padding: 1.5rem;
+      color: ${WHITE_COLOR};
+      background-color: ${MAIN_COLOR};
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+  .offSubMenu {
+    transform: translateY(-100%);
+    height: 0;
+  }
+  .onSubMenu {
+    transform: translateY(0);
+    height: 100%;
+  }
+  @media only screen and (max-width: ${MD_SIZE}) {
+    ${onSmallNav
+      ? `transform:translateX(0); width:200px; position:absolute; top:0; left:0;z-index:1;`
+      : `transform: translateX(-100px);
+    width: 0px;
+    height: 100%;`}
+    .nav_menu {
+      &_link {
+        font-size: 1rem;
+      }
+    }
+  }
+`;
 
 const SubMenuCSS = (menuIdx: number, stopAnimation: number | null) => css`
   overflow: hidden;
-  div {
+  ul {
     ${stopAnimation === menuIdx ? null : "transition: transform 0.3s"};
   }
   a {
@@ -26,17 +63,9 @@ const SubMenuCSS = (menuIdx: number, stopAnimation: number | null) => css`
   }
 `;
 
-const navCSS = (onSmallNav: boolean) => css`
-  transition: 0.3s all;
-  @media only screen and (max-width: ${MD_SIZE}) {
-    ${onSmallNav &&
-    "transform:translateX(0); width:200px; position:absolute; top:0; left:0;z-index:1;"};
-  }
-`;
-
-const Navigation: FC<NavProps> = observer(() => {
+const Navigation: FC = observer(() => {
   const history = useHistory();
-  let navRefs = useRef<HTMLDivElement[]>([]);
+  let navRefs = useRef<HTMLUListElement[]>([]);
 
   // Get the indexHash for slide menu animation
   let activeIdx = 0;
@@ -48,8 +77,6 @@ const Navigation: FC<NavProps> = observer(() => {
     let menuIdxWithActiveIdx = idxHash.find((v) => {
       return v.menuIdx === menuIdx;
     });
-    //where is the ref index for opening sub menu? => activeIndex
-    //idxHash {menuIdx: menu index which have sub menus , activeIndex}
     mainStore.onChangeActiveMenu(menuIdxWithActiveIdx as IdxHash);
     navRefs?.current[menuIdxWithActiveIdx?.activeIdx as number].classList.toggle("onSubMenu");
   }, []);
@@ -84,7 +111,7 @@ const Navigation: FC<NavProps> = observer(() => {
   }, [navRefs]);
 
   return (
-    <nav css={navCSS(mainStore.onSmallNav)} className="nav">
+    <nav css={navCSS(mainStore.onSmallNav)}>
       <ul>
         {main_nav_list.map((list, menuIdx) => {
           return (
@@ -100,8 +127,8 @@ const Navigation: FC<NavProps> = observer(() => {
               )}
               {/* Sub Menu */}
               {list.length > 2 && (
-                <ul css={SubMenuCSS(menuIdx, stopAnimation)} className="nav_sub_menu">
-                  <div
+                <div css={SubMenuCSS(menuIdx, stopAnimation)} className="nav_sub_menu">
+                  <ul
                     className="offSubMenu"
                     ref={(el) => {
                       //el will be pushed sequentially that's why i did ++
@@ -121,8 +148,8 @@ const Navigation: FC<NavProps> = observer(() => {
                         </a>
                       </li>
                     ))}
-                  </div>
-                </ul>
+                  </ul>
+                </div>
               )}
             </li>
           );
