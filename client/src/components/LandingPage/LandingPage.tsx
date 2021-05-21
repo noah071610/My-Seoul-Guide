@@ -2,22 +2,62 @@
 import { css } from "@emotion/react";
 import { FC, useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
-import { page_images } from "../../config";
+import { BLUE_COLOR, MD_SIZE, page_images, WHITE_COLOR } from "../../config";
 import CheckListForm from "./CheckListForm";
 import { checkListStore } from "../../@store/store";
 import { observer } from "mobx-react";
+import styled from "@emotion/styled";
 
-const settings = {
-  dots: false,
-  fade: true,
-  infinite: true,
-  autoplay: true,
-  autoplaySpeed: 20000,
-  slidesToShow: 1,
-  touchMove: false,
-  pauseOnHover: false,
-  pauseOnFocus: false,
-};
+const Landing = styled.div`
+  position: relative;
+  .slick-slider {
+    height: 100vh;
+    overflow: hidden;
+    .landing_bg {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+  .landing_title {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      transition: 0.3s;
+      font-family: "Kaushan Script", cursive;
+      color: ${WHITE_COLOR};
+      text-align: center;
+      user-select: none;
+      background-image: linear-gradient(transparent calc(100% - 3px), ${WHITE_COLOR} 5px);
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+    }
+    button {
+      transition: 0.3s;
+      font-size: 2rem;
+      font-weight: bold;
+      color: ${WHITE_COLOR};
+      &:hover {
+        color: ${BLUE_COLOR};
+      }
+    }
+  }
+  @media only screen and (max-width: ${MD_SIZE}) {
+    .landing_title {
+      h1 {
+        font-size: 2.5rem;
+      }
+      button {
+        font-size: 1.5rem;
+      }
+    }
+  }
+`;
 
 const TitleUp = (onForm: boolean) => css`
   ${onForm ? "transform:translateY(-210%)" : "transform:translateY(-20%)"};
@@ -34,6 +74,18 @@ const imageChanger = (imageURL: string) => css`
   animation: zoomInOut 20s infinite linear alternate forwards;
 `;
 
+const settings = {
+  dots: false,
+  fade: true,
+  infinite: true,
+  autoplay: true,
+  autoplaySpeed: 20000,
+  slidesToShow: 1,
+  touchMove: false,
+  pauseOnHover: false,
+  pauseOnFocus: false,
+};
+
 const LandingPage: FC = observer(() => {
   const formRef = useRef<HTMLDivElement | null>(null);
   const [onForm, setOnForm] = useState(false);
@@ -49,7 +101,7 @@ const LandingPage: FC = observer(() => {
   }, []);
 
   return (
-    <div className="home_landing">
+    <Landing>
       <Slider {...settings}>
         {page_images.map((v, i) => (
           <div className="landing_bg" key={i} css={imageChanger(v)} />
@@ -62,7 +114,7 @@ const LandingPage: FC = observer(() => {
           {onForm ? "Guide Start" : "Go into Seoul"}
         </button>
       </div>
-    </div>
+    </Landing>
   );
 });
 

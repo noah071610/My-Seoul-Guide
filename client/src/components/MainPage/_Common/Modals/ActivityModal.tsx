@@ -2,11 +2,97 @@ import { gql, useQuery } from "@apollo/client";
 import { Divider } from "antd";
 import { observer } from "mobx-react";
 import { useCallback } from "react";
-import { checkListStore, mainStore } from "../../../@store/store";
-import LoadingPage from "../LoadingPage";
-import { TogoRecommedInter } from "../../../types";
-import useSortList from "../../../hooks/useSortList";
-import { NO_IMAGE_URL } from "../../../config";
+import { checkListStore, mainStore } from "../../../../@store/store";
+import LoadingPage from "../../LoadingPage";
+import { TogoRecommedInter } from "../../../../types";
+import useSortList from "../../../../hooks/useSortList";
+import { NO_IMAGE_URL, SM_SIZE } from "../../../../config";
+import styled from "@emotion/styled";
+
+const ActivityModalComponent = styled.div`
+  position: absolute;
+  top: 2.5%;
+  left: 2.5%;
+  margin: 0;
+  width: 95%;
+  height: 95%;
+  overflow-y: auto;
+  .recommend {
+    &_container {
+      display: grid;
+      grid-template-rows: repeat(3, 32%);
+      grid-template-columns: repeat(3, 1fr);
+      height: 80%;
+      gap: 7px;
+    }
+    &_tags {
+      margin: 0.5rem 0;
+      li {
+        margin-right: 0.5rem;
+      }
+    }
+    &_card {
+      cursor: pointer;
+      position: relative;
+      transition: 0.4s all;
+      &:hover {
+        h4 {
+          opacity: 1;
+        }
+        .recommend_img {
+          opacity: 0.3;
+        }
+      }
+      .recommend_img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+      }
+      h4 {
+        opacity: 0;
+        position: absolute;
+        width: 80%;
+        font-size: 0.9rem;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    &_submit {
+      button {
+        font-size: 1.2rem;
+        font-weight: bold;
+        &:hover {
+          color: $BLUE_COLOR;
+        }
+      }
+    }
+    &_checked {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  @media only screen and (max-width: ${SM_SIZE}) {
+    top: 10%;
+    height: 70%;
+    .recommend {
+      &_container {
+        gap: 4px;
+      }
+      &_card {
+        h4 {
+          width: 100%;
+          font-size: 0.5rem;
+        }
+      }
+      &_checked {
+        width: 30%;
+      }
+    }
+  }
+`;
 
 const GET_RECOMMEND = gql`
   query ($mapx: Float!, $mapy: Float!, $isShopping: Boolean!, $isFood: Boolean!) {
@@ -63,9 +149,9 @@ const GET_RECOMMEND = gql`
     }
   }
 `;
-export const HomeModalTogo = observer(() => {
+export const ActivityModal = observer(() => {
   const onClickCard = useCallback((arg: TogoRecommedInter) => {
-    let form = {
+    const form = {
       path: { lat: parseFloat(arg.mapy._text), lng: parseFloat(arg.mapx._text) },
       title: arg.title._text,
       contentid: arg.contentid._text,
@@ -88,9 +174,9 @@ export const HomeModalTogo = observer(() => {
   if (error) return <p className="error">Error :(</p>;
 
   return (
-    <div
+    <ActivityModalComponent
       style={checkListStore.overlayCnt === 1 ? { display: "block" } : { display: "none" }}
-      className="home_recommend_togo_modal home_modal"
+      className="modal"
     >
       <h3>
         Hello, {mainStore.userInfo?.gender} ! We found attraction you may like, Click and add list
@@ -126,13 +212,13 @@ export const HomeModalTogo = observer(() => {
         )}
       </div>
       <Divider />
-      <div className="recommend_submit_btn">
+      <div className="recommend_submit">
         <button onClick={() => checkListStore.discountOverlayCnt()} className="underLineBtn">
           Let`s start guide
         </button>
       </div>
-    </div>
+    </ActivityModalComponent>
   );
 });
 
-export default HomeModalTogo;
+export default ActivityModal;
