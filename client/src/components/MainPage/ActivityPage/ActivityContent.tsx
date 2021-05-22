@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage";
 
 const ActivityContent = observer(() => {
+  const [pageNumber, setPageNumber] = useState(0);
   const [pageType, setPageType] = useState(76);
   const router: any = useRouteMatch();
   useEffect(() => {
