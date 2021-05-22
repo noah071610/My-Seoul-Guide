@@ -25,7 +25,7 @@ const typeDefs = gql`
     contentid: Id
   }
   type Query {
-    ActivityCards(typeNum: Int!): [ActivityObj]
+    ActivityCards(typeNum: Int!, pageNum: Int!): [ActivityObj]
     FoodRecommendCards(isFood: Boolean!): [RecommendObj]
     ShoppingRecommendCards(isShopping: Boolean!): [RecommendObj]
     NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
