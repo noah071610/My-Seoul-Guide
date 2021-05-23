@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GithubFilled, InstagramFilled, MailFilled } from "@ant-design/icons";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";

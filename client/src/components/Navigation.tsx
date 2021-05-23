@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/** @jsxImportSource @emotion/react */
+
 import { css } from "@emotion/react";
 import { observer } from "mobx-react";
 import { FC, useCallback, useEffect, useRef, useState } from "react";

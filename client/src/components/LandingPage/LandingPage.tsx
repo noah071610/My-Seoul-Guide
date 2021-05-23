@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { FC, useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
