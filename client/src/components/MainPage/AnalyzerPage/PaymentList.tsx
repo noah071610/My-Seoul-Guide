@@ -2,7 +2,7 @@ import { FC } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Divider, Input } from "antd";
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useInput from "../../../hooks/useInput";
 import analyzerStore from "../../../@store/analyzerStore";
 import { observer } from "mobx-react";

@@ -1,3 +1,4 @@
+import React from "react";
 import PlaceModal from "./Modals/PlaceModal";
 import MapModal from "./Modals/MapModal";
 import MenuModal from "./Modals/MenuModal";
