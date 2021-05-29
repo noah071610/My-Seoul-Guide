@@ -3,8 +3,17 @@
 
 # <div align=center>My Seoul Guide</div> 
 #### <div align=center>This is for your trip, This is your Seoul.</div>
-<div align=center><img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master"/></div>
-<br/><br/>
+
+<br/>
+
+<div align=center>
+<img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master"/>&nbsp
+  <img src="https://img.shields.io/github/stars/noah071610/My-Seoul-Guide?style=social"/>&nbsp
+  <img src="https://img.shields.io/github/watchers/noah071610/My-Seoul-Guide?style=social"/>&nbsp
+</div>
+
+<br/>
+
 <div align=center>
 <img src="https://img.shields.io/badge/Photoshop-31A8FF?style=flat-square&logo=adobe-photoshop&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp
@@ -22,15 +31,31 @@
 <img src="https://img.shields.io/badge/Google_Map-4285F4?style=flat-square&logo=Google-Maps&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=Babel&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=white"/>&nbsp
-
 </div>
-<br/><br/><br/><br/>
+
+<br/>
+
+<div align=center>
+  <a href="https://github.com/noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/25/25657.png"/></a>&nbsp
+  <a href="https://www.instagram.com/salmonchobab" target="_blank"><img src="https://image.flaticon.com/icons/png/24/1409/1409946.png"/></a>&nbsp
+  <a href="https://velog.io/@noah071610" target="_blank"><img width="24" src="https://api.faviconkit.com/velog.io/144"/></a>&nbsp
+  <a href="noah071610@naver.com"><img width="24" src="https://lh3.googleusercontent.com/proxy/jSPGDpNbX6xztXCy4axN0zvpdCa2wNWkv5TTHCKpfvEGVXeDOZUbpq9GTXFopXYO5z1KDvhPh__zEnUUSZTyy0xuONNtSHSDXIfyGE-T81k"/></a>&nbsp
+  <a href="https://velog.io/@noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp
+</div>
+
+<br/><br/><br/><br/><br/>
 
 ## 🎉 YES, This is your Seoul.
 #### 코로나라는 아픔을 이겨내고 한국에 다시 방문하게될 외국인들을 위한 웹 가이드 어플리케이션.
 <br/>
 
-> 🎤 : 만든 이유가 뭔가요? 
+> 🎤 : 간단하게 자기소개 부탁드려요
+
+신입 프론트엔드 개발자 취업을 희망하는 장현수라고 합니다. 신뢰와 소통을 가장 중요하게 생각합니다.
+
+<br/>
+
+> 🎤 : 마이서울가이드를 만든 이유가 뭔가요? 
 
 호텔매니저와 국가통역안내사자격증을 토대로 관광통역업무를 겸하며 생각보다 많은 외국인들이 잘못된 정보를 접하며 
 놀기도에도 부족한 시간과 돈을 낭비하는것을 자주 보았습니다. 그들의 고충을 덜고 자랑스런 대한민국의 서울을 알리고자 웹 사이트를 개발했습니다.
