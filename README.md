@@ -70,6 +70,7 @@
 - 개발자 : 장현수 (Noah) 외 0명
 - 개발포지션 : 디자인 , 프론트엔드 , 백엔드 , 서버
 - 언어 : English (日本語は間もなくアップデート予定です 🔜)
+- 반응형 웹 사이트
 
 <br/><br/>
 
@@ -419,15 +420,11 @@ server.listen().then(({ url }) => {
 ### 5. HOME 이외 메뉴는 Accommodation / Airport / Attractions / Analyzer 가 있습니다. 
 - 지정 숙박지역은 Accommodation 메뉴에서 확인 및 변경 가능합니다.
 
-<br/>
-
 <img src="https://user-images.githubusercontent.com/74864925/120072235-c623dd80-c0cd-11eb-8e7a-251de91926e8.gif"/>
 
 <br/>
 
 - 공항에서 숙박지역까지의 경로를 Airport 메뉴에서 탐색합니다.
-
-<br/>
 
 <img src="https://user-images.githubusercontent.com/74864925/120072242-cb812800-c0cd-11eb-87de-404af622344c.gif"/>
 
@@ -496,8 +493,6 @@ export default AcmAndRoutePage;
 ```
 
 - 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
-
-<br/>
 
 <img src="https://user-images.githubusercontent.com/74864925/120071985-7e508680-c0cc-11eb-854f-910cfcdfe239.gif"/>
 
