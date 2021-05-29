@@ -33,18 +33,24 @@
 호텔매니저와 국가통역안내사를 토대로 관광통역업무를 겸하며 많은 외국인들이 생각보다 많은 외국인들이 잘못된 정보를 접하는걸 보게 되었습니다.
 놀기도 부족한 시간과 아까운 돈을 낭비하는 그들의 고충을 덜고 자랑스런 대한민국의 서울을 알리고자 웹 사이트를 개발했습니다.
 
-<br/><br/><br/>
+<br/><br/>
 
 ## 🛫 Attention please, We will arrive in Incheon international Airport.
 #### 프로젝트 기본 정보
+<br/>
+
 - 제작기간 : 2021/4 ~ 2021/5
 - 개발자 : 장현수 (Noah) 외 0명
 - 개발포지션 : 디자인 , 프론트엔드 , 백엔드 , 서버
-- 언어 : English , (日本語のバージョンは間もなくアップデート予定です 🇯🇵🔜)
-<br/><br/><br/>
+- 언어 : English (日本語は間もなくアップデート予定です 🔜)
+
+<br/><br/>
 
 ## 🚝 Let's go into Center of Seoul.
-#### 1. 이용자의 취향을 사전에 파악합니다.
+#### 마이 서울 가이드의 기본적인 흐름에 대해서 리뷰해드리겠습니다.
+<br/>
+
+### 1. 이용자의 취향을 사전에 파악합니다.
 <img src="https://user-images.githubusercontent.com/74864925/120032343-0420f300-c035-11eb-882c-8513dc22b996.gif"/>
 
 ```javascript
@@ -80,9 +86,12 @@ const checkListStore = observable<CheckListStore>({
   }),
 ```
 ---
-#### 2. 선택한 취향에 맞춘 숙박지역 및 놀거리를 추천합니다.
-- 이용자의 취향을 분석해 점수를 매긴후 숙박지역 매칭순위 상위2개의 가져옵니다.
-- 놀거리추천을 위해 몇가지 항목은 따로 때서 사전에 분류합니다.
+
+<br/>
+
+### 2. 취향에 맞춘 숙박지역 및 명소를 추천합니다.
+- 이용자의 취향을 데이터를 토대로 분석해 점수를 매긴후 숙박지역 매칭순위 상위2개의 가져옵니다.
+- 여기서 추천 명소를 위해 몇개의 항목을 저장하여 빼두는 작업을 거칩니다.
 
 ```javascript
 📁store.ts
@@ -92,7 +101,7 @@ const checkListStore = observable<CheckListStore>({
     const recommendsArr: string[] = [];
     //유저에게 받은 정보를 저장합니다.
     let userInfo = {
-      //클라이언트에서 무조건 체크하게 걸러주기때문에 typeScript에 !를 이용했습니다.
+      //클라이언트에서 걸러주기때문에 typeScript에 !를 이용했습니다.
       gender: checkListStore.gender!,
       age: checkListStore.age!,
       party: checkListStore.party!,
@@ -154,7 +163,7 @@ const checkListStore = observable<CheckListStore>({
 
     //===== special Key ======
     //특수키로 이용자의 항목에 이 키가 있으면 rankPlace에서 순위 변경 작업이 일어납니다.
-    //명동은 서울토박이들은 추천하지않습니다. 대체제도 많고요  Native Recommendation 이라면 명동은 제외시켜버립니다.
+    //찐서울인들은 명동을 추천하지않습니다. 대체제도 많고요.  Native Recommendation 이라면 명동은 제외시켜버립니다.
     if (checkListStore.purpose.includes("Native Recommendation")) {
       rankPlace = rankPlace.filter((v) => v.id !== 1);
     }
@@ -173,9 +182,12 @@ const checkListStore = observable<CheckListStore>({
     //=================^^ Recommend Stay finder done. ^^=====================
 ```
 ---
-#### 3. 웹 어플 시작전 이용자에게 숙박지역 및 놀거리를 추천합니다.
-- 모달은 overlay를 클릭시 4부터 시작하는 카운트를 차감해 카운트가 0이 되면 사라지고 카운트가 되지 않습니다.
-- 추천 숙박지역 및 놀거리 선택 시 메인페이지의 구글맵에 자동 반영됩니다.
+
+<br/>
+
+### 3. 사용법 안내 및 숙박지역 및 놀거리를 추천합니다.
+- 모달은 overlay를 클릭시 사라지며 시작전 딱 한번만 나옵니다.
+- 추천 숙박지역 및 놀거리 선택 시 메인페이지 맵에 자동 반영됩니다.
 ```javascript
 📁server/db.ts
 const getActivities = async (typeNum: number, pageNum: number) => {
@@ -286,10 +298,13 @@ export const ActivityModal = observer(() => {
       
 ```
 ---
-#### 3. 선택한 추천숙박지역과 추천놀거리에 기반해 Home 안 구글맵 api에 OverlayView를 표시합니다.
-- 지정 숙박지역으로 부터 선택 놀거리까지의 경로를 탐색할 수 있습니다.
-- 지정 숙박지역은 Accommodation 메뉴에서 변경 가능합니다 *추천하진않지만 airport 메뉴에서도 변경 가능합니다.
-- 지정 놀거리는 삭제 가능하며, Attractions 메뉴에서 추가 가능합니다 (이메뉴는 초기의 추천기반이아닌 한국관광공사의 인기+카테고리 기반입니다.)
+
+<br/>
+
+### 4. HOME에는 지정 숙소 및 가고싶은 명소의 내용이 담겨있습니다.
+- 지정 숙박지역으로 부터 선택 명소까지의 경로를 탐색할 수 있습니다.
+- 지정 숙박지역은 Accommodation 메뉴에서 변경 가능합니다.
+- 지정 명소는 삭제 가능하며, Attractions 메뉴에서 추가 가능합니다 (Attractions 메뉴는 초기의 추천기반이아닌 한국관광공사의 인기+카테고리 기반입니다.)
 ```jsx
 📁Home.tsx
 
@@ -299,6 +314,7 @@ export const ActivityModal = observer(() => {
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={
+              // 숙박지역이 정해져있지 않다면 서울의 정중앙을 center 좌표로 삼습니다.
                 mainStore.place?.stationPath || { lat: 37.549687466128496, lng: 126.9809660539474 }
               }
               zoom={12}
@@ -334,16 +350,20 @@ export const ActivityModal = observer(() => {
                   );
                 })}
               {toPlacePath && (
+                // Direction 부분은 코드량이 길어져서 따로 별개의 컴포넌트를 분리해두었습니다.
                 <Directions origin={mainStore.place?.stationPath} destination={toPlacePath} />
               )}
             </GoogleMap>
           </LoadScript>
           
 ```
+---
 
-#### 4. 메뉴는 Accommodation / Airport / Attractions / Analyzer 가 있습니다. 
+<br/>
+
+### 5. HOME 이외 메뉴는 Accommodation / Airport / Attractions / Analyzer 가 있습니다. 
 - 지정 숙박지역은 Accommodation 메뉴에서 변경 가능합니다.
-- 공항에서 숙박지역까지의 경로를 Airport 메뉴에서 탐색합니다. (숙박지역 변경도 가능합니다.)
+- 공항에서 숙박지역까지의 경로를 Airport 메뉴에서 탐색합니다.
 - 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
 - 여행장부 및 소비계획은 Analayzer 메뉴에서 가능합니다.
 ```javascript
@@ -351,6 +371,7 @@ export const ActivityModal = observer(() => {
 
 const AcmAndRoutePage: FC = observer(() => {
   const { path } = useRouteMatch();
+  // useRouteMatch 로 현재가 Accommodation 메뉴인지 Airport 메뉴인지 파악합니다.
   let isAirportRoutePath = path.slice(1) === "airport_route";
   const [center, setCenter] = useState<PathObj>({
     lat: 37.517146640932296,
@@ -449,6 +470,7 @@ const ActivityContent = () => {
       })}
       <Pagenation>
         {pageNumber === 1 ? (
+        //페이지장수가 첫번째면 더이상 이전으로 갈 곳이 없기때문에 이전페이지버튼을 막아둡니다.
           <span className="btn-none">
             <DoubleLeftOutlined />
             Previous Page
@@ -470,7 +492,10 @@ const ActivityContent = () => {
 
 export default ActivityContent;
 ```
-#### Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
+
+<br/>
+
+### Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
 - 먼저 예산을 입력하고 지출을 기록합니다.
 - 파이차트를 확인하며 지출비율, 남은예산 등을 파악합니다.
 ```javascript
@@ -523,11 +548,11 @@ const LedgerModal = observer(
 ```
 <br/><br/><br/>
 
-## 🎯 Why pronunciation of Seoul is similar to Soul
+## 🎯 Why pronunciation of Seoul is similar to Soul?
 
 <br/>
 
-> 🎤 : 개발과정 중 힘들었던 부분은?
+> 🎤 : 개발과정 중 힘들었던 부분과 피드백은?
 
 <br/>
 
@@ -538,6 +563,8 @@ const LedgerModal = observer(
 - 네이버맵과 카카오맵, 구글맵 선택 과정중 많은 오류가 있었고 선택이 힘들었습니다. 결국 영어지원이 되는 구글맵을 선택했습니다.
 
 - API 요청은 돈이다 라는것을 몸소 체험했습니다. 요청 한도초과되서 당황했던 기억이 납니다.
+
+![image](https://user-images.githubusercontent.com/74864925/120052094-8376ec80-c05e-11eb-954c-ff3fda715a51.png)
 
 - GraphQL과 Apollo의 기본적인 것에 자주막혀 처음부터 차근차근 다시 공부했습니다.
 
@@ -561,15 +588,25 @@ const LedgerModal = observer(
 
 <br/>
 
+> 🎤 : 업데이트 상황을 알려주세요
+
+<br/>
+
 | Date | Version | Update |
 | ------ | ------ | ------ |
 | 2020/05/29 | v1.0 | Final Update for first deployment through AWS |
+
+<br/>
+
+> 🎤 : 마지막으로 하고 싶은말은?
+
+<br/>
 
 피드백은 항상 저를 성장시키게 합니다.
 
 궁금한게 있으시면 noah07160@naver.com 으로 언제든지 편하게 연락주세요.
 
-긴글 읽어주셔서 감사합니다.
+지금까지 신뢰를 주는 장현수였습니다. 긴글 읽어주셔서 감사합니다.
 
 <br/><br/><br/>
 
