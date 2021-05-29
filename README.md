@@ -5,7 +5,9 @@
 #### <div align=center>This is for your trip, This is your Seoul.</div>
 <div align=center><img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master"/></div>
 <br/><br/>
-<div align=center><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp
+<div align=center>
+<img src="https://img.shields.io/badge/Photoshop-31A8FF?style=flat-square&logo=adobe-photoshop&logoColor=white"/>&nbsp
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=Sass&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>&nbsp
@@ -30,8 +32,8 @@
 
 > 🎤 : 만든 이유가 뭔가요? 
 
-호텔매니저와 국가통역안내사를 토대로 관광통역업무를 겸하며 많은 외국인들이 생각보다 많은 외국인들이 잘못된 정보를 접하는걸 보게 되었습니다.
-놀기도 부족한 시간과 아까운 돈을 낭비하는 그들의 고충을 덜고 자랑스런 대한민국의 서울을 알리고자 웹 사이트를 개발했습니다.
+호텔매니저와 국가통역안내사자격증을 토대로 관광통역업무를 겸하며 생각보다 많은 외국인들이 잘못된 정보를 접하며 
+놀기도에도 부족한 시간과 돈을 낭비하는것을 자주 보았습니다. 그들의 고충을 덜고 자랑스런 대한민국의 서울을 알리고자 웹 사이트를 개발했습니다.
 
 <br/><br/>
 
@@ -51,7 +53,7 @@
 <br/>
 
 ### 1. 이용자의 취향을 사전에 파악합니다.
-<img src="https://user-images.githubusercontent.com/74864925/120032343-0420f300-c035-11eb-882c-8513dc22b996.gif"/>
+<img src="https://user-images.githubusercontent.com/74864925/120073070-caea9080-c0d1-11eb-828c-3afaf0e8fbc8.png"/>
 
 ```javascript
 📁store.ts
@@ -89,9 +91,9 @@ const checkListStore = observable<CheckListStore>({
 
 <br/>
 
-### 2. 취향에 맞춘 숙박지역 및 명소를 추천합니다.
-- 이용자의 취향을 데이터를 토대로 분석해 점수를 매긴후 숙박지역 매칭순위 상위2개의 가져옵니다.
-- 여기서 추천 명소를 위해 몇개의 항목을 저장하여 빼두는 작업을 거칩니다.
+### 2. 취향에 맞춘 숙박지역 및 명소 데이터를 가져옵니다.
+- 이용자의 취향을 내장된 데이터를 토대로 분석해 점수를 매긴후 숙박지역 매칭순위 상위2개의 가져옵니다.
+- 여기서 추천 명소를 위해 몇개의 항목을 따로 빼두는 작업을 거칩니다.
 
 ```javascript
 📁store.ts
@@ -140,7 +142,7 @@ const checkListStore = observable<CheckListStore>({
 
     //=========== Recommend Stay finder start =================
 
-    // 해시맵과 그 메쏘드를 이용한 알고리즘입니다. 점수산출 근거는 기존점수 나누기 이용자의 항목선택수 에 따릅니다.
+    // 해시맵과 그 메쏘드를 이용한 알고리즘입니다. 점수산출은 기존점수 나누기 이용자의 항목선택수 에 따릅니다.
     for (let i = 0; i < userPick.length; i++) {
       for (let j = 0; j < places.length; j++) {
         places[j].valueList.forEach((place) => {
@@ -162,12 +164,13 @@ const checkListStore = observable<CheckListStore>({
     let rankPlace = Array.from(map, ([id, cnt]) => ({ id, cnt })).sort((a, b) => b.cnt - a.cnt);
 
     //===== special Key ======
-    //특수키로 이용자의 항목에 이 키가 있으면 rankPlace에서 순위 변경 작업이 일어납니다.
-    //찐서울인들은 명동을 추천하지않습니다. 대체제도 많고요.  Native Recommendation 이라면 명동은 제외시켜버립니다.
+    //이용자의 항목에 특수키가 있으면 rankPlace에서 순위 변경 작업이 일어납니다.
+    //서울인들은 명동을 추천하지않습니다. 대체제도 많고요.  Native Recommendation 이라면 명동은 제외시켜버립니다.
+    //서울 여러분은 명동을 추천하시나요?? 이견이 있으시면 언제든지 피드백 주세요.
     if (checkListStore.purpose.includes("Native Recommendation")) {
       rankPlace = rankPlace.filter((v) => v.id !== 1);
     }
-    //강남은 성형에 성지입니다. 성형하러왔는데 강남에서 숙소 안잡았다가 고생하는 외국인들 정말 많이 봤습니다. 순위를 맨위로 올립니다.
+    //강남은 성형에 성지입니다. 성형을 원한다면 강남의 순위를 맨위로 올립니다.
     if (checkListStore.purpose.includes("Plastic surgery")) {
       rankPlace.unshift(rankPlace.splice(rankPlace.map((v) => v.id).indexOf(3), 1)[0]);
     }
@@ -186,53 +189,13 @@ const checkListStore = observable<CheckListStore>({
 <br/>
 
 ### 3. 사용법 안내 및 숙박지역 및 놀거리를 추천합니다.
-- 모달은 overlay를 클릭시 사라지며 시작전 딱 한번만 나옵니다.
-- 추천 숙박지역 및 놀거리 선택 시 메인페이지 맵에 자동 반영됩니다.
+- 모달은 overlay를 클릭시 사라지며 첫 시작시 한번만 나옵니다.
+- 추천 숙박지역을 선택합니다. 이는 HOME 메뉴에 반영되고 Accomodation 메뉴에서 세부정보를 확인 할 수 있습니다.
+
+<img src="https://user-images.githubusercontent.com/74864925/120071358-de91f900-c0c9-11eb-9785-232206427dec.gif"/>
+
+
 ```javascript
-📁server/db.ts
-const getActivities = async (typeNum: number, pageNum: number) => {
-  const contents = await fetch(
-    `http://api.visitkorea.or.kr/openapi/service/rest/EngService/
-    areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}....`
-  )
-    .then((res) => res.text())
-    .then((data) => {
-      // XML을 JSON으로 바꿔줍니다. xml2json 라이브러리를 사용했습니다.
-      let contents = JSON.parse(convert.xml2json(data, { compact: true })).response.body.items;
-      return contents;
-    });
-  // 명소에대한 설명은 content id가 필요해 다시 쿼리를 보내는 것 말고는 방법이 없었습니다.
-  for (let i = 0; i < contents.item.length; i++) {
-    const getOneOverview = await fetch(
-      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon.....
-    )
-      ...
-      
-    contents.item[i].overview = getOneOverview;
-  }
-  return contents.item;
-};
-
-==================================================================================================
-📁server
-
-  ...
-  
-  type Query {
-    ActivityCards(typeNum: Int!, pageNum: Int!): [ActivityObj]
-    FoodRecommendCards(isFood: Boolean!): [RecommendObj]
-    ShoppingRecommendCards(isShopping: Boolean!): [RecommendObj]
-    NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
-  }
-`;
-
-//서버에 그래프큐엘을 이용합니다.
-const server = new ApolloServer({ typeDefs, resolvers });
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`);
-});
-
-==================================================================================================
 📁PlaceModal.tsx
 
 <ul className="placeTags">
@@ -243,8 +206,16 @@ server.listen().then(({ url }) => {
     </li>
   ))}
 </ul>
+```
+<br/>
 
-==================================================================================================
+- 추천 명소를 선택합니다. HOME 메뉴에 반영되고 삭제가능하며 Attractions 메뉴에서 추가 가능합니다.
+
+<img src="https://user-images.githubusercontent.com/74864925/120071418-47797100-c0ca-11eb-9e36-60a9a4c38e09.gif"/>
+
+<br/>
+
+```javascript
 📁ActivityModal.tsx
 
 export const ActivityModal = observer(() => {
@@ -297,6 +268,58 @@ export const ActivityModal = observer(() => {
       ...
       
 ```
+
+<br/>
+
+- 추천 숙박 지역은 서버안 데이터를 통해서 분석하며, 추천 명소는 GraphQL과 공공데이터를 이용해 분석합니다.
+
+<br/>
+
+```javascript
+📁server/db.ts
+const getActivities = async (typeNum: number, pageNum: number) => {
+  const contents = await fetch(
+    `http://api.visitkorea.or.kr/openapi/service/rest/EngService/
+    areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}....`
+  )
+    .then((res) => res.text())
+    .then((data) => {
+      // XML을 JSON으로 바꿔줍니다. xml2json 라이브러리를 사용했습니다.
+      let contents = JSON.parse(convert.xml2json(data, { compact: true })).response.body.items;
+      return contents;
+    });
+  // 명소에대한 설명은 content id가 필요해 다시 요청을 보내는 것 말고는 방법이 없었습니다.
+  for (let i = 0; i < contents.item.length; i++) {
+    const getOneOverview = await fetch(
+      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon.....
+    )
+      ...
+      
+    contents.item[i].overview = getOneOverview;
+  }
+  return contents.item;
+};
+
+📁server
+
+  ...
+  
+  type Query {
+    ActivityCards(typeNum: Int!, pageNum: Int!): [ActivityObj]
+    FoodRecommendCards(isFood: Boolean!): [RecommendObj]
+    ShoppingRecommendCards(isShopping: Boolean!): [RecommendObj]
+    NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
+  }
+`;
+
+//서버에 그래프큐엘을 이용합니다.
+const server = new ApolloServer({ typeDefs, resolvers });
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`);
+});
+
+```
+
 ---
 
 <br/>
@@ -305,6 +328,13 @@ export const ActivityModal = observer(() => {
 - 지정 숙박지역으로 부터 선택 명소까지의 경로를 탐색할 수 있습니다.
 - 지정 숙박지역은 Accommodation 메뉴에서 변경 가능합니다.
 - 지정 명소는 삭제 가능하며, Attractions 메뉴에서 추가 가능합니다 (Attractions 메뉴는 초기의 추천기반이아닌 한국관광공사의 인기+카테고리 기반입니다.)
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74864925/120071700-6f1d0900-c0cb-11eb-908a-7b06207d4910.gif"/>
+
+<br/>
+
 ```jsx
 📁Home.tsx
 
@@ -362,10 +392,22 @@ export const ActivityModal = observer(() => {
 <br/>
 
 ### 5. HOME 이외 메뉴는 Accommodation / Airport / Attractions / Analyzer 가 있습니다. 
-- 지정 숙박지역은 Accommodation 메뉴에서 변경 가능합니다.
+- 지정 숙박지역은 Accommodation 메뉴에서 확인 및 변경 가능합니다.
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74864925/120072235-c623dd80-c0cd-11eb-8e7a-251de91926e8.gif"/>
+
+<br/>
+
 - 공항에서 숙박지역까지의 경로를 Airport 메뉴에서 탐색합니다.
-- 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
-- 여행장부 및 소비계획은 Analayzer 메뉴에서 가능합니다.
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74864925/120072242-cb812800-c0cd-11eb-87de-404af622344c.gif"/>
+
+<br/>
+
 ```javascript
 📁MapPage.tsx
 
@@ -426,8 +468,17 @@ const AcmAndRoutePage: FC = observer(() => {
 
 export default AcmAndRoutePage;
 
+```
 
-==================================================================================================
+- 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74864925/120071985-7e508680-c0cc-11eb-854f-910cfcdfe239.gif"/>
+
+<br/>
+
+```javascript
 📁ActivityContent.tsx
 
 const ActivityContent = () => {
@@ -556,7 +607,7 @@ const LedgerModal = observer(
 
 <br/>
 
-- Google Map 관련 React 라이브러리가 당황스러웠습니다... 지금봐도 헷갈리네요.
+- Google Map 관련 React 라이브러리가 정말 헷갈리고 당황스러웠습니다. 곤욕을 치뤘지만 라이브러리 선정 기준이나 방법을 몸소 익혔습니다.
 
 ![image](https://user-images.githubusercontent.com/74864925/120048788-0a25cc80-c053-11eb-8749-f398b4a68d6f.png)
 
@@ -572,7 +623,7 @@ const LedgerModal = observer(
 
 - 생각보다 Babel 과 Webpack의 원리에 대해서 약하다는것을 깨닫고 보강했습니다.
 
-- 메뉴에 세세한 부분에도 심혈을 기울이다보니 상당히 로직이 복잡하고 시간도 오래 걸리게 되었습니다. 사실 그렇게 중요하진 않은데...
+- 메뉴(navigation)에 세세한 부분에도 심혈을 기울이다보니 상당히 로직이 복잡하고 시간도 오래 걸리게 되었습니다. 중요성을 잘 따져 개발기간을 계획적으로 나누는법을 익혔습니다.
 
 - 최대한 컴포넌트의 재사용성을 위해서 힘썼지만 복잡한 로직에 가독성도 떨어지게 되었습니다. 그냥 컴포넌트 하나 더 만드는게 여러모로 나을듯 한데 욕심 부린것 같습니다.
 
@@ -581,6 +632,8 @@ const LedgerModal = observer(
 ![image](https://cdn-images-1.medium.com/max/1000/1*yBxZo9LNEjRaL7eKUBqRSA.png)
 
 - 변수명 컴포넌트명 클래스명 작명법을 획기적으로 바꿔야될거 같습니다. 또한 협업을 한다면 무조건 그 프로젝트의 컨벤션을 지켜야겠다 다짐했습니다.
+
+- 테스트를 피차일반 뒤로 미루며 생긴 예기치않은 오류에 많이 시간을 뺏겼습니다. 테스트 주도 개발 (TDD) 의 필요성을 느꼈습니다.
 
 <br/><br/><br/>
 
@@ -604,7 +657,7 @@ const LedgerModal = observer(
 
 피드백은 항상 저를 성장시키게 합니다.
 
-궁금한게 있으시면 noah07160@naver.com 으로 언제든지 편하게 연락주세요.
+궁금한게 있으시면 noah071610@naver.com 으로 언제든지 편하게 연락주세요.
 
 지금까지 신뢰를 주는 장현수였습니다. 긴글 읽어주셔서 감사합니다.
 
