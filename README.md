@@ -1,20 +1,26 @@
 
 <div align=center><a href="https://github.com/noah071610/My-Seoul-Guide"><img src="https://media.vlpt.us/images/noah071610/post/bcf1258c-eac3-4972-a17d-874565c90141/image.png"/></a></div>
 
-# <div align=center>My Seoul Guide</div>
+# <div align=center>My Seoul Guide</div> 
 #### <div align=center>This is for your trip, This is your Seoul.</div>
 <div align=center><img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master"/></div>
-<br/>
+<br/><br/>
 <div align=center><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=Sass&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>&nbsp
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>&nbsp <br/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/MobX-FF9955?style=flat-square&logo=MobX&logoColor=white"/>&nbsp 
 <img src="https://img.shields.io/badge/Emotion-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>&nbsp
+<img src="https://img.shields.io/badge/Antd-0170FE?style=flat-square&logo=Ant-design&logoColor=white"/>&nbsp <br/>
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node-dot-js&logoColor=white"/>&nbsp
 <img src="https://img.shields.io/badge/GraphQL-E434AA?style=flat-square&logo=GraphQL&logoColor=white"/>&nbsp
+<img src="https://img.shields.io/badge/Apollo-311C87?style=flat-square&logo=Apollo-GraphQL&logoColor=white"/>&nbsp
+<img src="https://img.shields.io/badge/Google_Map-4285F4?style=flat-square&logo=Google-Maps&logoColor=white"/>&nbsp
+<img src="https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=Babel&logoColor=white"/>&nbsp
+<img src="https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=white"/>&nbsp
+
 </div>
 <br/><br/><br/><br/>
 
@@ -27,12 +33,10 @@
 호텔매니저와 국가통역안내사를 토대로 관광통역업무를 겸하며 많은 외국인들이 생각보다 많은 외국인들이 잘못된 정보를 접하는걸 보게 되었습니다.
 놀기도 부족한 시간과 아까운 돈을 낭비하는 그들의 고충을 덜고 자랑스런 대한민국의 서울을 알리고자 웹 사이트를 개발했습니다.
 
-
-> 🎤 : 웹은 영문인데 Read Me 는 한국어군요?
-
-한국에서 개발자로 취업을 희망하며 포트폴리오를 작성중이라 한국어로 작성했습니다. 추후 이용자용 안내서는 영문 또는 일본어로 제작 할 생각입니다.
 <br/><br/><br/>
+
 ## 🛫 Attention please, We will arrive in Incheon international Airport.
+#### 프로젝트 기본 정보
 - 제작기간 : 2021/4 ~ 2021/5
 - 개발자 : 장현수 (Noah) 외 0명
 - 개발포지션 : 디자인 , 프론트엔드 , 백엔드 , 서버
@@ -334,14 +338,6 @@ export const ActivityModal = observer(() => {
               )}
             </GoogleMap>
           </LoadScript>
-          <div
-            style={checkListStore.overlayCnt === 0 ? { display: "none" } : { display: "block" }}
-            onClick={() => checkListStore.discountOverlayCnt()}
-            className="overlay"
-          />
-          <HomeModal />
-          
-          ...
           
 ```
 
@@ -474,3 +470,107 @@ const ActivityContent = () => {
 
 export default ActivityContent;
 ```
+#### Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
+- 먼저 예산을 입력하고 지출을 기록합니다.
+- 파이차트를 확인하며 지출비율, 남은예산 등을 파악합니다.
+```javascript
+📁LedgerModal.tsx
+
+const LedgerModal = observer(
+  ({ currentExchage, isModalVisible, setIsModalVisible }: AnalyzerContentProps) => {
+    const [memo, onChangeMemo, setMemo] = useInput("");
+    const [payment, onChangePayment, setPayment] = useInput(null);
+    const [select, setSelect] = useState("");
+    const onChangeSelect = useCallback((value: string) => {
+      setSelect(value);
+    }, []);
+
+    const onSubmit = useCallback(() => {
+      //입력을 안한 부분이 있다면 요청을 취소합니다.
+      if (!payment || !select) {
+        message.error("Please fill contents up");
+        return;
+      }
+      // 날짜를 위한 데이터를 만듭니다.
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = ("0" + (1 + date.getMonth())).slice(-2);
+      const day = ("0" + date.getDate()).slice(-2);
+      let form = {
+        date: year + "/" + month + "/" + day,
+        type: select,
+        // 환율정보를 제공하는 API를 이용하여 USD 를 KRW로 변환합니다.
+        payment: useExchageClac(payment, currentExchage),
+        memo,
+      };
+      // 데이터를 store에 전달합니다.
+      analyzerStore.addPaymentList(form);
+      setMemo("");
+      setPayment("");
+    }, [currentExchage, memo, payment, select, setMemo, setPayment]);
+
+    return (
+      <LedgerModalComponent
+        title="Ledger"
+        visible={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
+        footer={false}
+        className="analyzer_input"
+      >
+      
+      ....
+      
+```
+<br/><br/><br/>
+
+## 🎯 Why pronunciation of Seoul is similar to Soul
+
+<br/>
+
+> 🎤 : 개발과정 중 힘들었던 부분은?
+
+<br/>
+
+- Google Map 관련 React 라이브러리가 당황스러웠습니다... 지금봐도 헷갈리네요.
+
+![image](https://user-images.githubusercontent.com/74864925/120048788-0a25cc80-c053-11eb-8749-f398b4a68d6f.png)
+
+- 네이버맵과 카카오맵, 구글맵 선택 과정중 많은 오류가 있었고 선택이 힘들었습니다. 결국 영어지원이 되는 구글맵을 선택했습니다.
+
+- API 요청은 돈이다 라는것을 몸소 체험했습니다. 요청 한도초과되서 당황했던 기억이 납니다.
+
+- GraphQL과 Apollo의 기본적인 것에 자주막혀 처음부터 차근차근 다시 공부했습니다.
+
+- Emotion 라이브러리로 인해 CRA에 기본설정을 해체하는데 시간이 걸렸고 대신 CRA의 장단점및 craco 사용법을 알게 되었습니다.
+
+- 생각보다 Babel 과 Webpack의 원리에 대해서 약하다는것을 깨닫고 보강했습니다.
+
+- 메뉴에 세세한 부분에도 심혈을 기울이다보니 상당히 로직이 복잡하고 시간도 오래 걸리게 되었습니다. 사실 그렇게 중요하진 않은데...
+
+- 최대한 컴포넌트의 재사용성을 위해서 힘썼지만 복잡한 로직에 가독성도 떨어지게 되었습니다. 그냥 컴포넌트 하나 더 만드는게 여러모로 나을듯 한데 욕심 부린것 같습니다.
+
+- CSS를 사용할건지 Styled-components 를 사용할건지 선택해야되는데 짬뽕해서 쓰니 효율성이 떨어지게 되었습니다.
+
+![image](https://cdn-images-1.medium.com/max/1000/1*yBxZo9LNEjRaL7eKUBqRSA.png)
+
+- 변수명 컴포넌트명 클래스명 작명법을 획기적으로 바꿔야될거 같습니다. 또한 협업을 한다면 무조건 그 프로젝트의 컨벤션을 지켜야겠다 다짐했습니다.
+
+<br/><br/><br/>
+
+## 🌇 Before you go back your place from Seoul.
+
+<br/>
+
+| Date | Version | Update |
+| ------ | ------ | ------ |
+| 2020/05/29 | v1.0 | Final Update for first deployment through AWS |
+
+피드백은 항상 저를 성장시키게 합니다.
+
+궁금한게 있으시면 noah07160@naver.com 으로 언제든지 편하게 연락주세요.
+
+긴글 읽어주셔서 감사합니다.
+
+<br/><br/><br/>
+
+##
