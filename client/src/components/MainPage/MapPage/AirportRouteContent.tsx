@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import { observer } from "mobx-react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
-import { useCallback } from "react";
+import React,{ useCallback } from "react";
 import { BLUE_COLOR, placeList, SM_SIZE, WHITE_COLOR } from "../../../config";
 import { Select } from "antd";
 import { mainStore } from "../../../@store/store";

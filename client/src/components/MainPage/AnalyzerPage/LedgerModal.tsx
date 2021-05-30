@@ -69,10 +69,12 @@ const LedgerModal = observer(
     }, []);
 
     const onSubmit = useCallback(() => {
+      //입력을 안한 부분이 있다면 요청을 취소합니다.
       if (!payment || !select) {
         message.error("Please fill contents up");
         return;
       }
+      // 날짜를 위한 데이터를 만듭니다.
       const date = new Date();
       const year = date.getFullYear();
       const month = ("0" + (1 + date.getMonth())).slice(-2);
@@ -80,9 +82,11 @@ const LedgerModal = observer(
       let form = {
         date: year + "/" + month + "/" + day,
         type: select,
+        // 환율정보를 제공하는 API를 이용하여 USD 를 KRW로 변환합니다.
         payment: useExchageClac(payment, currentExchage),
         memo,
       };
+      // 데이터를 store에 전달합니다.
       analyzerStore.addPaymentList(form);
       setMemo("");
       setPayment("");

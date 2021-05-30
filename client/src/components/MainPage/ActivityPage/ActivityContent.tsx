@@ -73,6 +73,7 @@ const ActivityContent = () => {
   const [pageType, setPageType] = useState<number>(76);
   const router: any = useRouteMatch();
   useEffect(() => {
+    //router.params의 값에 따라 보여주는 데이터를 변경합니다.
     const category = router.params.category;
     if (category === "popular") {
       setPageType(85);

@@ -151,6 +151,7 @@ const GET_RECOMMEND = gql`
 `;
 export const ActivityModal = observer(() => {
   const onClickCard = useCallback((arg: TogoRecommedInter) => {
+    //추천 놀거리를 클릭하면 메인페이지의 구글맵에 추천 루트에 반영되게 합니다.
     const form = {
       path: { lat: parseFloat(arg.mapy._text), lng: parseFloat(arg.mapx._text) },
       title: arg.title._text,

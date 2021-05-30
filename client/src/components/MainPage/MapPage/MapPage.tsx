@@ -11,7 +11,7 @@ import AirportRouteCards from "./AirportRouteContent";
 import { PathObj } from "../../../types";
 import { mainStore } from "../../../@store/store";
 
-const MainPage: FC = observer(() => {
+const AcmAndRoutePage: FC = observer(() => {
   const { path } = useRouteMatch();
   let isAirportRoutePath = path.slice(1) === "airport_route";
   const [center, setCenter] = useState<PathObj>({
@@ -65,4 +65,4 @@ const MainPage: FC = observer(() => {
   );
 });
 
-export default MainPage;
+export default AcmAndRoutePage;
