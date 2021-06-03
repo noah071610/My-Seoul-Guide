@@ -11,6 +11,10 @@ import LedgerModal from "./LedgerModal";
 import styled from "@emotion/styled";
 import { SM_SIZE } from "../../../config";
 
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+axios.defaults.baseURL = "http://api.exchangeratesapi.io";
+axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
+
 const Budget = styled.div`
   display: flex;
   padding: 1rem;
