@@ -1,5 +1,7 @@
 import { resolvers } from "./resolvers";
 import { ApolloServer, gql } from "apollo-server";
+import cors from "cors";
+import express from "express";
 
 const typeDefs = gql`
   type Content {
@@ -32,7 +34,17 @@ const typeDefs = gql`
   }
 `;
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  cors: {
+    origin: "https://myseoulguide.site",
+  },
+});
+
+const app = express();
+app.use(cors({ credentials: true }));
+
 server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);
 });
