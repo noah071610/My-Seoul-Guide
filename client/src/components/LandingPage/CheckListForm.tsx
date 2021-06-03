@@ -83,7 +83,8 @@ const CheckListForm: FC<CheckListFormProps> = observer(({ formRef }) => {
       <div className="listForm" ref={formRef}>
         {/* Gender */}
         <h3>
-          1. What is your gender?<span>* {!checkListStore.gender && "Please select one"}</span>
+          1. What is your gender?
+          <span>* {!checkListStore.gender && "Please select at least one"}</span>
         </h3>
         <Radio.Group name="gender" className="checkBox" onChange={onChangeInfo}>
           <Radio value="Man">Gentleman</Radio>
@@ -91,7 +92,7 @@ const CheckListForm: FC<CheckListFormProps> = observer(({ formRef }) => {
         </Radio.Group>
         {/* Age */}
         <h3>
-          2. What is your age?<span>* {!checkListStore.age && "Please select one"}</span>
+          2. What is your age?<span>* {!checkListStore.age && "Please select at least one"}</span>
         </h3>
         <Radio.Group name="age" className="checkBox" onChange={onChangeInfo}>
           {check_age_list.map((list, i) => (
@@ -103,7 +104,7 @@ const CheckListForm: FC<CheckListFormProps> = observer(({ formRef }) => {
         {/* Party */}
         <h3>
           3. What is type of your party?
-          <span>* {!checkListStore.party && "Please select one"}</span>
+          <span>* {!checkListStore.party && "Please select at least one"}</span>
         </h3>
         <Radio.Group name="party" className="checkBox" onChange={onChangeInfo}>
           {check_party_list.map((list, i) => (

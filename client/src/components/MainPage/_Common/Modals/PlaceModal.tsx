@@ -10,12 +10,17 @@ const PlaceModalComponent = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -60%);
-  width: 90%;
-  height: 550px;
+  width: 80%;
+  .recom_for_title {
+    margin-bottom: 1rem;
+  }
+  .recom_choose_title {
+    margin-top: 1.5rem;
+  }
   .placeTags {
     margin: 1rem 0;
     .tag {
-      margin: 1rem 0.5rem 1rem 0;
+      margin: 0 0.5rem 0 0;
       cursor: default;
     }
   }
@@ -62,7 +67,7 @@ export const PlaceModal = observer(() => {
       style={checkListStore.overlayCnt === 2 ? { display: "block" } : { display: "none" }}
       className="modal"
     >
-      <h3>Here is our Recommendation place to stay for you 😘</h3>
+      <h3 className="recom_for_title">Here is our Recommendation place to stay for you 😘</h3>
       <ul className="placeTags">
         {mainStore.userInfo?.purpose.concat(mainStore.userInfo?.acm).map((v, i) => (
           <li className="tag" key={i}>
@@ -76,7 +81,9 @@ export const PlaceModal = observer(() => {
         <PlaceCard place={mainStore.recommend_places[1]} />
       </div>
       <Divider />
-      <h3>Check Accommodation page and choose one which you like !</h3>
+      <h3 className="recom_choose_title">
+        Check Accommodation page and choose one which you like !
+      </h3>
     </PlaceModalComponent>
   );
 });

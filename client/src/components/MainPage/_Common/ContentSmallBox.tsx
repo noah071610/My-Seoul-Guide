@@ -24,6 +24,9 @@ export const ContentSmall = styled.div`
       font-size: 0.9rem;
     }
   }
+  .get_point {
+    margin: 0.8rem 0 0 0;
+  }
   .image_wrapper {
     overflow: hidden;
     border-radius: 10px;
@@ -98,7 +101,7 @@ const ContentSmallBox = observer(
           />
         </div>
         {checkListStore.overlayCnt === 2 && (
-          <h3>
+          <h3 className="get_point">
             Get Points : <CountUp className="countUp" duration={5} start={0} end={place.point} />{" "}
           </h3>
         )}

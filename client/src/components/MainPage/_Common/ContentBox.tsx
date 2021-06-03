@@ -65,10 +65,9 @@ const Content = styled.div`
         padding-left: 1.5rem;
         font-size: 0.9rem;
         line-height: 2.2;
-        height: 250px;
-        overflow-y: auto;
         p {
           height: 250px;
+          overflow-y: auto;
         }
       }
     }
@@ -79,7 +78,6 @@ const Content = styled.div`
       &_article {
         &_text {
           padding: 1rem 0 2rem 0;
-          height: 100%;
           p {
             height: 100%;
           }
@@ -87,7 +85,6 @@ const Content = styled.div`
         &_text_attractions {
           margin: 1rem 0 1.5rem 0;
           padding: 0;
-          height: 150px;
           p {
             height: 100%;
           }
@@ -143,10 +140,6 @@ const Content = styled.div`
         }
         &_text {
           padding: 0 0 1rem 0;
-          height: 100%;
-          p {
-            height: 100%;
-          }
         }
       }
     }

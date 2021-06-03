@@ -6,7 +6,7 @@ import { checkListStore, mainStore } from "../../../../@store/store";
 import LoadingPage from "../../LoadingPage";
 import { TogoRecommedInter } from "../../../../types";
 import useSortList from "../../../../hooks/useSortList";
-import { NO_IMAGE_URL, SM_SIZE } from "../../../../config";
+import { BLUE_COLOR, NO_IMAGE_URL, SM_SIZE } from "../../../../config";
 import styled from "@emotion/styled";
 
 const ActivityModalComponent = styled.div`
@@ -15,8 +15,12 @@ const ActivityModalComponent = styled.div`
   left: 2.5%;
   margin: 0;
   width: 95%;
-  height: 95%;
+  height: 85%;
   overflow-y: auto;
+  h3 {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
   .recommend {
     &_container {
       display: grid;
@@ -24,11 +28,13 @@ const ActivityModalComponent = styled.div`
       grid-template-columns: repeat(3, 1fr);
       height: 80%;
       gap: 7px;
+      margin: 1rem 0;
     }
     &_tags {
-      margin: 0.5rem 0;
+      margin: 1rem 0;
       li {
         margin-right: 0.5rem;
+        cursor: default;
       }
     }
     &_card {
@@ -60,11 +66,14 @@ const ActivityModalComponent = styled.div`
       }
     }
     &_submit {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
       button {
-        font-size: 1.2rem;
+        font-size: 2rem;
         font-weight: bold;
         &:hover {
-          color: $BLUE_COLOR;
+          color: ${BLUE_COLOR};
         }
       }
     }
@@ -214,8 +223,8 @@ export const ActivityModal = observer(() => {
       </div>
       <Divider />
       <div className="recommend_submit">
-        <button onClick={() => checkListStore.discountOverlayCnt()} className="underLineBtn">
-          Let`s start guide
+        <button onClick={() => checkListStore.discountOverlayCnt()} className="btn-underLine">
+          Start guide 🛫
         </button>
       </div>
     </ActivityModalComponent>

@@ -9,7 +9,6 @@ const MenuModalComponent = styled.div`
   top: 0;
   left: 0;
   width: 500px;
-  height: 370px;
   @media only screen and (max-width: ${SM_SIZE}) {
     width: 90%;
     left: 50%;

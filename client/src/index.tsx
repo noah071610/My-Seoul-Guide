@@ -8,7 +8,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  uri: "http://api.myseoulguide.site",
   cache: new InMemoryCache(),
 });
 

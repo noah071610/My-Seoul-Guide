@@ -9,7 +9,6 @@ const MapModalComponent = styled.div`
   bottom: 0;
   right: 0;
   width: 620px;
-  height: 260px;
   @media only screen and (max-width: ${SM_SIZE}) {
     width: 90%;
     bottom: 10%;
