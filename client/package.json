@@ -1,8 +1,8 @@
 {
   "name": "my-seoul-guide",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": ".",
+  "version": "1.0.0",
+  "main": "App.js",
+  "homepage": "https://myseoulguide.site/",
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@apollo/client": "^3.3.18",
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "react-scripts build",
+    "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
