@@ -37,13 +37,10 @@ const typeDefs = gql`
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  cors: {
-    origin: "https://myseoulguide.site",
-  },
 });
 
 const app = express();
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: "https://myseoulguide.site", credentials: true }));
 
 server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);
