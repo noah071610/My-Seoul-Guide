@@ -1,5 +1,5 @@
 
-<div align=center><a href="https://github.com/noah071610/My-Seoul-Guide"><img src="https://media.vlpt.us/images/noah071610/post/bcf1258c-eac3-4972-a17d-874565c90141/image.png"/></a></div>
+<div align=center><a href="https://myseoulguide.site"><img src="https://media.vlpt.us/images/noah071610/post/bcf1258c-eac3-4972-a17d-874565c90141/image.png"/></a></div>
 
 # <div align=center>My Seoul Guide</div> 
 #### <div align=center>This is for your trip, This is your Seoul.</div>
@@ -43,6 +43,12 @@
   <a href="https://velog.io/@noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp;
 </div>
 
+<br/>
+
+<div align=center>
+  <a href="https://myseoulguide.site"><img src="https://img.shields.io/badge/go_to_website-EFFDFF?style=for-the-badge"/>&nbsp;</a>
+</div>
+
 <br/><br/><br/><br/><br/>
 
 ## 🎉 YES, This is your Seoul.
@@ -79,7 +85,10 @@
 <br/>
 
 ### 1. 이용자의 취향을 사전에 파악합니다.
-<img src="https://user-images.githubusercontent.com/74864925/120073070-caea9080-c0d1-11eb-828c-3afaf0e8fbc8.png"/>
+
+![캡처_2021_06_04_00_49_56_718](https://user-images.githubusercontent.com/74864925/120674289-e937fe00-c4ce-11eb-9c8b-71c2d66d5017.png)
+![캡처_2021_06_04_00_50_19_293](https://user-images.githubusercontent.com/74864925/120674297-eb01c180-c4ce-11eb-8929-0a2eec67bfb5.png)
+
 
 ```javascript
 📁store.ts
@@ -237,7 +246,7 @@ const checkListStore = observable<CheckListStore>({
 
 - 추천 명소를 선택합니다. HOME 메뉴에 반영되고 삭제가능하며 Attractions 메뉴에서 추가 가능합니다.
 
-<img src="https://user-images.githubusercontent.com/74864925/120071418-47797100-c0ca-11eb-9e36-60a9a4c38e09.gif"/>
+![녹화_2021_06_04_00_58_13_751](https://user-images.githubusercontent.com/74864925/120675476-11742c80-c4d0-11eb-9c25-2696a083f73a.gif)
 
 <br/>
 
@@ -494,7 +503,7 @@ export default AcmAndRoutePage;
 
 - 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
 
-<img src="https://user-images.githubusercontent.com/74864925/120071985-7e508680-c0cc-11eb-854f-910cfcdfe239.gif"/>
+![111](https://user-images.githubusercontent.com/74864925/120682789-d5dd6080-c4d7-11eb-9aa1-c4ab59880c47.gif)
 
 <br/>
 
@@ -568,7 +577,13 @@ export default ActivityContent;
 
 ### Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
 - 먼저 예산을 입력하고 지출을 기록합니다.
+
+![녹화_2021_06_04_01_47_37_626](https://user-images.githubusercontent.com/74864925/120683031-1b9a2900-c4d8-11eb-8477-036162f00114.gif)
+
 - 파이차트를 확인하며 지출비율, 남은예산 등을 파악합니다.
+
+![222](https://user-images.githubusercontent.com/74864925/120682796-d7a72400-c4d7-11eb-8188-19cdc99c7e50.gif)
+
 ```javascript
 📁LedgerModal.tsx
 
@@ -596,6 +611,8 @@ const LedgerModal = observer(
         date: year + "/" + month + "/" + day,
         type: select,
         // 환율정보를 제공하는 API를 이용하여 USD 를 KRW로 변환합니다.
+        // 환율api https는 유료로만 제공하고 요청한도도 매우 야박해서 손절하고 1 USD = 1300 KRW 고정값을 넣었습니다 
+        // 만약 추후에 필요하다면 유료결제해서 사용하겠습니다... (2021/06/04)
         payment: useExchageClac(payment, currentExchage),
         memo,
       };
@@ -661,13 +678,19 @@ const LedgerModal = observer(
 
 <br/>
 
+> 🎤 : 구경갈래요!
+
+#### <a href="https://myseoulguide.site">마이서울가이드 바로가기</a>
+
+<br/>
+
 > 🎤 : 업데이트 상황을 알려주세요
 
 <br/>
 
 | Date | Version | Update |
 | ------ | ------ | ------ |
-| 2020/05/29 | v1.0 | Final Update for first deployment through AWS |
+| 2020/06/04 | v1.0 | Final Update for first deployment through AWS |
 
 <br/>
 
@@ -681,6 +704,5 @@ const LedgerModal = observer(
 
 지금까지 신뢰를 주는 장현수였습니다. 긴글 읽어주셔서 감사합니다.
 
-<br/><br/><br/>
 
-##
+<br/><br/><br/>
