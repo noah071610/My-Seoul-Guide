@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const link = createHttpLink({
   uri: "https://api.myseoulguide.site",
-  credentials: "include",
+  credentials: "same-origin",
 });
 
 const client = new ApolloClient({

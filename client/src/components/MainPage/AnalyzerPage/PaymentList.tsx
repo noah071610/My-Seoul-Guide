@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Divider, Input } from "antd";
-import axios from "axios";
+// import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import useInput from "../../../hooks/useInput";
 import analyzerStore from "../../../@store/analyzerStore";
@@ -11,9 +11,9 @@ import LedgerModal from "./LedgerModal";
 import styled from "@emotion/styled";
 import { SM_SIZE } from "../../../config";
 
-axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-axios.defaults.baseURL = "http://api.exchangeratesapi.io";
-axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
+// axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+// axios.defaults.baseURL = "http://api.exchangeratesapi.io";
+// axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 
 const Budget = styled.div`
   display: flex;
@@ -107,11 +107,12 @@ const PaymentList: FC = observer(() => {
   }, [budget, currentExchage, isbudgetChange]);
 
   useEffect(() => {
-    axios
-      .get(
-        `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGE_KEY}&symbols=KRW&format=1`
-      )
-      .then((res) => setCurrentExchage(Object.values(res.data.rates)[0] as number));
+    // axios
+    //   .get(
+    //     `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGE_KEY}&symbols=KRW&format=1`
+    //   )
+    //   .then((res) => setCurrentExchage(Object.values(res.data.rates)[0] as number));
+    setCurrentExchage(1300);
   }, []);
 
   return (
