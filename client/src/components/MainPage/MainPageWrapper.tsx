@@ -18,11 +18,11 @@ const PageWrapper = styled.div`
   }
   .map {
     &_route {
-      height: 50%;
+      height: calc(100% - 330px);
       width: 100%;
     }
     &_acm {
-      height: 30%;
+      height: calc(100% - 470px);
       width: 100%;
       transition: 0.3s all;
       &:hover {
@@ -31,7 +31,7 @@ const PageWrapper = styled.div`
     }
     @media only screen and (max-width: ${SM_SIZE}) {
       &_route {
-        height: 55%;
+        height: calc(100% - 350px);
       }
     }
   }

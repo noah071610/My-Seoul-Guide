@@ -217,7 +217,7 @@ export const placeList = [
     point: 0,
     tags: ["University", "Food", "Young", "Trandy", "Music"],
     overview: {
-      _text: `Hongdae (Korean: 홍대; Hanja: 弘大) is a neighborhood in Seoul, South Korea near Hongik University, after which it is named. It is known for its urban arts and indie music culture, local shops, clubs and entertainment. The area is located in Mapo-gu in the western end of Seoul, stretching from Seogyo-dong to Hapjeong-dong.`,
+      _text: `Hongdae (Korean: 홍대; Hanja: 弘大) is a neighborhood in Seoul, South Korea near Hongik University, after which it is named. It is known for its urban arts and indie music culture, local shops, clubs and entertainment. The area is located in Mapo-gu in the western end of Seoul, stretching from Seogyo-dong to Hapjeong-dong. During early 1990s, students from the College of Fine Arts at Hongik University began to decorate the streets, walls, and roads around the college. Their efforts were soon joined by many artists from across the country and the first 'Street Art Festival' was held in 1993. Every year, students of Hongik University and neighbor artists join to produce diversity of visual arts on Hongdae streets like graffiti wall painting, installation arts and performances.`,
     },
     path: [
       { lat: 37.558467606580905, lng: 126.926214844173 },

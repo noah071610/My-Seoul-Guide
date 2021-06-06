@@ -86,7 +86,7 @@ const Content = styled.div`
           margin: 1rem 0 1.5rem 0;
           padding: 0;
           p {
-            height: 100%;
+            height: 230px;
           }
         }
       }

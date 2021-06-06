@@ -8,6 +8,7 @@ import LoadingPage from "../LoadingPage";
 import styled from "@emotion/styled";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 import { BLUE_COLOR, GRAY_COLOR } from "../../../config";
+import ErrorPage from "../ErrorPage";
 
 const Pagenation = styled.div`
   display: flex;
@@ -99,7 +100,7 @@ const ActivityContent = () => {
     },
   });
   if (loading) return <LoadingPage />;
-  if (error) return <p className="error">Error :(</p>;
+  if (error) return <ErrorPage />;
 
   return (
     <MainPageWrapper>
