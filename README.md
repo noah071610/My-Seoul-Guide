@@ -39,8 +39,8 @@
   <a href="https://github.com/noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/25/25657.png"/></a>&nbsp;
   <a href="https://www.instagram.com/salmonchobab" target="_blank"><img src="https://image.flaticon.com/icons/png/24/1409/1409946.png"/></a>&nbsp;
   <a href="https://velog.io/@noah071610" target="_blank"><img width="24" src="https://api.faviconkit.com/velog.io/144"/></a>&nbsp;
-  <a href="noah071610@naver.com"><img src="https://image.flaticon.com/icons/png/24/552/552486.png"/></a>&nbsp;
-  <a href="https://velog.io/@noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp;
+  <a href="mailto:noah071610@naver.com"><img src="https://image.flaticon.com/icons/png/24/552/552486.png"/></a>&nbsp;
+  <a href=href="https://noahworld.site/portfolio" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp;
 </div>
 
 <br/>
@@ -664,13 +664,15 @@ const LedgerModal = observer(
 
 - 최대한 컴포넌트의 재사용성을 위해서 힘썼지만 복잡한 로직에 가독성도 떨어지게 되었습니다. 그냥 컴포넌트 하나 더 만드는게 여러모로 나을듯 한데 욕심 부린것 같습니다.
 
-- CSS를 사용할건지 Styled-components 를 사용할건지 선택해야되는데 짬뽕해서 쓰니 효율성이 떨어지게 되었습니다.
+- CSS를 사용할건지 Styled-components 를 사용할건지 선택해야되는데 애매하게 둘다 사용해 효율이 떨어졌습니다.
 
 ![image](https://cdn-images-1.medium.com/max/1000/1*yBxZo9LNEjRaL7eKUBqRSA.png)
 
 - 변수명 컴포넌트명 클래스명 작명법을 획기적으로 바꿔야될거 같습니다. 또한 협업을 한다면 무조건 그 프로젝트의 컨벤션을 지켜야겠다 다짐했습니다.
 
 - 테스트를 피차일반 뒤로 미루며 생긴 예기치않은 오류에 많이 시간을 뺏겼습니다. 테스트 주도 개발 (TDD) 의 필요성을 느꼈습니다.
+
+- 모바일에서 불편한 사용감을 느꼈습니다 사용자 피드백에서 "여행다닐때 노트북 별로 안쓰지 않아?" 라는 말이 상당히 와닿았고 React-native 나 코틀린같은 언어에 관심이 생겼습니다.
 
 <br/><br/><br/>
 
