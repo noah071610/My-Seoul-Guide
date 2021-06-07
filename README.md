@@ -31,6 +31,9 @@
 <img src="https://img.shields.io/badge/Google_Map-4285F4?style=flat-square&logo=Google-Maps&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=Babel&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=white"/>&nbsp;
+  <img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=flat-square&logo=Amazon-AWS&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/>&nbsp;
 </div>
 
 <br/>
