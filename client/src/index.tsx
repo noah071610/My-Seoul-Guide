@@ -1,16 +1,17 @@
 import { createContext, FC, ReactNode } from "react";
-import { checkListStore, mainStore } from "./@store/store";
+import { checkListStore, mainStore } from "./store/store";
 import { ApolloProvider, createHttpLink } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import ReactDOM from "react-dom";
-import analyzerStore from "./@store/analyzerStore";
+import analyzerStore from "./store/analyzerStore";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
 const link = createHttpLink({
-  uri: "https://api.myseoulguide.site",
+  uri: "http://localhost:4000",
   credentials: "same-origin",
 });
+//"https://api.myseoulguide.site"
 
 const client = new ApolloClient({
   link,

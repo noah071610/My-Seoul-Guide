@@ -1,38 +1,8 @@
 import { resolvers } from "./resolvers";
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
+import { typeDefs } from "./gql";
 import cors from "cors";
 import express from "express";
-
-const typeDefs = gql`
-  type Content {
-    _text: String
-  }
-  type Id {
-    _text: String
-  }
-  type ActivityObj {
-    title: Content
-    firstimage: Content
-    addr1: Content
-    mapx: Content
-    mapy: Content
-    contentid: Id
-    overview: Content
-  }
-  type RecommendObj {
-    title: Content
-    firstimage: Content
-    mapx: Content
-    mapy: Content
-    contentid: Id
-  }
-  type Query {
-    ActivityCards(typeNum: Int!, pageNum: Int!): [ActivityObj]
-    FoodRecommendCards(isFood: Boolean!): [RecommendObj]
-    ShoppingRecommendCards(isShopping: Boolean!): [RecommendObj]
-    NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
-  }
-`;
 
 const server = new ApolloServer({
   typeDefs,
@@ -40,8 +10,8 @@ const server = new ApolloServer({
 });
 
 const app = express();
-app.use(cors({ origin: "https://myseoulguide.site", credentials: true }));
-
+app.use(cors({ origin: true, credentials: true }));
+//"https://myseoulguide.site"
 server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);
 });

@@ -16,8 +16,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "types": ["@emotion/react/types/css-prop"],
+    "types": ["@emotion/react/types/css-prop", "node"],
     "downlevelIteration": true
   },
-  "include": ["src"]
+  "include": ["./**/*"],
+  "exclude": ["node_modules"]
 }

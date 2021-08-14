@@ -2,16 +2,16 @@ import "antd/dist/antd.css";
 import "./styles/style.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Home from "./components/Home";
+import Home from "./components/@MainPage";
 import { Route, useHistory, withRouter } from "react-router-dom";
 import { Suspense, useEffect } from "react";
-import ActivityContent from "./components/MainPage/ActivityPage/ActivityContent";
-import AnalyzerContent from "./components/MainPage/AnalyzerPage/AnalyzerContent";
-import MapPage from "./components/MainPage/MapPage/MapPage";
-import LoadingPage from "./components/MainPage/LoadingPage";
-import { checkListStore, mainStore } from "./@store/store";
-import analyzerStore from "./@store/analyzerStore";
+import ActivityContent from "./components/@ActivityPage";
+import AnalyzerContent from "./components/@AnalyzerPage";
+import MapPage from "./components/@AcmAndRoutePage";
+import { checkListStore, mainStore } from "./store/store";
+import analyzerStore from "./store/analyzerStore";
 import { observer } from "mobx-react";
+import LoadingPage from "./components/LoadingPage";
 
 const App = observer(() => {
   const history = useHistory();

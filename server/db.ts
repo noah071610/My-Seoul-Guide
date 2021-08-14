@@ -1,8 +1,18 @@
-import * as convert from "xml-js";
-import * as dotenv from "dotenv";
+import convert from "xml-js";
+import dotenv from "dotenv";
 import fetch from "node-fetch";
 dotenv.config();
-
+// for (let i = 0; i < contents.item.length; i++) {
+//   const getOneOverview = await fetch(
+//     `http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=${typeNum}&contentId=${contents.item[i].contentid._text}&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&&overviewYN=Y`
+//   )
+//     .then((res) => res.text())
+//     .then((data) => {
+//       let content = JSON.parse(convert.xml2json(data, { compact: true })).response.body.items
+//         .item;
+//       return content.overview;
+//     });
+//   contents.item[i].overview = getOneOverview;
 const getActivities = async (typeNum: number, pageNum: number) => {
   const contents = await fetch(
     `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=${typeNum}&areaCode=1&sigunguCode=&cat1=A02&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=${pageNum}`
@@ -13,20 +23,6 @@ const getActivities = async (typeNum: number, pageNum: number) => {
       let contents = JSON.parse(convert.xml2json(data, { compact: true })).response.body.items;
       return contents;
     });
-  // 페이지로 20개의 명소 데이터를 뽑아오는데.... 명소 설명은 content의 아이디가 필요하더라구요.. 따로 다시 쿼리를 보내는 것 말고는 방법이 정말 없었습니다.
-  // 사실 그래프큐엘이라서 어떻게 해볼까 생각이라도 들었지, REST API 였으면 오버패칭 지옥이라 이부분은 포기했을거라고 생각합니다.
-  for (let i = 0; i < contents.item.length; i++) {
-    const getOneOverview = await fetch(
-      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon?ServiceKey=${process.env.TOUR_SERVICE_KEY}&contentTypeId=${typeNum}&contentId=${contents.item[i].contentid._text}&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&&overviewYN=Y`
-    )
-      .then((res) => res.text())
-      .then((data) => {
-        let content = JSON.parse(convert.xml2json(data, { compact: true })).response.body.items
-          .item;
-        return content.overview;
-      });
-    contents.item[i].overview = getOneOverview;
-  }
   return contents.item;
 };
 
