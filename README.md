@@ -645,6 +645,8 @@ const LedgerModal = observer(
 
 ## 🎯 What made you to go Seoul?
 
+<br/>
+
 > 🎤 : GraphQL 어떤가요?
 
 RestAPI의 오버패칭과 언더패칭문제가 한국관광공사 OPEN API에서 정말 치명적이었습니다. 이런 치명적인 단점을 GraphQL이 효율적으로 개선시켜줬기 때문에 매우 만족하지만, Express 와 NestJS보단 익숙하지 않기 때문에 공부가 더욱더 필요합니다.
@@ -658,8 +660,8 @@ RestAPI의 오버패칭과 언더패칭문제가 한국관광공사 OPEN API에�
 <br/>
 
 > 🎤 : Redux VS MobX
-> 
-MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevTool이 매우 직관적이고 강력하며 Saga 나 Thunk 같은 라이브러리를 같이 이용하면 시너지가 어마어마합니다. 간단한 프로젝트엔 MobX를, 대규모나 실무에선 Redux가 적합한거 같습니다. 둘다 훌륭한 상태관리 라이브러리입니다.
+
+MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevTool이 매우 직관적이고 강력하며 Saga 나 Thunk 같은 라이브러리를 같이 이용하면 시너지가 어마어마합니다. 간단한 프로젝트엔 MobX를, 대규모나 실무에선 Redux가 적합한거 같습니다. 둘다 훌륭한 상태관리 라이브러리입니다. 차기프로젝트인 'Fall IN Asia' 에서는 강력한 Data Fetching 라이브러리인 SWR과 Redux의 무거움을 덜어주는 Redux-toolkit을 혼용해서 사용했습니다.
 
 
 
