@@ -509,7 +509,7 @@ export default AcmAndRoutePage;
 
 - 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
 
-![111](https://user-images.githubusercontent.com/74864925/120682789-d5dd6080-c4d7-11eb-9aa1-c4ab59880c47.gif)
+![111](https://user-images.githubusercontent.com/74864925/129363658-81953b0a-5d19-4c27-9b0d-e2db9116d637.gif)
 
 <br/>
 
@@ -710,6 +710,7 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 | Date | Version | Update |
 | ------ | ------ | ------ |
 | 2020/06/04 | v1.0 | Final Update for first deployment through AWS |
+| 2020/08/13 | v1.1 | Optimizated Components ,Stylesheet and Rebuild Attraction page  |
 
 <br/>
 
