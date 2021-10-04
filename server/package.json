@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "dev": "tsc && node ./dist/index"
   },
   "keywords": [],
