@@ -31,9 +31,10 @@
 <img src="https://img.shields.io/badge/Google_Map-4285F4?style=flat-square&logo=Google-Maps&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=Babel&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=white"/>&nbsp;
-  <img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=flat-square&logo=Amazon-AWS&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=flat-square&logo=Amazon-AWS&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/PM2-2B037A?style=flat-square&logo=PM2&logoColor=white"/>&nbsp;
 </div>
 
 <br/>
@@ -41,7 +42,6 @@
 <div align=center>
   <a href="https://github.com/noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/25/25657.png"/></a>&nbsp;
   <a href="https://www.instagram.com/salmonchobab" target="_blank"><img src="https://image.flaticon.com/icons/png/24/1409/1409946.png"/></a>&nbsp;
-  <a href="https://velog.io/@noah071610" target="_blank"><img width="24" src="https://api.faviconkit.com/velog.io/144"/></a>&nbsp;
   <a href="mailto:noah071610@naver.com"><img src="https://image.flaticon.com/icons/png/24/552/552486.png"/></a>&nbsp;
   <a href=href="https://noahworld.site/portfolio" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp;
 </div>
@@ -55,10 +55,8 @@
 <br/><br/><br/><br/><br/>
 
 ## 🎉 YES, This is your Seoul.
-#### 코로나라는 아픔을 이겨내고 한국에 다시 방문하게될 외국인들을 위한 웹 가이드 어플리케이션.
-<br/>
 
-> 🎤 : 마이서울가이드를 만든 이유가 뭔가요? 
+<br/>
 
 2018년부터 2019년까지 개인적으로 서울에 오는 많은 외국인 관광객을 상대로 조사해본 결과
 
@@ -74,67 +72,35 @@
 
 <br/><br/>
 
-## 🛫 Attention please, We will arrive in Incheon international Airport.
-#### 프로젝트 기본 정보
+## 🛫 프로젝트 기본 정보
+
 <br/>
 
 - 제작기간 : 2021/4 ~ 2021/6
 - 개발자 : 장현수 (Noah) 외 0명
-- 개발포지션 : 디자인 , 프론트엔드 , 백엔드 , 서버
+- 개발포지션 : 디자인 , 프론트엔드 , 백엔드 , 배포
 - 언어 : English (日本語は間もなくアップデート予定です 🔜)
 - 반응형 웹 사이트
 
 <br/><br/>
 
 ## 🚝 Let's go into Center of Seoul.
-#### 마이 서울 가이드의 기본적인 흐름에 대해서 리뷰해드리겠습니다.
+
+<br/><br/>
+
+### 1. 아름다운 서울의 전경을 시작으로 고객의 여행 성향과 인원 등을 미리 수집합니다.
+- 이용자의 취향은 이용자에게 맞는 명소 및 맞춤 숙박지역을 추천하기위해서 사용합니다.
 <br/>
 
-### 1. 이용자의 취향을 사전에 파악합니다.
-
-![캡처_2021_06_04_00_49_56_718](https://user-images.githubusercontent.com/74864925/120674289-e937fe00-c4ce-11eb-9c8b-71c2d66d5017.png)
-![캡처_2021_06_04_00_50_19_293](https://user-images.githubusercontent.com/74864925/120674297-eb01c180-c4ce-11eb-8929-0a2eec67bfb5.png)
-
-
-```javascript
-📁store.ts
-
-const checkListStore = observable<CheckListStore>({
-  // 체크된 모든 사항은 checkListStore 가 담당합니다.
-  age: null,
-  gender: null,
-  party: null,
-  purpose: [],
-  // acm 은 accommodation의 약자입니다.
-  acm: [],
-  overlayCnt: 4,
-  isSubmit: false,
-  isPermanetSubmit: false,
-  changeTaste: action((data: string[], name: string) => {
-    if (name === "purpose") {
-      checkListStore.purpose = data;
-    } else {
-      checkListStore.acm = data;
-    }
-  }),
-  changeInfo: action((data: string, name: string) => {
-    // 중복을 최소화 하기 위해 조건문을 활용하였습니다.
-    if (name === "gender") {
-      checkListStore.gender = data;
-    } else if (name === "age") {
-      checkListStore.age = data;
-    } else {
-      checkListStore.party = data;
-    }
-  }),
-```
----
+<div align=center>
+  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_landing1.png" alt="myseoulguide_landing1"/>
+  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_landing2.png" alt="myseoulguide_landing2"/>
+</div>
 
 <br/>
 
 ### 2. 취향에 맞춘 숙박지역 및 명소 데이터를 가져옵니다.
 - 이용자의 취향을 내장된 데이터를 토대로 분석해 점수를 매긴후 숙박지역 매칭순위 상위2개의 가져옵니다.
-- 여기서 추천 명소를 위해 몇개의 항목을 따로 빼두는 작업을 거칩니다.
 
 ```javascript
 📁store.ts
@@ -225,419 +191,272 @@ const checkListStore = observable<CheckListStore>({
 
     //=================^^ Recommend Stay finder done. ^^=====================
 ```
----
 
 <br/>
 
 ### 3. 사용법 안내 및 숙박지역 및 놀거리를 추천합니다.
-- 모달은 overlay를 클릭시 사라지며 첫 시작시 한번만 나옵니다.
-- 추천 숙박지역을 선택합니다. 이는 HOME 메뉴에 반영되고 Accomodation 메뉴에서 세부정보를 확인 할 수 있습니다.
+- 매칭률이 높은 숙박지역과 명소를 알맞게 제공하고 Home , Accomodation , Attraction 메뉴에서 각각 경로 추가 탐색 및 세부정보를 확인 할 수 있습니다.
 
-<img src="https://user-images.githubusercontent.com/74864925/120071358-de91f900-c0c9-11eb-9785-232206427dec.gif"/>
+<div align=center>
+<img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_main_modal.jpg" alt="myseoulguide_main_modal"/>
+  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_attraction_select.gif" alt="myseoulguide_attraction_select"/>
+  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_attraction_page.gif" alt="myseoulguide_attraction_page"/>
+  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_acm_select.jpg" alt="myseoulguide_acm_select"/>
+  </div>
 
-
-```javascript
-📁PlaceModal.tsx
-
-<ul className="placeTags">
-  {mainStore.userInfo?.purpose.concat(mainStore.userInfo?.acm).map((v, i) => (
-    //추천 숙박지역 2곳과 점수를 나타내어 줍니다.
-    <li className="tag" key={i}>
-      {v}
-    </li>
-  ))}
-</ul>
-```
-<br/>
-
-- 추천 명소를 선택합니다. HOME 메뉴에 반영되고 삭제가능하며 Attractions 메뉴에서 추가 가능합니다.
-
-![녹화_2021_06_04_00_58_13_751](https://user-images.githubusercontent.com/74864925/120675476-11742c80-c4d0-11eb-9c25-2696a083f73a.gif)
-
-<br/>
 
 ```javascript
-📁ActivityModal.tsx
 
-export const ActivityModal = observer(() => {
-  const onClickCard = useCallback((arg: TogoRecommedInter) => {
-    //추천 놀거리를 클릭하면 메인페이지의 구글맵에 반영되게 합니다.
-    const form = {
-      path: { lat: parseFloat(arg.mapy._text), lng: parseFloat(arg.mapx._text) },
-      title: arg.title._text,
-      contentid: arg.contentid._text,
-    };
-    if (mainStore.togoLists.find((togo) => togo.contentid === form.contentid)) {
-      //만약 이미 체크한 상태에서 다시 클릭한다면 리스트에서 삭제합니다.
-      mainStore.deleteTogoList(form.contentid);
-    } else {
-      mainStore.addTogoList(form);
-    }
-  }, []);
-  const { loading, error, data } = useQuery(GET_RECOMMEND, {
-    variables: {
-      ...
-    },
-  });
-  
-  return (
-  
-    ...
-    
-    <div className="recommend_container">
-        {useSortList({ data: data, isKpop: mainStore.userInfo?.purpose.includes("K-pop") })?.map(
-          (v: TogoRecommedInter, i: number) => (
-            <div key={i} onClick={() => onClickCard(v)} className="recommend_card">
-              <img
-                className="recommend_img"
-                src={v.firstimage?._text || NO_IMAGE_URL}
-                alt={v.firstimage?._text || "no_image"}
-              />
-              <h4>{v.title._text}</h4>
-              {mainStore.togoLists.find((togo) => togo.contentid === v.contentid._text) && (
-                <img
-                  alt="checked"
-                  className="recommend_checked"
-                  src="https://img.icons8.com/emoji/48/000000/check-box-with-check-emoji.png"
-                />
-              )}
-            </div>
-          )
-        )}
-      </div>
+  📁ActivityModal.tsx
+
+    export const ActivityModal = observer(() => {
+      const onClickCard = useCallback((arg: TogoRecommedInter) => {
+        //추천 놀거리를 클릭하면 메인페이지의 구글맵에 반영되게 합니다.
+        const form = {
+          path: { lat: parseFloat(arg.mapy._text), lng: parseFloat(arg.mapx._text) },
+          title: arg.title._text,
+          contentid: arg.contentid._text,
+        };
+        if (mainStore.togoLists.find((togo) => togo.contentid === form.contentid)) {
+          //만약 이미 체크한 상태에서 다시 클릭한다면 리스트에서 삭제합니다.
+          mainStore.deleteTogoList(form.contentid);
+        } else {
+          mainStore.addTogoList(form);
+        }
+      }, []);
+      const { loading, error, data } = useQuery(GET_RECOMMEND, {
+        variables: {
+          ...
+        },
+      });
       
-      ...
+      return (
       
+        ...
+        
+        <div className="recommend_container">
+            {useSortList({ data: data, isKpop: mainStore.userInfo?.purpose.includes("K-pop") })?.map(
+              (v: TogoRecommedInter, i: number) => (
+                <div key={i} onClick={() => onClickCard(v)} className="recommend_card">
+                  <img
+                    className="recommend_img"
+                    src={v.firstimage?._text || NO_IMAGE_URL}
+                    alt={v.firstimage?._text || "no_image"}
+                  />
+                  <h4>{v.title._text}</h4>
+                  {mainStore.togoLists.find((togo) => togo.contentid === v.contentid._text) && (
+                    <img
+                      alt="checked"
+                      className="recommend_checked"
+                      src="https://img.icons8.com/emoji/48/000000/check-box-with-check-emoji.png"
+                    />
+                  )}
+                </div>
+              )
+            )}
+          </div>
+          
+          ...
+          
 ```
-
-<br/>
-
-- 추천 숙박 지역은 서버안 데이터를 통해서 분석하며, 추천 명소는 GraphQL과 공공데이터를 이용해 분석합니다.
-
-<br/>
-
-```javascript
-📁server/db.ts
-const getActivities = async (typeNum: number, pageNum: number) => {
-  const contents = await fetch(
-    `http://api.visitkorea.or.kr/openapi/service/rest/EngService/
-    areaBasedList?ServiceKey=${process.env.TOUR_SERVICE_KEY}....`
-  )
-    .then((res) => res.text())
-    .then((data) => {
-      // XML을 JSON으로 바꿔줍니다. xml2json 라이브러리를 사용했습니다.
-      let contents = JSON.parse(convert.xml2json(data, { compact: true })).response.body.items;
-      return contents;
-    });
-  // 명소에대한 설명은 content id가 필요해 다시 요청을 보내는 것 말고는 방법이 없었습니다.
-  for (let i = 0; i < contents.item.length; i++) {
-    const getOneOverview = await fetch(
-      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon.....
-    )
-      ...
-      
-    contents.item[i].overview = getOneOverview;
-  }
-  return contents.item;
-};
-
-📁server
-
-  ...
-  
-  type Query {
-    ActivityCards(typeNum: Int!, pageNum: Int!): [ActivityObj]
-    FoodRecommendCards(isFood: Boolean!): [RecommendObj]
-    ShoppingRecommendCards(isShopping: Boolean!): [RecommendObj]
-    NearRecommendCards(mapx: Float!, mapy: Float!): [RecommendObj]
-  }
-`;
-
-//서버에 그래프큐엘을 이용합니다.
-const server = new ApolloServer({ typeDefs, resolvers });
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`);
-});
-
-```
-
----
 
 <br/>
 
 ### 4. HOME에는 지정 숙소 및 가고싶은 명소의 내용이 담겨있습니다.
-- 지정 숙박지역으로 부터 선택 명소까지의 경로를 탐색할 수 있습니다.
-- 지정 숙박지역은 Accommodation 메뉴에서 변경 가능합니다.
-- 지정 명소는 삭제 가능하며, Attractions 메뉴에서 추가 가능합니다 (Attractions 메뉴는 초기의 추천기반이아닌 한국관광공사의 인기+카테고리 기반입니다.)
+- 숙박지역과 명소까지 경로 탐색, 삭제등이 가능하며, Attractions 메뉴에서 명소 추가가 가능합니다
 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/74864925/120071700-6f1d0900-c0cb-11eb-908a-7b06207d4910.gif"/>
+<div align=center><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_main_map.gif" alt="myseoulguide_main_map"/></div>
+
+```javascript
+
+  
+  📁Home.tsx
+
+          ...
+    
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={
+            // 숙박지역이 정해져있지 않다면 서울의 정중앙을 center 좌표로 삼습니다.
+              mainStore.place?.stationPath || { lat: 37.549687466128496, lng: 126.9809660539474 }
+            }
+            zoom={12}
+          >
+            {mainStore.place && (
+              <OverlayView
+                position={mainStore.place?.stationPath}
+                mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+              >
+                <Preview>
+                  <h3>Your base place</h3>
+                  <h4>{mainStore.place?.title._text}</h4>
+                  <span>🌟</span>
+                </Preview>
+              </OverlayView>
+            )}
+            {mainStore.togoLists.length > 0 &&
+              mainStore.togoLists.map((v, i) => {
+                return (
+                  <OverlayView
+                    key={i}
+                    position={v.path}
+                    mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                  >
+                    <Popover content={() => togoPopup(v.contentid, v.path)}>
+                      <Preview>
+                        <h3>List No.{i + 1}</h3>
+                        <h4>{v.title}</h4>
+                        <span>📍</span>
+                      </Preview>
+                    </Popover>
+                  </OverlayView>
+                );
+              })}
+            {toPlacePath && (
+              // Direction 부분은 코드량이 길어져서 따로 별개의 컴포넌트를 분리해두었습니다.
+              <Directions origin={mainStore.place?.stationPath} destination={toPlacePath} />
+            )}
+          </GoogleMap>
+        </LoadScript>
+              
+      
+```
 
 <br/>
 
-```jsx
-📁Home.tsx
+### 5. 지정 숙박지역 및 공항까지의 경로를 탐색할 수 있으며 최적의 동선을 탐색할 수 있습니다.
+- 구글 맵 API의 경로시스템과 개인적으로 수집한 관광 데이터 등을 적극 이용합니다.
 
-      ...
+<br/>
 
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
+<div align=center><img width="700px" src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_acm_page.png" alt="myseoulguide_acm_page"/><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_route_page.gif" alt="myseoulguide_route_page"/></div>
+
+```javascript
+  📁MapPage.tsx
+
+    const AcmAndRoutePage: FC = observer(() => {
+      const { path } = useRouteMatch();
+      // useRouteMatch 로 현재가 Accommodation 메뉴인지 Airport 메뉴인지 파악합니다.
+      let isAirportRoutePath = path.slice(1) === "airport_route";
+      const [center, setCenter] = useState<PathObj>({
+        lat: 37.517146640932296,
+        lng: 126.80792769408053,
+      });
+    
+      useEffect(() => {
+        if (!isAirportRoutePath && mainStore.place) {
+          let centerXY = useCalcCenter(mainStore.place?.path as PathObj[]);
+          //doubleCheck
+          setCenter(centerXY);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [isAirportRoutePath, mainStore.place]);
+    
+      return (
+        <MainPageWrapper>
+          <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
             <GoogleMap
-              mapContainerStyle={mapContainerStyle}
-              center={
-              // 숙박지역이 정해져있지 않다면 서울의 정중앙을 center 좌표로 삼습니다.
-                mainStore.place?.stationPath || { lat: 37.549687466128496, lng: 126.9809660539474 }
-              }
-              zoom={12}
+              mapContainerClassName={isAirportRoutePath ? "map_route" : "map_acm"}
+              center={center}
+              zoom={isAirportRoutePath ? 10 : 13}
             >
-              {mainStore.place && (
-                <OverlayView
-                  position={mainStore.place?.stationPath}
-                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                >
-                  <Preview>
-                    <h3>Your base place</h3>
-                    <h4>{mainStore.place?.title._text}</h4>
-                    <span>🌟</span>
-                  </Preview>
-                </OverlayView>
-              )}
-              {mainStore.togoLists.length > 0 &&
-                mainStore.togoLists.map((v, i) => {
-                  return (
-                    <OverlayView
-                      key={i}
-                      position={v.path}
-                      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                    >
-                      <Popover content={() => togoPopup(v.contentid, v.path)}>
-                        <Preview>
-                          <h3>List No.{i + 1}</h3>
-                          <h4>{v.title}</h4>
-                          <span>📍</span>
-                        </Preview>
-                      </Popover>
-                    </OverlayView>
-                  );
-                })}
-              {toPlacePath && (
-                // Direction 부분은 코드량이 길어져서 따로 별개의 컴포넌트를 분리해두었습니다.
-                <Directions origin={mainStore.place?.stationPath} destination={toPlacePath} />
+              {isAirportRoutePath ? (
+                //You can see direction when you pick airport up
+                mainStore.airport && (
+                  <Directions
+                    origin={{
+                      lat: mainStore.airport.path.lat,
+                      lng: mainStore.airport.path.lng,
+                    }}
+                    destination={{
+                      lat: mainStore.destination?.stationPath.lat,
+                      lng: mainStore.destination?.stationPath.lng,
+                    }}
+                  />
+                )
+              ) : (
+                //Polygon map area for acm page
+                <Polygon paths={mainStore?.place?.path} options={polygonOption} />
               )}
             </GoogleMap>
           </LoadScript>
-          
-```
----
-
-<br/>
-
-### 5. HOME 이외 메뉴는 Accommodation / Airport / Attractions / Analyzer 가 있습니다. 
-- 지정 숙박지역은 Accommodation 메뉴에서 확인 및 변경 가능합니다.
-
-<img src="https://user-images.githubusercontent.com/74864925/120072235-c623dd80-c0cd-11eb-8e7a-251de91926e8.gif"/>
-
-<br/>
-
-- 공항에서 숙박지역까지의 경로를 Airport 메뉴에서 탐색합니다.
-
-<img src="https://user-images.githubusercontent.com/74864925/120072242-cb812800-c0cd-11eb-87de-404af622344c.gif"/>
-
-<br/>
-
-```javascript
-📁MapPage.tsx
-
-const AcmAndRoutePage: FC = observer(() => {
-  const { path } = useRouteMatch();
-  // useRouteMatch 로 현재가 Accommodation 메뉴인지 Airport 메뉴인지 파악합니다.
-  let isAirportRoutePath = path.slice(1) === "airport_route";
-  const [center, setCenter] = useState<PathObj>({
-    lat: 37.517146640932296,
-    lng: 126.80792769408053,
-  });
-
-  useEffect(() => {
-    if (!isAirportRoutePath && mainStore.place) {
-      let centerXY = useCalcCenter(mainStore.place?.path as PathObj[]);
-      //doubleCheck
-      setCenter(centerXY);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAirportRoutePath, mainStore.place]);
-
-  return (
-    <MainPageWrapper>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
-        <GoogleMap
-          mapContainerClassName={isAirportRoutePath ? "map_route" : "map_acm"}
-          center={center}
-          zoom={isAirportRoutePath ? 10 : 13}
-        >
           {isAirportRoutePath ? (
-            //You can see direction when you pick airport up
-            mainStore.airport && (
-              <Directions
-                origin={{
-                  lat: mainStore.airport.path.lat,
-                  lng: mainStore.airport.path.lng,
-                }}
-                destination={{
-                  lat: mainStore.destination?.stationPath.lat,
-                  lng: mainStore.destination?.stationPath.lng,
-                }}
-              />
-            )
+            <AirportRouteCards />
           ) : (
-            //Polygon map area for acm page
-            <Polygon paths={mainStore?.place?.path} options={polygonOption} />
+            mainStore.place && <PlaceCards card={mainStore.place} isAcmCard={true} />
           )}
-        </GoogleMap>
-      </LoadScript>
-      {isAirportRoutePath ? (
-        <AirportRouteCards />
-      ) : (
-        mainStore.place && <PlaceCards card={mainStore.place} isAcmCard={true} />
-      )}
-    </MainPageWrapper>
-  );
-});
-
-export default AcmAndRoutePage;
-
-```
-
-- 놀거리 추가 및 탐색은 Attractions 메뉴에서 가능합니다.
-
-![111](https://user-images.githubusercontent.com/74864925/129363658-81953b0a-5d19-4c27-9b0d-e2db9116d637.gif)
-
-<br/>
-
-```javascript
-📁ActivityContent.tsx
-
-const ActivityContent = () => {
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [pageType, setPageType] = useState<number>(76);
-  const router: any = useRouteMatch();
-  useEffect(() => {
-    //router.params의 값에 따라 보여주는 데이터를 변경합니다.
-    const category = router.params.category;
-    if (category === "popular") {
-      setPageType(85);
-    } else if (category === "facilities") {
-      setPageType(78);
-    } else if (category === "experience") {
-      setPageType(76);
-    }
-    setPageNumber(1);
-  }, [router]);
-
-  const onClickNext = useCallback(() => {
-    setPageNumber((prev) => ++prev);
-  }, []);
-  const onClickPrev = useCallback(() => {
-    setPageNumber((prev) => --prev);
-  }, []);
-
-  const { loading, error, data } = useQuery(GET_CONTENTS, {
-    variables: {
-      pageNumber,
-      pageType,
-    },
-  });
-  if (loading) return <LoadingPage />;
-  if (error) return <p className="error">Error :(</p>;
-
-  return (
-    <MainPageWrapper>
-      {data.ActivityCards.map((card: ContentCardInter, i: number) => {
-        return <ContentCard key={i} card={card} />;
-      })}
-      <Pagenation>
-        {pageNumber === 1 ? (
-        //페이지장수가 첫번째면 더이상 이전으로 갈 곳이 없기때문에 이전페이지버튼을 막아둡니다.
-          <span className="btn-none">
-            <DoubleLeftOutlined />
-            Previous Page
-          </span>
-        ) : (
-          <button onClick={onClickPrev} className="btn-prev btn-underLine">
-            <DoubleLeftOutlined />
-            Previous Page
-          </button>
-        )}
-        <button onClick={onClickNext} className="btn-next btn-underLine">
-          Next Page
-          <DoubleRightOutlined />
-        </button>
-      </Pagenation>
-    </MainPageWrapper>
-  );
-};
-
-export default ActivityContent;
+        </MainPageWrapper>
+      );
+    });
+    
+    export default AcmAndRoutePage;
+    
+    
 ```
 
 <br/>
 
-### Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
-- 먼저 예산을 입력하고 지출을 기록합니다.
+### 6. Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
+- 예산을 입력하고 지출을 기록하면 파이차트에 표시되며 남은예산 등을 손쉽게 파악합니다.
 
-![녹화_2021_06_04_01_47_37_626](https://user-images.githubusercontent.com/74864925/120683031-1b9a2900-c4d8-11eb-8477-036162f00114.gif)
+<br/>
 
-- 파이차트를 확인하며 지출비율, 남은예산 등을 파악합니다.
+<div align=center><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_analyzer_setting.gif" alt="myseoulguide_analyzer_setting"/><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_analyzer_ledger.gif" alt="myseoulguide_analyzer_ledger"/></div>
 
-![222](https://user-images.githubusercontent.com/74864925/120682796-d7a72400-c4d7-11eb-8188-19cdc99c7e50.gif)
 
 ```javascript
-📁LedgerModal.tsx
 
-const LedgerModal = observer(
-  ({ currentExchage, isModalVisible, setIsModalVisible }: AnalyzerContentProps) => {
-    const [memo, onChangeMemo, setMemo] = useInput("");
-    const [payment, onChangePayment, setPayment] = useInput(null);
-    const [select, setSelect] = useState("");
-    const onChangeSelect = useCallback((value: string) => {
-      setSelect(value);
-    }, []);
+  📁LedgerModal.tsx
 
-    const onSubmit = useCallback(() => {
-      //입력을 안한 부분이 있다면 요청을 취소합니다.
-      if (!payment || !select) {
-        message.error("Please fill contents up");
-        return;
-      }
-      // 날짜를 위한 데이터를 만듭니다.
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = ("0" + (1 + date.getMonth())).slice(-2);
-      const day = ("0" + date.getDate()).slice(-2);
-      let form = {
-        date: year + "/" + month + "/" + day,
-        type: select,
-        // 환율정보를 제공하는 API를 이용하여 USD 를 KRW로 변환합니다.
-        // 환율api https는 유료로만 제공하고 요청한도도 매우 야박해서 손절하고 1 USD = 1300 KRW 고정값을 넣었습니다 
-        // 만약 추후에 필요하다면 유료결제해서 사용하겠습니다... (2021/06/04)
-        payment: useExchageClac(payment, currentExchage),
-        memo,
-      };
-      // 데이터를 store에 전달합니다.
-      analyzerStore.addPaymentList(form);
-      setMemo("");
-      setPayment("");
-    }, [currentExchage, memo, payment, select, setMemo, setPayment]);
-
-    return (
-      <LedgerModalComponent
-        title="Ledger"
-        visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        footer={false}
-        className="analyzer_input"
-      >
-      
-      ....
+    const LedgerModal = observer(
+      ({ currentExchage, isModalVisible, setIsModalVisible }: AnalyzerContentProps) => {
+        const [memo, onChangeMemo, setMemo] = useInput("");
+        const [payment, onChangePayment, setPayment] = useInput(null);
+        const [select, setSelect] = useState("");
+        const onChangeSelect = useCallback((value: string) => {
+          setSelect(value);
+        }, []);
+    
+        const onSubmit = useCallback(() => {
+          //입력을 안한 부분이 있다면 요청을 취소합니다.
+          if (!payment || !select) {
+            message.error("Please fill contents up");
+            return;
+          }
+          // 날짜를 위한 데이터를 만듭니다.
+          const date = new Date();
+          const year = date.getFullYear();
+          const month = ("0" + (1 + date.getMonth())).slice(-2);
+          const day = ("0" + date.getDate()).slice(-2);
+          let form = {
+            date: year + "/" + month + "/" + day,
+            type: select,
+            // 환율정보를 제공하는 API를 이용하여 USD 를 KRW로 변환합니다.
+            // 환율api가 https는 유료로만 제공하고 매우 비싸며 요청한도도 적어서 임시방편으로 1 USD = 1300 KRW 고정값을 넣었습니다 
+            // 만약 추후에 필요하다면 유료결제해서 사용하겠습니다. (장현수 : 2021/06/04)
+            payment: useExchageClac(payment, currentExchage),
+            memo,
+          };
+          // 데이터를 store에 전달합니다.
+          analyzerStore.addPaymentList(form);
+          setMemo("");
+          setPayment("");
+        }, [currentExchage, memo, payment, select, setMemo, setPayment]);
+    
+        return (
+          <LedgerModalComponent
+            title="Ledger"
+            visible={isModalVisible}
+            onCancel={() => setIsModalVisible(false)}
+            footer={false}
+            className="analyzer_input"
+          >
+          
+          ....
+          
       
 ```
 
@@ -677,8 +496,6 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 
 - API 요청은 돈이다 라는것을 몸소 체험했습니다. 요청 한도초과되서 당황했던 기억이 납니다.
 
-![image](https://user-images.githubusercontent.com/74864925/120048788-0a25cc80-c053-11eb-8749-f398b4a68d6f.png)
-
 - Emotion 라이브러리로 인해 CRA에 기본설정을 해체하는데 시간이 걸렸고 대신 CRA의 장단점및 craco 사용법을 알게 되었습니다.
 
 - 메뉴(navigation)가 그렇게 중요한 컴포넌트가 아닌데도 불구하고 세세한 부분에도 심혈을 기울이다보니 상당히 로직이 복잡해지고 시간도 오래 걸리게 되었습니다. 차기 프로젝트 'Fall In Asia'에서는 로직과 컴포넌트의 중요성을 따져 시간을 할애하도록 노력했습니다.
@@ -687,11 +504,8 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 
 - SCSS를 사용할건지 CSS-in-JS 를 사용할건지 선택해야되는데 애매하게 둘다 사용해 효율이 떨어졌습니다. 또한 클래스명 작명이 힘들었고 따라서 협업시 코딩컨벤션을 잘 따라야할 필요성을 느꼈습니다. 이후 차기 프로젝트 'Fall IN Asia' 에서 Emotion에 TailWindCSS를 넣어 CSS-in-JS만 사용했습니다.
 
-![image](https://cdn-images-1.medium.com/max/1000/1*yBxZo9LNEjRaL7eKUBqRSA.png)
+- SCSS를 사용할건지 CSS-in-JS 를 사용할건지 선택해야되는데 애매하게 둘다 사용해 효율이 떨어졌습니다. 또한 클래스명 작명이 힘들었고 따라서 협업시 코딩컨벤션을 잘 따라야할 필요성을 느꼈습니다. 이후 차기 프로젝트 'Fall IN Asia' 에서 Emotion에 TailWindCSS를 넣어 CSS-in-JS만 사용했습니다.
 
-- 테스트를 피차일반 뒤로 미루며 생긴 예기치않은 오류에 많이 시간을 뺏겼습니다. 테스트 주도 개발 (TDD) 의 필요성을 느꼈고 차기 프로젝트 'Fall IN Asia' 에서 Jest와 Supertest등을 사용해서 V모델 개발을 최대한 인용해 단위테스트 와 통합테스트 (+인수테스트)를 시행했습니다.
-
-- 모바일에서 불편한 사용감을 느꼈습니다 인수테스트중 "여행다닐때 노트북 별로 안쓰지 않아?" 라는 말이 상당히 와닿았고 현재 PWA를 공부중입니다.
 
 <br/><br/><br/>
 
@@ -723,8 +537,6 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 피드백은 항상 저를 성장시키게 합니다.
 
 궁금한게 있으시면 noah071610@naver.com 으로 언제든지 편하게 연락주세요.
-
-지금까지 신뢰를 주는 장현수였습니다. 긴글 읽어주셔서 감사합니다.
 
 
 <br/><br/><br/>
