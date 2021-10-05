@@ -49,12 +49,12 @@ const checkListStore = observable<CheckListStore>({
     const map = new Map();
     const recommendsArr: string[] = [];
     //유저에게 받은 정보를 저장합니다.
-    let userInfo = {
-      gender: checkListStore.gender!,
-      age: checkListStore.age!,
-      party: checkListStore.party!,
-      acm: [...checkListStore.acm],
-      purpose: [...checkListStore.purpose],
+    const userInfo = {
+      gender: checkListStore.gender as string,
+      age: checkListStore.age as string,
+      party: checkListStore.party as string,
+      acm: [...checkListStore.acm] as string[],
+      purpose: [...checkListStore.purpose] as string[],
     };
 
     //놀거리 추천에 이용할 항목과 특수키는 사전에 따로 분류합니다.
@@ -79,7 +79,7 @@ const checkListStore = observable<CheckListStore>({
     }
 
     //숙박 추천에 이용할 항목을 담습니다.
-    let userPick = [...userInfo.purpose, ...userInfo.acm, userInfo.age];
+    const userPick = [...userInfo.purpose, ...userInfo.acm, userInfo.age];
 
     //숙박 추천에 관한 데이터를 ID와 value값으로 가져옵니다.
     const places = valueList.map((v) => {
@@ -121,7 +121,7 @@ const checkListStore = observable<CheckListStore>({
     }
 
     //상위 두개만 추천할거기 때문에 상위 2곳에 값만 따로 때옵니다.
-    let solution = rankPlace.slice(0, 2).map((v) => {
+    const solution = rankPlace.slice(0, 2).map((v) => {
       return placeList[v.id - 1];
     });
 

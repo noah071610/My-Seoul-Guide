@@ -12,9 +12,9 @@ interface Props {
   isKpop: boolean | undefined;
 }
 
-export default function sortList(form: Props) {
+export default function sortList(form: Props): any[] {
   let array = form.data.NearRecommendCards;
-  let arrLength = form.data.NearRecommendCards.length;
+  const arrLength = form.data.NearRecommendCards.length;
   if (form.data.ShoppingRecommendCards) {
     array = form.data.ShoppingRecommendCards.concat(array).slice(0, arrLength);
   }

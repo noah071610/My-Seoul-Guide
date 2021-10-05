@@ -2,16 +2,16 @@ import "antd/dist/antd.css";
 import "./styles/style.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Home from "./components/@MainPage";
+import Home from "./components/views/MainPage";
 import { Route, useHistory, withRouter } from "react-router-dom";
 import { Suspense, useEffect } from "react";
-import ActivityContent from "./components/@ActivityPage";
-import AnalyzerContent from "./components/@AnalyzerPage";
-import MapPage from "./components/@AcmAndRoutePage";
+import ActivityContent from "./components/views/ActivityPage";
+import AnalyzerContent from "./components/views/AnalyzerPage";
+import MapPage from "./components/views/AcmAndRoutePage";
 import { checkListStore, mainStore } from "./store/store";
 import analyzerStore from "./store/analyzerStore";
 import { observer } from "mobx-react";
-import LoadingPage from "./components/LoadingPage";
+import LoadingPage from "./components/views/LoadingPage";
 
 const App = observer(() => {
   const history = useHistory();
@@ -43,7 +43,6 @@ const App = observer(() => {
     if (!checkListStore.isSubmit) {
       history.push("/");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Suspense fallback={<LoadingPage />}>

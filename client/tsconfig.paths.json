@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@store/*": ["store/*"],
+      "config": ["config.ts"],
+      "types": ["types.ts"],
+      "@views/*": ["components/views/*"],
+      "@hooks/*": ["hooks/*"],
+      "@layout/*": ["components/views/Layout/*"]
+    }
+  }
+}

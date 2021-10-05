@@ -1,7 +1,13 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
-    "lib": ["es2020", "es2015", "es2016", "dom"],
+    "lib": [
+      "es2020",
+      "es2015",
+      "es2016",
+      "dom"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,9 +22,18 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "types": ["@emotion/react/types/css-prop", "node"],
+    "types": [
+      "@emotion/react/types/css-prop",
+      "node"
+    ],
     "downlevelIteration": true
   },
-  "include": ["./**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "tsconfig.paths.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
 }
