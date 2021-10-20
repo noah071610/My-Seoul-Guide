@@ -8,10 +8,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
 const link = createHttpLink({
-  uri:
-    process.env.NODE_ENV === "production"
-      ? process.env.REACT_APP_BASE_URL
-      : "http://localhost:4000",
+  uri: "http://localhost:4000",
   credentials: "same-origin",
 });
 
