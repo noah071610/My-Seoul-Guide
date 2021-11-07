@@ -4,7 +4,6 @@
   "main": "App.js",
   "private": true,
   "homepage": "https://myseoulguide.site/",
-  "proxy": "http://api.visitkorea.or.kr",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^6.3.0",
