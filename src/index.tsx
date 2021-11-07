@@ -8,7 +8,7 @@ import { ApolloProvider, createHttpLink } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const link = createHttpLink({
-  uri: process.env.REACT_APP_BASE_URL,
+  uri: "https://myseoulguide.herokuapp.com",
   credentials: "same-origin",
 });
 
