@@ -32,6 +32,7 @@ const ActivityContent = () => {
         method: "GET",
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "X-Requested-With": "XMLHttpRequest",
           "Content-Type": "application/xml; charset=utf-8",
         },
         withCredentials: true,
