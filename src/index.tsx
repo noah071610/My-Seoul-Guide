@@ -4,6 +4,18 @@ import ReactDOM from "react-dom";
 import analyzerStore from "./store/analyzerStore";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import { ApolloProvider, createHttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+const link = createHttpLink({
+  uri: process.env.REACT_APP_BASE_URL,
+  credentials: "same-origin",
+});
+
+const client = new ApolloClient({
+  link,
+  cache: new InMemoryCache(),
+});
 
 const storeContext = createContext({
   checkListStore,
@@ -21,9 +33,11 @@ const StoreProvider: FC = ({ children }) => {
 
 ReactDOM.render(
   <BrowserRouter>
-    <StoreProvider>
-      <App />
-    </StoreProvider>
+    <ApolloProvider client={client}>
+      <StoreProvider>
+        <App />
+      </StoreProvider>
+    </ApolloProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

@@ -1,16 +1,40 @@
 import MainLayout from "../Layout/index";
 import { ContentCardInter } from "types";
+import { useQuery, gql } from "@apollo/client";
 import { match, useRouteMatch } from "react-router";
 import { useCallback, useEffect, useState } from "react";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
+import ErrorPage from "../ErrorPage";
+import LoadingPage from "../LoadingPage";
 import { AttractionList, PagenationBtnWrapper } from "./styles";
 import AttractionCard from "../Commons/AttractionCard";
-import axios from "axios";
-
+const GET_CONTENTS = gql`
+  query ($pageNumber: Int!, $pageType: Int!) {
+    ActivityCards(typeNum: $pageType, pageNum: $pageNumber) {
+      contentid {
+        _text
+      }
+      title {
+        _text
+      }
+      firstimage {
+        _text
+      }
+      addr1 {
+        _text
+      }
+      mapx {
+        _text
+      }
+      mapy {
+        _text
+      }
+    }
+  }
+`;
 const ActivityContent = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageType, setPageType] = useState<number>(76);
-  const [activityData, setActivityData] = useState<Array<ContentCardInter> | null>(null);
   const router: match<{ category: string }> = useRouteMatch();
   useEffect(() => {
     //router.params의 값에 따라 보여주는 데이터를 변경합니다.
@@ -25,34 +49,6 @@ const ActivityContent = () => {
     setPageNumber(1);
   }, [router]);
 
-  useEffect(() => {
-    axios(
-      `https://myseoulguide.herokuapp.com/http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=${pageType}&areaCode=1&sigunguCode=&cat1=A02&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=${pageNumber}`,
-      {
-        method: "GET",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "X-Requested-With": "XMLHttpRequest",
-          "Content-Type": "application/xml; charset=utf-8",
-        },
-        withCredentials: true,
-      }
-    ).then((res: any) => {
-      setActivityData(
-        res.data.response.body.items.item.map((v: any) => {
-          return {
-            title: { _text: v.title },
-            firstimage: { _text: v.firstimage },
-            contentid: { _text: v.contentid },
-            addr1: { _text: v.addr1 },
-            mapx: { _text: v.title },
-            mapy: { _text: v.title },
-          };
-        })
-      );
-    });
-  }, [pageNumber, pageType]);
-
   const onClickNext = useCallback(() => {
     setPageNumber((prev) => ++prev);
   }, []);
@@ -60,10 +56,19 @@ const ActivityContent = () => {
     setPageNumber((prev) => --prev);
   }, []);
 
+  const { loading, error, data } = useQuery(GET_CONTENTS, {
+    variables: {
+      pageNumber,
+      pageType,
+    },
+  });
+  if (loading) return <LoadingPage />;
+  if (error) return <ErrorPage />;
+
   return (
     <MainLayout>
       <AttractionList>
-        {activityData?.map((card: ContentCardInter, i: number) => {
+        {data.ActivityCards?.map((card: ContentCardInter, i: number) => {
           return <AttractionCard key={i} card={card} />;
         })}
       </AttractionList>
