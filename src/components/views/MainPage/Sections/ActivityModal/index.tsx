@@ -29,7 +29,7 @@ export const ActivityModal = observer(() => {
   useEffect(() => {
     if (mainStore.userInfo?.purpose.includes("Food")) {
       axios(
-        `openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=82&areaCode=1&sigunguCode=&cat1=A05&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=12&pageNo=1`,
+        `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=82&areaCode=1&sigunguCode=&cat1=A05&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=12&pageNo=1`,
         {
           method: "GET",
           headers: {
@@ -44,7 +44,7 @@ export const ActivityModal = observer(() => {
     }
     if (mainStore.userInfo?.purpose.includes("Shopping")) {
       axios(
-        `openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=79&areaCode=1&sigunguCode=&cat1=A04&cat2=A0401&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=1`,
+        `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=79&areaCode=1&sigunguCode=&cat1=A04&cat2=A0401&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=1`,
         {
           method: "GET",
           headers: {
@@ -59,7 +59,7 @@ export const ActivityModal = observer(() => {
     }
     if (mainStore.place?.stationPath.lng && mainStore.place?.stationPath.lat) {
       axios(
-        `openapi/service/rest/EngService/locationBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=&mapX=${mainStore.place?.stationPath.lng}&mapY=${mainStore.place?.stationPath.lat}&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=1`,
+        `http://api.visitkorea.or.kr/openapi/service/rest/EngService/locationBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=&mapX=${mainStore.place?.stationPath.lng}&mapY=${mainStore.place?.stationPath.lat}&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=1`,
         {
           method: "GET",
           headers: {

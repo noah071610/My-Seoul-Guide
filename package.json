@@ -75,6 +75,7 @@
     "@types/shortid": "^0.0.29",
     "@typescript-eslint/parser": "^5.1.0",
     "babel-eslint": "^10.1.0",
-    "craco-alias": "^3.0.1"
+    "craco-alias": "^3.0.1",
+    "shx": "^0.3.3"
   }
 }

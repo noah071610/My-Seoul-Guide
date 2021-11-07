@@ -27,7 +27,7 @@ const ActivityContent = () => {
 
   useEffect(() => {
     axios(
-      `/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=${pageType}&areaCode=1&sigunguCode=&cat1=A02&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=${pageNumber}`,
+      `http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=${process.env.REACT_APP_TOUR_SERVICE_KEY}&contentTypeId=${pageType}&areaCode=1&sigunguCode=&cat1=A02&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=12&pageNo=${pageNumber}`,
       {
         method: "GET",
         headers: {
