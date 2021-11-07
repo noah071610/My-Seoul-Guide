@@ -3,7 +3,7 @@ import "./styles/style.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Home from "./components/views/MainPage";
-import { Route, useHistory, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, useHistory, withRouter } from "react-router-dom";
 import { Suspense, useEffect } from "react";
 import ActivityContent from "./components/views/ActivityPage";
 import AnalyzerContent from "./components/views/AnalyzerPage";
@@ -45,13 +45,15 @@ const App = observer(() => {
     }
   }, []);
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/stay" component={MapPage} />
-      <Route exact path="/airport_route" component={MapPage} />
-      <Route exact path="/activity/:category" component={ActivityContent} />
-      <Route exact path="/analyzer" component={AnalyzerContent} />
-    </Suspense>
+    <BrowserRouter basename="/">
+      <Suspense fallback={<LoadingPage />}>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/stay" component={MapPage} />
+        <Route exact path="/airport_route" component={MapPage} />
+        <Route exact path="/activity/:category" component={ActivityContent} />
+        <Route exact path="/analyzer" component={AnalyzerContent} />
+      </Suspense>
+    </BrowserRouter>
   );
 });
 

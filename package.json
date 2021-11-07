@@ -1,7 +1,8 @@
 {
   "name": "my-seoul-guide",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "App.js",
+  "private": true,
   "homepage": "https://myseoulguide.site/",
   "proxy": "http://api.visitkorea.or.kr",
   "dependencies": {
@@ -17,6 +18,7 @@
     "cra-template-typescript": "1.1.2",
     "customize-cra": "^1.0.0",
     "dotenv": "^10.0.0",
+    "gh-pages": "^3.2.3",
     "graphql": "^15.6.1",
     "html-react-parser": "^1.4.0",
     "mobx": "^6.3.5",
@@ -39,7 +41,8 @@
     "start": "craco start ",
     "build": "craco build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "craco build && shx cp build/index.html build/404.html && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
