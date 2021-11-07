@@ -1,10 +1,10 @@
 import { TogoRecommedInter } from "../types";
 import { kpop_recommends } from "./../config";
 
-interface TogoListsInter {
+export interface TogoListsInter {
   FoodRecommendCards?: TogoRecommedInter[];
   ShoppingRecommendCards?: TogoRecommedInter[];
-  NearRecommendCards: TogoRecommedInter[];
+  NearRecommendCards?: TogoRecommedInter[];
 }
 
 interface Props {
@@ -13,8 +13,8 @@ interface Props {
 }
 
 export default function sortList(form: Props): any[] {
-  let array = form.data.NearRecommendCards;
-  const arrLength = form.data.NearRecommendCards.length;
+  let array = form.data.NearRecommendCards!;
+  const arrLength = form.data.NearRecommendCards!.length;
   if (form.data.ShoppingRecommendCards) {
     array = form.data.ShoppingRecommendCards.concat(array).slice(0, arrLength);
   }

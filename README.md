@@ -1,7 +1,7 @@
-
 <div align=center><a href="https://myseoulguide.site"><img src="https://user-images.githubusercontent.com/74864925/129395349-90ca9abc-6b1a-4989-b98a-aadfec7ff383.png"/></a></div>
 
-# <div align=center>My Seoul Guide</div> 
+# <div align=center>My Seoul Guide</div>
+
 #### <div align=center>This is for your trip, This is your Seoul.</div>
 
 <br/>
@@ -89,8 +89,9 @@
 <br/><br/>
 
 ### 1. 아름다운 서울의 전경을 시작으로 고객의 여행 성향과 인원 등을 미리 수집합니다.
+
 - 이용자의 취향은 이용자에게 맞는 명소 및 맞춤 숙박지역을 추천하기위해서 사용합니다.
-<br/>
+  <br/>
 
 <div align=center>
   <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_landing1.png" alt="myseoulguide_landing1"/>
@@ -100,6 +101,7 @@
 <br/>
 
 ### 2. 취향에 맞춘 숙박지역 및 명소 데이터를 가져옵니다.
+
 - 이용자의 취향을 내장된 데이터를 토대로 분석해 점수를 매긴후 숙박지역 매칭순위 상위2개의 가져옵니다.
 
 ```javascript
@@ -195,6 +197,7 @@
 <br/>
 
 ### 3. 사용법 안내 및 숙박지역 및 놀거리를 추천합니다.
+
 - 매칭률이 높은 숙박지역과 명소를 알맞게 제공하고 Home , Accomodation , Attraction 메뉴에서 각각 경로 추가 탐색 및 세부정보를 확인 할 수 있습니다.
 
 <div align=center>
@@ -203,7 +206,6 @@
   <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_attraction_page.gif" alt="myseoulguide_attraction_page"/>
   <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_acm_select.jpg" alt="myseoulguide_acm_select"/>
   </div>
-
 
 ```javascript
 
@@ -229,11 +231,11 @@
           ...
         },
       });
-      
+
       return (
-      
+
         ...
-        
+
         <div className="recommend_container">
             {useSortList({ data: data, isKpop: mainStore.userInfo?.purpose.includes("K-pop") })?.map(
               (v: TogoRecommedInter, i: number) => (
@@ -255,14 +257,15 @@
               )
             )}
           </div>
-          
+
           ...
-          
+
 ```
 
 <br/>
 
 ### 4. HOME에는 지정 숙소 및 가고싶은 명소의 내용이 담겨있습니다.
+
 - 숙박지역과 명소까지 경로 탐색, 삭제등이 가능하며, Attractions 메뉴에서 명소 추가가 가능합니다
 
 <br/>
@@ -271,11 +274,11 @@
 
 ```javascript
 
-  
+
   📁Home.tsx
 
           ...
-    
+
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
@@ -321,13 +324,14 @@
             )}
           </GoogleMap>
         </LoadScript>
-              
-      
+
+
 ```
 
 <br/>
 
 ### 5. 지정 숙박지역 및 공항까지의 경로를 탐색할 수 있으며 최적의 동선을 탐색할 수 있습니다.
+
 - 구글 맵 API의 경로시스템과 개인적으로 수집한 관광 데이터 등을 적극 이용합니다.
 
 <br/>
@@ -345,7 +349,7 @@
         lat: 37.517146640932296,
         lng: 126.80792769408053,
       });
-    
+
       useEffect(() => {
         if (!isAirportRoutePath && mainStore.place) {
           let centerXY = useCalcCenter(mainStore.place?.path as PathObj[]);
@@ -354,7 +358,7 @@
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isAirportRoutePath, mainStore.place]);
-    
+
       return (
         <MainPageWrapper>
           <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_CLIENT_ID as string}>
@@ -391,21 +395,21 @@
         </MainPageWrapper>
       );
     });
-    
+
     export default AcmAndRoutePage;
-    
-    
+
+
 ```
 
 <br/>
 
 ### 6. Analyzer 페이지에서 예산과 지출을 파악할 수 있습니다.
+
 - 예산을 입력하고 지출을 기록하면 파이차트에 표시되며 남은예산 등을 손쉽게 파악합니다.
 
 <br/>
 
 <div align=center><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_analyzer_setting.gif" alt="myseoulguide_analyzer_setting"/><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_analyzer_ledger.gif" alt="myseoulguide_analyzer_ledger"/></div>
-
 
 ```javascript
 
@@ -419,7 +423,7 @@
         const onChangeSelect = useCallback((value: string) => {
           setSelect(value);
         }, []);
-    
+
         const onSubmit = useCallback(() => {
           //입력을 안한 부분이 있다면 요청을 취소합니다.
           if (!payment || !select) {
@@ -435,7 +439,7 @@
             date: year + "/" + month + "/" + day,
             type: select,
             // 환율정보를 제공하는 API를 이용하여 USD 를 KRW로 변환합니다.
-            // 환율api가 https는 유료로만 제공하고 매우 비싸며 요청한도도 적어서 임시방편으로 1 USD = 1300 KRW 고정값을 넣었습니다 
+            // 환율api가 https는 유료로만 제공하고 매우 비싸며 요청한도도 적어서 임시방편으로 1 USD = 1300 KRW 고정값을 넣었습니다
             // 만약 추후에 필요하다면 유료결제해서 사용하겠습니다. (장현수 : 2021/06/04)
             payment: useExchageClac(payment, currentExchage),
             memo,
@@ -445,7 +449,7 @@
           setMemo("");
           setPayment("");
         }, [currentExchage, memo, payment, select, setMemo, setPayment]);
-    
+
         return (
           <LedgerModalComponent
             title="Ledger"
@@ -454,10 +458,10 @@
             footer={false}
             className="analyzer_input"
           >
-          
+
           ....
-          
-      
+
+
 ```
 
 <br/><br/><br/>
@@ -468,7 +472,13 @@
 
 > 🎤 : GraphQL 어떤가요?
 
-RestAPI의 오버패칭과 언더패칭문제가 한국관광공사 OPEN API에서 정말 치명적이었습니다. 이런 치명적인 단점을 GraphQL이 효율적으로 개선시켜줬기 때문에 매우 만족하지만, Express 와 NestJS보단 익숙하지 않기 때문에 공부가 더욱더 필요합니다.
+RestAPI의 오버패칭과 언더패칭문제가 한국관광공사 OPEN API에서 정말 치명적이었습니다. 이런 치명적인 단점을 GraphQL이 효율적으로 개선시켜줬기 때문에 매우 만족하지만, Express 와 NestJS보단 익숙하지 않기 때문에 공부가 더욱 더 필요합니다.
+
+<br/>
+
+> 🎤 : 근데 프로젝트에 GraphQL이 없던데 어떻게 된 일인가요?
+
+"코드는 안쓰는게 최고의 코드다." 라는 모토로 한두번의 API요청을 위해 서버를 따로두는건 현실적으로 이해타산이 맞지 않는다고 생각하였고, 배포 후 유지보수 과정에서 GraphQL과 Apollo Client를 삭제하고 서버리스 프로젝트로 바꾸었습니다.
 
 <br/>
 
@@ -481,8 +491,6 @@ RestAPI의 오버패칭과 언더패칭문제가 한국관광공사 OPEN API에�
 > 🎤 : Redux VS MobX
 
 MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevTool이 매우 직관적이고 강력하며 Saga 나 Thunk 같은 라이브러리를 같이 이용하면 시너지가 어마어마합니다. 간단한 프로젝트엔 MobX를, 대규모나 실무에선 Redux가 적합한거 같습니다. 둘다 훌륭한 상태관리 라이브러리입니다. 차기프로젝트인 'Fall IN Asia' 에서는 강력한 Data Fetching 라이브러리인 SWR과 Redux의 무거움을 덜어주는 Redux-toolkit을 혼용해서 사용했습니다.
-
-
 
 <br/><br/><br/>
 
@@ -504,9 +512,6 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 
 - SCSS를 사용할건지 CSS-in-JS 를 사용할건지 선택해야되는데 애매하게 둘다 사용해 효율이 떨어졌습니다. 또한 클래스명 작명이 힘들었고 따라서 협업시 코딩컨벤션을 잘 따라야할 필요성을 느꼈습니다. 이후 차기 프로젝트 'Fall IN Asia' 에서 Emotion에 TailWindCSS를 넣어 CSS-in-JS만 사용했습니다.
 
-- SCSS를 사용할건지 CSS-in-JS 를 사용할건지 선택해야되는데 애매하게 둘다 사용해 효율이 떨어졌습니다. 또한 클래스명 작명이 힘들었고 따라서 협업시 코딩컨벤션을 잘 따라야할 필요성을 느꼈습니다. 이후 차기 프로젝트 'Fall IN Asia' 에서 Emotion에 TailWindCSS를 넣어 CSS-in-JS만 사용했습니다.
-
-
 <br/><br/><br/>
 
 ## 🌇 Before you go back your place from Seoul.
@@ -523,10 +528,11 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 
 <br/>
 
-| Date | Version | Update |
-| ------ | ------ | ------ |
-| 2020/06/04 | v1.0 | Final Update for first deployment through AWS |
-| 2020/08/13 | v1.1 | Optimizated Components ,Stylesheet and Rebuild Attraction page  |
+| Date       | Version | Update                                                         |
+| ---------- | ------- | -------------------------------------------------------------- |
+| 2020/06/04 | v1.0    | Final Update for first deployment through AWS                  |
+| 2020/08/13 | v1.1    | Optimizated Components ,Stylesheet and Rebuild Attraction page |
+| 2020/11/07 | v2.0    | Remove GraphQL Server for Serverless                           |
 
 <br/>
 
@@ -536,7 +542,6 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 
 피드백은 항상 저를 성장시키게 합니다.
 
-궁금한게 있으시면 noah071610@naver.com 으로 언제든지 편하게 연락주세요.
-
+궁금한게 있으시면 noah071610@gmail.com 으로 언제든지 편하게 연락주세요.
 
 <br/><br/><br/>
