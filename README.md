@@ -25,16 +25,14 @@
 <img src="https://img.shields.io/badge/MobX-FF9955?style=flat-square&logo=MobX&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Emotion-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Antd-0170FE?style=flat-square&logo=Ant-design&logoColor=white"/>&nbsp; <br/>
-<img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node-dot-js&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/GraphQL-E434AA?style=flat-square&logo=GraphQL&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Apollo-311C87?style=flat-square&logo=Apollo-GraphQL&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Google_Map-4285F4?style=flat-square&logo=Google-Maps&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=Babel&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=white"/>&nbsp;
-<img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=flat-square&logo=Amazon-AWS&logoColor=white"/>&nbsp;
-<img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=white"/>&nbsp;
-<img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/>&nbsp;
-<img src="https://img.shields.io/badge/PM2-2B037A?style=flat-square&logo=PM2&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/Github_Page-181717?style=flat-square&logo=Github&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/Heroku-430098?style=flat-square&logo=Heroku&logoColor=white"/>&nbsp;
 </div>
 
 <br/>
@@ -42,8 +40,8 @@
 <div align=center>
   <a href="https://github.com/noah071610" target="_blank"><img src="https://image.flaticon.com/icons/png/24/25/25657.png"/></a>&nbsp;
   <a href="https://www.instagram.com/salmonchobab" target="_blank"><img src="https://image.flaticon.com/icons/png/24/1409/1409946.png"/></a>&nbsp;
-  <a href="mailto:noah071610@naver.com"><img src="https://image.flaticon.com/icons/png/24/552/552486.png"/></a>&nbsp;
-  <a href=href="https://noahworld.site/portfolio" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp;
+  <a href="mailto:noah071610@gmail.com"><img src="https://image.flaticon.com/icons/png/24/552/552486.png"/></a>&nbsp;
+  <a href="https://jshyunsoo.site" target="_blank"><img src="https://image.flaticon.com/icons/png/24/3135/3135715.png"/></a>&nbsp;
 </div>
 
 <br/>
@@ -533,7 +531,7 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 | ---------- | ------- | -------------------------------------------------------------- |
 | 2020/06/04 | v1.0    | Final Update for first deployment through AWS                  |
 | 2020/08/13 | v1.1    | Optimizated Components ,Stylesheet and Rebuild Attraction page |
-| 2020/11/08 | v2.0    | move GraphQL Server from EC2 to Heroku                             |
+| 2020/11/08 | v2.0    | Move GraphQL Server from EC2 to Heroku                         |
 
 <br/>
 
