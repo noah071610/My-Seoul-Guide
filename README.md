@@ -478,7 +478,8 @@ RestAPI의 오버패칭과 언더패칭문제가 한국관광공사 OPEN API에�
 
 > 🎤 : 근데 프로젝트에 GraphQL이 없던데 어떻게 된 일인가요?
 
-"코드는 안쓰는게 최고의 코드다." 라는 모토로 한두번의 API요청을 위해 서버를 따로두는건 현실적으로 이해타산이 맞지 않는다고 생각하였고, 배포 후 유지보수 과정에서 GraphQL과 Apollo Client를 삭제하고 서버리스 프로젝트로 바꾸었습니다.
+한두번의 API요청을 위해 AWS EC2 서버를 따로두는건 현실적으로 이해타산이 맞지 않는다고 생각하였고, 배포 후 유지보수 과정에서 서버는 Heroku를 사용한 무료 호스팅으로 바꾸었습니다.
+개인적으로 아직 요청이 많지않고 Heroku의 수면모드가 토이프로젝트에선 장점이라고 생각하여 만족합니다.
 
 <br/>
 
@@ -532,7 +533,7 @@ MobX의 경우에는 보다 로직이 간단하지만 Redux같은 경우엔 DevT
 | ---------- | ------- | -------------------------------------------------------------- |
 | 2020/06/04 | v1.0    | Final Update for first deployment through AWS                  |
 | 2020/08/13 | v1.1    | Optimizated Components ,Stylesheet and Rebuild Attraction page |
-| 2020/11/07 | v2.0    | Remove GraphQL Server for Serverless                           |
+| 2020/11/08 | v2.0    | move GraphQL Server from EC2 to Heroku                             |
 
 <br/>
 
