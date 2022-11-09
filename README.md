@@ -92,11 +92,11 @@
   <br/>
 
 <div align=center>
-  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_landing1.png" alt="myseoulguide_landing1"/>
-  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_landing2.png" alt="myseoulguide_landing2"/>
+  <img src="https://user-images.githubusercontent.com/74864925/200762339-4e1fdffb-b9cb-4c53-8341-bbd44ab3e2c7.png" alt="myseoulguide_landing1"/>
+  <img src="https://user-images.githubusercontent.com/74864925/200762350-7e39a878-671d-4348-af43-d50625123fbf.png" alt="myseoulguide_landing2"/>
 </div>
-
 <br/>
+
 
 ### 2. 취향에 맞춘 숙박지역 및 명소 데이터를 가져옵니다.
 
@@ -199,11 +199,12 @@
 - 매칭률이 높은 숙박지역과 명소를 알맞게 제공하고 Home , Accomodation , Attraction 메뉴에서 각각 경로 추가 탐색 및 세부정보를 확인 할 수 있습니다.
 
 <div align=center>
-<img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_main_modal.jpg" alt="myseoulguide_main_modal"/>
-  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_attraction_select.gif" alt="myseoulguide_attraction_select"/>
-  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_attraction_page.gif" alt="myseoulguide_attraction_page"/>
-  <img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_acm_select.jpg" alt="myseoulguide_acm_select"/>
+<img src="https://user-images.githubusercontent.com/74864925/200762546-285fadcd-41de-4674-af93-41e5be870e91.jpg" alt="myseoulguide_main_modal"/>
+  <img src="https://user-images.githubusercontent.com/74864925/200762572-59b02303-e3e1-4e7a-ba36-888f48122986.gif" alt="myseoulguide_attraction_select"/>
+  <img src="https://user-images.githubusercontent.com/74864925/200762556-19718b3c-6134-42d5-b8fa-eba73cec8245.gif" alt="myseoulguide_attraction_page"/>
+  <img src="https://user-images.githubusercontent.com/74864925/200762569-24d93628-115c-4b8b-8ab0-4e98aa8e6ab5.jpg"/>
   </div>
+
 
 ```javascript
 
@@ -268,7 +269,7 @@
 
 <br/>
 
-<div align=center><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_main_map.gif" alt="myseoulguide_main_map"/></div>
+<div align=center><img src="https://user-images.githubusercontent.com/74864925/200762696-911b5626-2a3a-4659-a7f2-44dd7963b961.gif" alt="myseoulguide_main_map"/></div>
 
 ```javascript
 
@@ -334,7 +335,9 @@
 
 <br/>
 
-<div align=center><img width="700px" src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_acm_page.png" alt="myseoulguide_acm_page"/><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_route_page.gif" alt="myseoulguide_route_page"/></div>
+<div align=center><img width="700px" src="https://user-images.githubusercontent.com/74864925/200762809-d6e655e5-3739-47df-b409-4139151d61d3.png" alt="myseoulguide_acm_page"/>
+<img src="https://user-images.githubusercontent.com/74864925/200762875-69764dfc-8bd0-4203-b09a-888a6eccfea1.gif" alt="myseoulguide_route_page"/></div>
+
 
 ```javascript
   📁MapPage.tsx
@@ -407,7 +410,7 @@
 
 <br/>
 
-<div align=center><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_analyzer_setting.gif" alt="myseoulguide_analyzer_setting"/><img src="https://jshyunsoo.site/images/myseoulguide/myseoulguide_analyzer_ledger.gif" alt="myseoulguide_analyzer_ledger"/></div>
+<div align=center><img src="https://user-images.githubusercontent.com/74864925/200762946-2760acd0-da34-485d-bb87-c529198fbac8.gif" alt="myseoulguide_analyzer_setting"/><img src="https://user-images.githubusercontent.com/74864925/200762941-66243b66-fd75-4cbe-a386-62e91bea8790.gif" alt="myseoulguide_analyzer_ledger"/></div>
 
 ```javascript
 
